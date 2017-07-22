@@ -1,0 +1,352 @@
+" URL: http://vim.wikia.com/wiki/Example_vimrc
+" Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
+" Description: A minimal, but feature rich, example .vimrc. If you are a
+"              newbie, basing your first .vimrc on this file is a good choice.
+"              If you're a more advanced user, building your own .vimrc based
+"              on this file is still a good idea.
+
+"------------------------------------------------------------
+" Features {{{1
+"
+" These options and commands enable some very useful features in Vim, that
+" no user should have to live without.
+ 
+" Set 'nocompatible' to ward off unexpected things that your distro might
+" have made, as well as sanely reset options when re-sourcing .vimrc
+set nocompatible
+ 
+" Attempt to determine the type of a file based on its name and possibly its
+" contents. Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+filetype indent plugin on
+ 
+" Enable syntax highlighting
+syntax on
+ 
+ 
+
+"
+" These are highly recommended options.
+ 
+" Vim with default settings does not allow easy switching between multiple files
+" in the same editor window. Users can use multiple split windows or multiple
+" tab pages to edit multiple files, but it is still best to enable an option to
+" allow easier switching between files.
+"
+" One such option is the 'hidden' option, which allows you to re-use the same
+" window and switch from an unsaved buffer without saving it first. Also allows
+" you to keep an undo history for multiple files when re-using the same window
+" in this way. Note that using persistent undo also lets you undo in multiple
+" files even in the same window, but is less efficient and is actually designed
+" for keeping undo history after closing Vim entirely. Vim will complain if you
+" try to quit without saving, and swap files will keep you safe if your computer
+" crashes.
+set hidden
+ 
+" Note that not everyone likes working this way (with the hidden option).
+" Alternatives include using tabs or split windows instead of re-using the same
+" window as mentioned above, and/or either of the following options:
+" set confirm
+" set autowriteall
+ 
+" Better command-line completion
+set wildmenu
+ 
+" Show partial commands in the last line of the screen
+set showcmd
+ 
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
+set hlsearch
+ 
+" Modelines have historically been a source of security vulnerabilities. As
+" such, it may be a good idea to disable them and use the securemodelines
+" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
+" set nomodeline
+ 
+ 
+"------------------------------------------------------------
+" Usability options {{{1
+"
+" These are options that users frequently set in their .vimrc. Some of them
+" change Vim's behaviour in ways which deviate from the true Vi way, but
+" which are considered to add usability. Which, if any, of these options to
+" use is very much a personal preference, but they are harmless.
+ 
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+ 
+" Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start
+ 
+" When opening a new line and no filetype-specific indenting is enabled, keep
+" the same indent as the line you're currently on. Useful for READMEs, etc.
+set autoindent
+ 
+" Stop certain movements from always going to the first character of a line.
+" While this behaviour deviates from that of Vi, it does what most users
+" coming from other editors would expect.
+set nostartofline
+ 
+" Display the cursor position on the last line of the screen or in the status
+" line of a window
+set ruler
+ 
+" Always display the status line, even if only one window is displayed
+"set laststatus=2
+ 
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+ 
+" Use visual bell instead of beeping when doing something wrong
+set visualbell
+ 
+" And reset the terminal code for the visual bell. If visualbell is set, and
+" this line is also included, vim will neither flash nor beep. If visualbell
+" is unset, this does nothing.
+set t_vb=
+ 
+" Enable use of the mouse for all modes
+set mouse=a
+ 
+" Set the command window height to 2 lines, to avoid many cases of having to
+" "press <Enter> to continue"
+" set cmdheight=2
+ 
+" Display line numbers on the left
+set number
+ 
+" Quickly time out on keycodes, but never time out on mappings
+set notimeout ttimeout ttimeoutlen=200
+ 
+" Use <F11> to toggle between 'paste' and 'nopaste'
+" set pastetoggle=<F11>
+ 
+
+ 
+"------------------------------------------------------------
+" Indentation options {{{1
+"
+" Indentation settings according to personal preference.
+ 
+" Indentation settings for using 4 spaces instead of tabs.
+" Do not change 'tabstop' from its default value of 8 with this setup.
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+ 
+" Indentation settings for using hard tabs for indent. Display tabs as
+" four characters wide.
+"set shiftwidth=4
+"set tabstop=4
+ 
+ 
+"------------------------------------------------------------
+" Mappings {{{1
+"
+" Useful mappings
+ 
+" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
+" which is the default
+map Y y$
+ 
+" Map <C-L> (redraw screen) to also turn off search highlighting until the
+" next search
+nnoremap <C-L> :nohl<CR><C-L>
+ 
+
+"------------------------------------------------------------
+" By Ovídio José Francisco
+"------------------------------------------------------------
+
+
+set pastetoggle=<F3>
+
+" set noswapfile
+" set nobackup
+
+
+set nocompatible
+set showcmd
+filetype on 
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+  Plugin 'VundleVim/Vundle.vim'
+  Plugin 'itchyny/lightline.vim'
+  Plugin 'nanotech/jellybeans.vim' 
+  Plugin 'jszakmeister/vim-togglecursor'
+
+
+  Plugin 'junegunn/goyo.vim'
+
+
+"  Plugin 'godlygeek/tabular'
+"  Plugin 'plasticboy/vim-markdown'
+  
+call vundle#end()
+
+
+
+"Bundle 'gabrielelana/vim-markdown'
+" https://github.com/gabrielelana/vim-markdown
+" And then execute the following command in your shell:
+" $ vim +'PluginInstall! vim-markdown' +qall
+"let g:markdown_enable_spell_checking = 0
+
+
+
+" https://github.com/tpope/vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+
+
+filetype plugin indent on
+
+
+colorscheme elflord
+"colorscheme slate
+
+set showmatch
+set laststatus=2
+
+set wrap
+set linebreak
+set nolist
+set textwidth=60
+" set wrapmargin=80                                                          
+
+
+let g:lightline = {
+    \ 'colorscheme': 'jellybeans',
+    \}
+" Allow transparent background in jellybeans
+let g:jellybeans_background_color_256='NONE'
+
+" Set Line numbers foreground color
+highlight LineNr ctermfg=darkgrey
+highlight HtmlH1 cterm=bold
+highlight markdownListMarker cterm=bold ctermfg=yellow
+
+" Move lines
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+
+" Duplicate current line
+nnoremap <C-Down>       :t.<CR><left> 
+nnoremap <C-Up>         :t.<CR><up>
+inoremap <C-Down>  <ESC>:t.<CR>a
+inoremap <C-Up>    <ESC>:t.<CR>a<up>
+vnoremap <C-Down>  <ESC>:t.<CR> 
+vnoremap <C-Up>    <ESC>:t.<CR> 
+
+" Save & Quit
+nnoremap <F2> :w <CR>
+nnoremap <F1> :q <CR> 
+inoremap <F2> <ESC>:w <CR>a
+inoremap <F1> <ESC>:q <CR>a 
+vnoremap <F2> :w <CR>
+vnoremap <F1> :q <CR> 
+
+" Quit without save
+nnoremap <F12><F12>      ZQ
+inoremap <F12> <esc>
+
+" Undo
+nnoremap <C-z> :u<CR>
+inoremap <C-z> <c-o>:u<CR>
+
+" Goyo --> Distraction Free Writing
+nnoremap <F4>      :Goyo<CR>
+inoremap <F4> <c-o>:Goyo<CR>
+
+" Set/unset Transparent Bakcground 
+nnoremap <F5>      :call ToggleTransparentBG()<CR>
+inoremap <F5> <c-o>:call ToggleTransparentBG()<CR>
+
+" Change colorscheme
+nnoremap <F8>      :call Change_colorscheme()<CR>
+inoremap <F8> <c-o>:call Change_colorscheme()<CR>
+
+
+" Delete the word under the cursor
+nnoremap <C-c>      daw
+inoremap <C-c> <c-o>daw
+
+" Delete line in Insert Mode
+inoremap <C-d> <c-o>dd
+inoremap <C-f> <c-o>D
+
+" Insert line in Normal Mode
+nnoremap <C-i> O<esc>
+nnoremap <CR>  i<CR><esc>
+
+" Go to the Midle of the page in Insert Mode
+inoremap <c-B> <c-o>M
+
+
+"-----------------------------------------------------------
+"-----------------------------------------------------------
+
+let w:cs = 0 " ColorScheme
+function Change_colorscheme() 
+
+    if w:cs == 0
+        colorscheme slate
+        let w:cs = 1
+    elseif w:cs == 1
+        colorscheme elflord
+        let w:cs = 2
+        highlight LineNr ctermfg=darkgrey
+    elseif w:cs == 2 
+        colorscheme jellybeans
+        let w:cs = 3
+    elseif w:cs == 3 
+        colorscheme evening
+        let w:cs = 4
+    elseif w:cs == 4 
+        colorscheme shine
+        let w:cs = 5
+    elseif w:cs == 5 
+        colorscheme darkblue
+        let w:cs = 0
+    endif
+
+
+endfunction
+
+let w:tb = 0 "transparent background
+function ToggleTransparentBG()
+    
+    if w:tb 
+        highlight Normal ctermbg=NONE
+    else
+        highlight Normal ctermbg=black
+    endif
+
+    let w:tb =! w:tb
+
+endfunction
+
+"------------------------------------------------------------
+"
+" https://hea-www.harvard.edu/~fine/Tech/vi.html#defs
+"
+"------------------------------------------------------------
+"
+" diw delete in the word (doesn't include spaces)
+" daw delete around the word (includes spaces before the next word).
+" ciw delete the entire word your cursor is on and to put you in insert mode
+" caw : delete the word under the cursor and put you in insert mode 
+"
+" D or d$ will delete the rest of the line and leve you in command mode 
+" C or c$ will delete the rest of the line and leve you in insert mode
+"
