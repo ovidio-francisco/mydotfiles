@@ -38,28 +38,28 @@ syn match markdownLineStart "^[<@]\@!" nextgroup=@markdownBlock,htmlSpecialChar
 syn cluster markdownBlock contains=markdownH1,markdownH2,markdownH3,markdownH4,markdownH5,markdownH6,markdownBlockquote,markdownListMarker,markdownOrderedListMarker,markdownCodeBlock,markdownRule
 syn cluster markdownInline contains=markdownLineBreak,markdownLinkText,markdownItalic,markdownBold,markdownCode,markdownEscape,@htmlTop,markdownError
 
-syn match markdownH1 "^.\+\n=\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
-syn match markdownH2 "^.\+\n-\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+" syn match markdownH1 "^.\+\n=\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+" syn match markdownH2 "^.\+\n-\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
 
-syn match markdownHeadingRule "^[=-]\+$" contained
+" syn match markdownHeadingRule "^[=-]\+$" contained
 
-syn region markdownH1 matchgroup=markdownHeadingDelimiter start="##\@!"      end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-syn region markdownH2 matchgroup=markdownHeadingDelimiter start="###\@!"     end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-syn region markdownH3 matchgroup=markdownHeadingDelimiter start="####\@!"    end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-syn region markdownH4 matchgroup=markdownHeadingDelimiter start="#####\@!"   end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-syn region markdownH5 matchgroup=markdownHeadingDelimiter start="######\@!"  end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-syn region markdownH6 matchgroup=markdownHeadingDelimiter start="#######\@!" end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH1 matchgroup=markdownHeadingDelimiter start="##\@!"      end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH2 matchgroup=markdownHeadingDelimiter start="###\@!"     end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH3 matchgroup=markdownHeadingDelimiter start="####\@!"    end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH4 matchgroup=markdownHeadingDelimiter start="#####\@!"   end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH5 matchgroup=markdownHeadingDelimiter start="######\@!"  end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+" syn region markdownH6 matchgroup=markdownHeadingDelimiter start="#######\@!" end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
 
 syn match markdownBlockquote ">\%(\s\|$\)" contained nextgroup=@markdownBlock
 
-syn region markdownCodeBlock start="    \|\t" end="$" contained
+" syn region markdownCodeBlock start="    \|\t" end="$" contained
 
 " TODO: real nesting
-syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
-syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
+" syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
+" syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
 
-syn match markdownRule "\* *\* *\*[ *]*$" contained
-syn match markdownRule "- *- *-[ -]*$" contained
+" syn match markdownRule "\* *\* *\*[ *]*$" contained
+" syn match markdownRule "- *- *-[ -]*$" contained
 
 syn match markdownLineBreak " \{2,\}$"
 
@@ -90,6 +90,58 @@ syn region markdownCode matchgroup=markdownCodeDelimiter start="^\s*```.*$" end=
 syn match markdownFootnote "\[^[^\]]\+\]"
 syn match markdownFootnoteDefinition "^\[^[^\]]\+\]:"
 
+
+
+
+
+
+
+" by ojf 16/07/2017
+
+
+syn region markdownH1 matchgroup=markdownHeadingDelimiter start="^\s*#"      end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+syn region markdownH2 matchgroup=markdownHeadingDelimiter start="^\s*##"     end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+syn region markdownH3 matchgroup=markdownHeadingDelimiter start="^\s*###"    end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+syn region markdownH4 matchgroup=markdownHeadingDelimiter start="^\s*####"   end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+syn region markdownH5 matchgroup=markdownHeadingDelimiter start="^\s*#####"  end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+syn region markdownH6 matchgroup=markdownHeadingDelimiter start="^\s*######" end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
+
+
+syn match markdownH1 "^.\+\n=\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+syn match markdownH2 "^.\+\n-\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+syn match markdownH3 "^.\+\n\~\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+syn match markdownH4 "^.\+\n[+]\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+syn match markdownH5 "^.\+\n[:]\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+syn match markdownH6 "^.\+\n[\^]\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
+
+syn match markdownHeadingRule "^[\:\+\~=-]\+$" contained
+
+
+syn match markdownListMarker "^\s*[-*+]\ " contained
+syn match markdownOrderedListMarker "^\s*\d\+[\ \.\-\)]*" contained
+
+syn match markdownRule "^\s*[=-]\{3,\}.*$" contained
+
+syn match markdownRightArrow "^\s*-->"
+syn match markdownRightArrow "-->"
+
+syn region markdownBox start="+-" end="-+"
+" syn region markdownBox start="^\s*|" end="|\s*$"
+
+syn match markdownBox "^\s*|"
+syn match markdownBox "|\s*$"
+
+" syn match markdownCheckBox  "-\ \[x\]"  
+
+" syn match markdownCheckBox  "-\ \[x\zs\]"    
+" syn match markdownCheckBox  "foo\zsbar\ "    
+" syn match markdownCheckBoxX "\[\zsx\ze\]"  
+
+syn match markdownCheckBoxX "\[\zsx\ze\]"  
+syn match markdownCheckBox  "\[x\zs\]"    
+syn match markdownCheckBox  "-\ \[\zex\]"  
+
+
 if main_syntax ==# 'markdown'
   for s:type in g:markdown_fenced_languages
     exe 'syn region markdownHighlight'.substitute(matchstr(s:type,'[^=]*$'),'\..*','','').' matchgroup=markdownCodeDelimiter start="^\s*```\s*'.matchstr(s:type,'[^=]*').'\>.*$" end="^\s*```\ze\s*$" keepend contains=@markdownHighlight'.substitute(matchstr(s:type,'[^=]*$'),'\.','','g')
@@ -106,7 +158,8 @@ hi def link markdownH3                    htmlH3
 hi def link markdownH4                    htmlH4
 hi def link markdownH5                    htmlH5
 hi def link markdownH6                    htmlH6
-hi def link markdownHeadingRule           markdownRule
+" hi def link markdownHeadingRule           markdownRule
+hi def link markdownHeadingRule           Delimiter
 hi def link markdownHeadingDelimiter      Delimiter
 hi def link markdownOrderedListMarker     markdownListMarker
 hi def link markdownListMarker            htmlTagName
@@ -136,6 +189,15 @@ hi def link markdownCodeDelimiter         Delimiter
 
 hi def link markdownEscape                Special
 hi def link markdownError                 Error
+
+hi markdownBox ctermfg=cyan
+hi markdownArrow ctermfg=red
+
+hi def link markdownRightArrow            markdownArrow
+hi def link markdownBox                   markdownBox
+hi def link markdownCheckBox			  markdownArrow
+hi def link markdownCheckBoxX			  markdownBox
+
 
 let b:current_syntax = "markdown"
 if main_syntax ==# 'markdown'

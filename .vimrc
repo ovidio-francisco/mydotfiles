@@ -36,7 +36,6 @@ set formatoptions+=t
 set virtualedit=onemore,block
 set spell spelllang=pt,en
 set nospell
-set noautoread                               " Avoid to autoreload any file. I prefer to be asked for it.
 colorscheme elflord
 
 
@@ -44,8 +43,10 @@ autocmd CursorHold * checktime
 
 autocmd BufEnter,BufNewFile *.tex call SetTexConfig()
 autocmd BufEnter,BufNewFile *.csv call SetCSVConfig()
-autocmd FileType text colorscheme darkblue
-autocmd FileType help colorscheme elflord
+autocmd BufEnter,BufNewFile *.md  call SetMarkdownConfig()
+" autocmd BufEnter,BufNewFile *.txt colorscheme darkblue
+" autocmd FileType text colorscheme darkblue
+" autocmd FileType help colorscheme elflord
 
 
 call vundle#begin()
@@ -63,6 +64,11 @@ call vundle#begin()
 call vundle#end()
 
 
+let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_folding_level = 6
+
+
+
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh'] " https://github.com/tpope/vim-markdown
 let donothing='do nothing :) ' 
 
@@ -71,10 +77,6 @@ let NERDTreeQuitOnOpen = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeHighlightCursorline=1
 let NERDTreeMinimalUI = 1
-"let NERDTreeDirArrows = 0
-
-"let g:NERDTreeDirArrowExpandable  = '·'
-"let g:NERDTreeDirArrowCollapsible = '*'
 
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
@@ -212,7 +214,7 @@ inoremap <silent><up>   <c-o>gk
 inoremap <silent><down> <c-o>gj
 
 
-nnoremap <Leader>l  :set cursorline!<cr>
+nnoremap <Leader>l  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
 nnoremap <Leader>w  :set wrap!<cr>
 
 nnoremap <Leader>\| :vsplit<cr>
@@ -221,8 +223,8 @@ nnoremap <Leader>x  :q<cr>
 
 nnoremap <Leader>t  :tabnew<cr>
 
-nnoremap K :set hls!<CR>
-
+let hlstate=1
+nnoremap <silent>K :if (hlstate == 1) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate =! hlstate<cr>
 
 "set splitright
 set splitbelow
@@ -282,6 +284,7 @@ nnoremap <leader>P "+gP
 nnoremap ~ ~h
 
 nnoremap ; :call NERDComment(0,"toggle")<cr>
+vnoremap ; :call NERDComment(0,"toggle")<cr>
 
 " -----------------------------------------------------------
 
@@ -325,6 +328,24 @@ function ToggleTransparentBG()
 	let s:tb =! s:tb
 
 endfunction
+
+
+" let s:hisearch = 1 "highlight the search
+" function ToggleHiSearch()
+
+	" if s:his" earch == 1
+		" set hls	
+		" echo "1111111111111111"	
+	" else
+		" :noh<cr>
+		" echo 	"2222222222222222"	
+	" endif
+
+	" let s:hisearch =! s:hisearch
+
+" endfunction
+
+
 
 set showbreak=
 set cpoptions-=n
@@ -472,6 +493,19 @@ function SetCSVConfig()
 
 endfunction
 
+function SetMarkdownConfig()
+	
+	hi markdownH2 cterm=none ctermfg=cyan 
+	hi markdownH3 cterm=none ctermfg=darkcyan 
+	hi markdownH4 cterm=none ctermfg=magenta
+	hi markdownH5 cterm=none ctermfg=darkmagenta 
+	hi markdownH6 cterm=none ctermfg=red 
+	hi markdownOrderedListMarker cterm=none ctermfg=yellow
+	hi markdownRule ctermfg=darkcyan
+	
+endfunction
+
+
 let s:hc = 0
 call ToggleHiglightTheCursor()
 
@@ -526,9 +560,6 @@ let g:lightline = {
 
 
 
-
-" ================================================================
-"  
 "1<c-g>
 
 "highlight VertSplit cterm=none ctermbg=236 ctermfg=236
@@ -537,18 +568,10 @@ let g:lightline = {
 
 "¹²³£¢¬{[]}\§/?€®ŧ←↓→øþ´ªæßðđŋħĸł~º«»©“”nµ·̣°̣ 
 " https://hea-www.harvard.edu/~fine/Tech/vi.html#defs
-"
 " http://vimdoc.sourceforge.net/htmldoc/insert.html
 " http://vimdoc.sourceforge.net/htmldoc/motion.html
 "
-" :autocmd FileType python     :iabbrev <buffer> iff if:<left>
-" :autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-" http://
 " vim.wikia.com/wiki/Search_patterns
-" [\.\!\%]\ [A-Z]
-" [\.\!\%\n]\ *[A-Z]
-" (?<=[\.\!\%\n]\ *)[A-Z]
-
 
 
 " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
@@ -558,116 +581,24 @@ let g:lightline = {
 " https://www.ibm.com/developerworks/library/l-vim-script-1/index.html
 " https://stackoverflow.com/questions/19994922/find-and-replace-strings-in-vim-on-multiple-lines
 
-
-
-
-" Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
-" Description: A minimal, but feature rich, example .vimrc. If you are a
-"              newbie, basing your first .vimrc on this file is a good choice.
-"              If you're a more advanced user, building your own .vimrc based
-"              on this file is still a good idea.
-
-
-" Modelines have historically been a source of security vulnerabilities. As
-" such, it may be a good idea to disable them and use the securemodelines
-" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
-" set nomodeline
- 
- 
-" Set the command window height to 2 lines, to avoid many cases of having to
-"
-" "press <Enter> to continue"
-" set cmdheight=2
- 
-"------------------------------------------------------------
-" Indentation options {{{1
-"
-" Indentation settings according to personal preference.
- 
-" Indentation settings for using 4 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-" set shiftwidth=4
-" set softtabstop=4
-" set expandtab
- 
- 
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
-" map Y y$
- 
-"  Plugin 'godlygeek/tabular'
-"  Plugin 'plasticboy/vim-markdown'
-
-"Bundle 'gabrielelana/vim-markdown'
-" https://github.com/gabrielelana/vim-markdown
-" And then execute the following command in your shell:
-" $ vim +'PluginInstall! vim-markdown' +qall
-"let g:markdown_enable_spell_checking = 0
-
-
-" set textwidth=80
-" set wrapmargin=80                                                          
-
-"let g:lightline = {
-    "\ 'colorscheme': 'jellybeans',
-    "\}
-" Allow transparent background in jellybeans
-
-
-" Duplicate current line
-" nnoremap <C-Down>       :t.<CR><left> 
-" nnoremap <C-Up>         :t.<CR><up>
-" inoremap <C-Down>  <ESC>:t.<CR>a
-" inoremap <C-Up>    <ESC>:t.<CR>a<up>
-" vnoremap <C-Down>  <ESC>:t.<CR> 
-" vnoremap <C-Up>    <ESC>:t.<CR> 
-
-" Go to the Midle of the page in Insert Mode
-" inoremap <c-B> <c-o>M
-
-
-
 ".'\u2026'
-" set hidden
-" set confirm
-" set autowriteall
-" set laststatus=2             " Always display the status line, even if only one window is displayed
-
-" set noswapfile
-" set nobackup
-
-" filetype on 
-"------------------------------------------------------------
-" By Ovídio José Francisco
-"------------------------------------------------------------
-
-" filetype detect
-" if (&ft == 'plaintex')
-" 
-" 	call SetTexConfig()
-" 
-" endif
-
-" if (&ft == 'csv')
-
-    " colorscheme darkblue
-	
-	" hi link CSVColumnOdd MoreMsg
-	" hi link CSVColumnEven Question
-
-	" hi link CSVColumnEven CSVColumnOdd
-	" 
-	" hi Conceal ctermbg=none ctermfg=darkgray
-	" hi LineNr ctermfg=darkgray
-
-	" set nonumber
-
-" endif
-
-" if (&ft == 'text')
-
-	" colorscheme darkblue
-" endif
+"let g:NERDTreeDirArrowExpandable  = '·'
+"let g:NERDTreeDirArrowCollapsible = '*'
 
 
-"------------------------------------------------------------
+
+
+
+
+"
+
+
+
+
+
+
+
+
+
+
+"

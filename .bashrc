@@ -170,6 +170,7 @@ alias lx='ls -X'
 alias L='ls -lF'
 alias lh='ls -Ad .*' # list the hiddens
 alias ld='ls -A | grep "^\."'
+alias lf='ls | grep '
 
 alias copy='cp -iv'
 alias move='mv -iv'
@@ -180,10 +181,9 @@ stty -ixon   # desable the <ctrl-s>
 
 
 alias taskadd='~/.mytasks/createtask.sh'
-      
 
-
-
+alias taskquestion='task rc.data.location=~/.myquestions'
+alias taskquestionadd='~/.myquestions/createquestion.sh'
 
 
 
