@@ -49,7 +49,7 @@ let s:p.normal.right  = [ [ s:base02, s:base1  ], [ s:base2, s:base01 ] ]
 
 let s:p.insert.left   = [ [ s:darkestcyan, s:white, 'bold'  ], [ s:white, s:darkblue ] ]
 let s:p.insert.middle = [ [ s:mediumcyan, s:darkestblue ]                        ]
-let s:p.insert.right  = [ [ s:darkestcyan, s:mediumcyan  ], [ s:mediumcyan, s:darkestblue ] ]
+let s:p.insert.right  = [ [ s:darkestcyan, s:mediumcyan ], [ s:mediumcyan, s:darkblue ], [ s:mediumcyan, s:darkestblue ] ]
 
 " let s:p.insert.left   = [ [ s:base02, s:green  ], [ s:base3, s:base01 ] ]
 " let s:p.insert.middle = [ [ s:green1, s:base02 ]                        ]
@@ -76,9 +76,8 @@ let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 
 let g:lightline#colorscheme#jellybeans#palette = lightline#colorscheme#flatten(s:p)
 
-
-
-
+" https://github.com/itchyny/lightline.vim/blob/master/doc/lightline.txt
+" https://github.com/admc/dotfiles/blob/master/.vim/autoload/Powerline/Colorschemes/default.vim
 " let s:p.insert.left   = [ [ s:base02, s:green  ], [ s:base3, s:base01 ] ]
 " let s:p.insert.right  = [ [ s:base02, s:base1  ], [ s:base2, s:base01 ] ]
 " let s:p.insert.middle = [ [ s:base0 , s:base02 ]                        ]
