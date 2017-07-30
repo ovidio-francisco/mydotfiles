@@ -38,28 +38,9 @@ syn match markdownLineStart "^[<@]\@!" nextgroup=@markdownBlock,htmlSpecialChar
 syn cluster markdownBlock contains=markdownH1,markdownH2,markdownH3,markdownH4,markdownH5,markdownH6,markdownBlockquote,markdownListMarker,markdownOrderedListMarker,markdownCodeBlock,markdownRule
 syn cluster markdownInline contains=markdownLineBreak,markdownLinkText,markdownItalic,markdownBold,markdownCode,markdownEscape,@htmlTop,markdownError
 
-" syn match markdownH1 "^.\+\n=\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
-" syn match markdownH2 "^.\+\n-\+$" contained contains=@markdownInline,markdownHeadingRule,markdownAutomaticLink
-
-" syn match markdownHeadingRule "^[=-]\+$" contained
-
-" syn region markdownH1 matchgroup=markdownHeadingDelimiter start="##\@!"      end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-" syn region markdownH2 matchgroup=markdownHeadingDelimiter start="###\@!"     end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-" syn region markdownH3 matchgroup=markdownHeadingDelimiter start="####\@!"    end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-" syn region markdownH4 matchgroup=markdownHeadingDelimiter start="#####\@!"   end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-" syn region markdownH5 matchgroup=markdownHeadingDelimiter start="######\@!"  end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
-" syn region markdownH6 matchgroup=markdownHeadingDelimiter start="#######\@!" end="#*\s*$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
 
 syn match markdownBlockquote ">\%(\s\|$\)" contained nextgroup=@markdownBlock
 
-" syn region markdownCodeBlock start="    \|\t" end="$" contained
-
-" TODO: real nesting
-" syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
-" syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
-
-" syn match markdownRule "\* *\* *\*[ *]*$" contained
-" syn match markdownRule "- *- *-[ -]*$" contained
 
 syn match markdownLineBreak " \{2,\}$"
 
@@ -96,8 +77,13 @@ syn match markdownFootnoteDefinition "^\[^[^\]]\+\]:"
 
 
 
+
+
+
+
 " by ojf 16/07/2017
 
+" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 syn region markdownH1 matchgroup=markdownHeadingDelimiter start="^\s*#"      end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
 syn region markdownH2 matchgroup=markdownHeadingDelimiter start="^\s*##"     end="$" keepend oneline contains=@markdownInline,markdownAutomaticLink contained
@@ -117,8 +103,10 @@ syn match markdownH6 "^.\+\n[\^]\+$" contained contains=@markdownInline,markdown
 syn match markdownHeadingRule "^[\:\+\~=-]\+$" contained
 
 
+
+
+syn match markdownOrderedListMarker "^\s*\([0-9]\+[\ \.\-\)]\+\)\+" contained 
 syn match markdownListMarker "^\s*[-*+]\ " contained
-syn match markdownOrderedListMarker "^\s*\d\+[\ \.\-\)]*" contained
 
 syn match markdownRule "^\s*[=-]\{3,\}.*$" contained
 
@@ -126,20 +114,29 @@ syn match markdownRightArrow "^\s*-->"
 syn match markdownRightArrow "-->"
 
 syn region markdownBox start="+-" end="-+"
-" syn region markdownBox start="^\s*|" end="|\s*$"
 
 syn match markdownBox "^\s*|"
 syn match markdownBox "|\s*$"
 
-" syn match markdownCheckBox  "-\ \[x\]"  
 
-" syn match markdownCheckBox  "-\ \[x\zs\]"    
-" syn match markdownCheckBox  "foo\zsbar\ "    
-" syn match markdownCheckBoxX "\[\zsx\ze\]"  
 
 syn match markdownCheckBoxX "\[\zsx\ze\]"  
-syn match markdownCheckBox  "\[x\zs\]"    
-syn match markdownCheckBox  "-\ \[\zex\]"  
+syn match markdownCheckBox  "^\s*-\s*\[[\ x]\]"        contains=markdownCheckBoxX
+
+
+" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if main_syntax ==# 'markdown'
@@ -190,12 +187,14 @@ hi def link markdownCodeDelimiter         Delimiter
 hi def link markdownEscape                Special
 hi def link markdownError                 Error
 
-hi markdownBox ctermfg=cyan
+hi markdownBox ctermfg=green
 hi markdownArrow ctermfg=red
 
 hi def link markdownRightArrow            markdownArrow
 hi def link markdownBox                   markdownBox
 hi def link markdownCheckBox			  markdownArrow
+" hi def link markdownCheckBoxO			  markdownArrow
+" hi def link markdownCheckBoxC			  markdownArrow
 hi def link markdownCheckBoxX			  markdownBox
 
 
@@ -205,3 +204,47 @@ if main_syntax ==# 'markdown'
 endif
 
 " vim:set sw=2:
+
+
+
+
+
+
+
+" http://vimdoc.sourceforge.net/htmldoc/syntax.html#syntax
+
+
+" syn region markdownBox start="^\s*|" end="|\s*$"
+
+" syn match markdownCheckBox  "-\ \[x\]"  
+
+" syn match markdownCheckBox  "-\ \[x\zs\]"    
+" syn match markdownCheckBox  "foo\zsbar\ "    
+" syn match markdownCheckBoxX "\[\zsx\ze\]"  
+
+
+" syn region markdownCheckBox start="-\ \[\zex\]" end="\[x\zs\]"
+
+
+
+
+" syn match markdownOrderedListMarker "^\s*\d\+[\ \.\-\)]*" contained
+" syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" 
+
+
+
+" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+" syn match markdownCheckBoxX "\[\zsx\ze\]"  
+" syn match markdownCheckBoxO  "\[x\zs\]"    
+" syn match markdownCheckBoxC  "-\ \[\zex\]"  
+
+" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+" syn match markdownCheckBox "-\ \[x\]" contains=markdownCheckBoxX
+
+
+" syn region markdownCheckBox start="-\ \[\zex\]" end="\]" contains markdownCheckBoxX
+
+

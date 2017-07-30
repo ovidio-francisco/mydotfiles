@@ -1,8 +1,9 @@
 " ------------------------------------
-" Authors:     Ovídio José Francisco
+" Author:      Ovídio José Francisco
 " Description: My Vim dotfile
 " Last Change: July, 2017
 " ------------------------------------
+
 
 filetype indent plugin on
 syntax on
@@ -36,14 +37,18 @@ set formatoptions+=t
 set virtualedit=onemore,block
 set spell spelllang=pt,en
 set nospell
+set noshowmode
 colorscheme elflord
 
 
 autocmd CursorHold * checktime
 
-autocmd BufEnter,BufNewFile *.tex call SetTexConfig()
-autocmd BufEnter,BufNewFile *.csv call SetCSVConfig()
-autocmd BufEnter,BufNewFile *.md  call SetMarkdownConfig()
+autocmd BufRead,BufNewFile *.tex call SetTexConfig()
+autocmd BufRead,BufNewFile *.csv call SetCSVConfig()
+autocmd BufRead,BufNewFile *.md  call SetMarkdownConfig()
+
+
+" autocmd InsertEnter * highlight LightlineLeft_insert_0 ctermbg=green
 " autocmd BufEnter,BufNewFile *.txt colorscheme darkblue
 " autocmd FileType text colorscheme darkblue
 " autocmd FileType help colorscheme elflord
@@ -61,6 +66,7 @@ call vundle#begin()
   Plugin 'chrisbra/csv.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'scrooloose/nerdcommenter' 
+  Plugin 'lervag/vimtex'
 call vundle#end()
 
 
@@ -88,6 +94,8 @@ let g:NERDSpaceDelims = 1
 
 
 let g:jellybeans_background_color_256='NONE'
+
+
 
 highlight Directory ctermfg=gray
 highlight NERDTreeFile ctermfg=gray
@@ -131,6 +139,7 @@ inoremap <F1><F1> <ESC>:q<cr>
 
 
 " Quit without save
+nnoremap <F12><F1><F12><F12>  :qa!<cr>
 nnoremap <F12><F12>      ZQ
 inoremap <F12> <esc>
 
@@ -182,7 +191,7 @@ inoremap <C-f> <c-o>D
 
 
 " Insert line in Normal Mode
-nnoremap <CR>  i<CR><esc>
+" nnoremap <CR>  i<CR><esc>
 
 
 " Insert tab in Normal Mode
@@ -210,11 +219,11 @@ inoremap <c-q>    <esc><c-y>gki
 
 
 " Move Up, Down in Insert mode
-inoremap <silent><up>   <c-o>gk
-inoremap <silent><down> <c-o>gj
+" inoremap <silent><up>   <c-o>gk
+" inoremap <silent><down> <c-o>gj
 
 
-nnoremap <Leader>l  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
+nnoremap <Leader>h  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
 nnoremap <Leader>w  :set wrap!<cr>
 
 nnoremap <Leader>\| :vsplit<cr>
@@ -330,21 +339,6 @@ function ToggleTransparentBG()
 endfunction
 
 
-" let s:hisearch = 1 "highlight the search
-" function ToggleHiSearch()
-
-	" if s:his" earch == 1
-		" set hls	
-		" echo "1111111111111111"	
-	" else
-		" :noh<cr>
-		" echo 	"2222222222222222"	
-	" endif
-
-	" let s:hisearch =! s:hisearch
-
-" endfunction
-
 
 
 set showbreak=
@@ -360,6 +354,7 @@ function ToggleShowBreaks()
 	else
 		let &showbreak=w:myshowbreak
 		set cpoptions+=n
+
 
 	endif
 
@@ -409,6 +404,9 @@ function ToggleHiglightTheCursor()
 	let s:hc =! s:hc
 
 endfunction
+
+
+
 
 
 function MakeTexAbrevs()
@@ -475,6 +473,14 @@ function SetTexConfig()
 
 	set spell
 
+	hi texAbstract cterm=italic
+	
+	hi VimtexTocTodo ctermfg=yellow ctermbg=none
+	hi VimtexTocHelp ctermfg=darkcyan cterm=none
+	hi VimtexTocSec0 ctermfg=white cterm=bold
+	hi VimtexTocSec1 ctermfg=gray cterm=none
+	hi VimtexTocSec2 ctermfg=darkgray cterm=none
+
 endfunction
 
 function SetCSVConfig()
@@ -500,9 +506,43 @@ function SetMarkdownConfig()
 	hi markdownH4 cterm=none ctermfg=magenta
 	hi markdownH5 cterm=none ctermfg=darkmagenta 
 	hi markdownH6 cterm=none ctermfg=red 
-	hi markdownOrderedListMarker cterm=none ctermfg=yellow
+	hi markdownListMarker        cterm=none ctermfg=red
+	hi markdownOrderedListMarker cterm=none ctermfg=red
 	hi markdownRule ctermfg=darkcyan
-	
+	hi 
+
+
+	" Check/Uncheck the CheckBox
+	nnoremap <silent><space> :call CheckTheBox()<cr>
+
+	let g:markDownCheckBoxCheckedChar='x'
+	let g:markDownCheckBoxUnCheckedChar=' '
+	function CheckTheBox() 
+
+		let line = getline(".")
+		let rege = "^\\s*\\zs-\\s*\\[[\\".g:markDownCheckBoxUnCheckedChar.g:markDownCheckBoxCheckedChar."]\\]"
+		let startBox = match(line, rege)  		
+		let endBox = match(line, "^\\s*-\\s*\\[[\\ x]\\zs\\]")
+
+		if startBox < 0 | return | endif
+
+		let colu = col(".")-1
+		let char = line[endBox-1]
+		let curp = getcurpos()
+
+
+		if colu >= startBox && colu <= endBox
+			if char == g:markDownCheckBoxCheckedChar   | let newchecbox = '['.g:markDownCheckBoxUnCheckedChar.']' | endi	
+			if char == g:markDownCheckBoxUnCheckedChar | let newchecbox = '['.g:markDownCheckBoxCheckedChar.  ']' | endi	
+				
+			let brackets = "\\[[\\".char."]\\]"
+
+			exec 's/'.brackets.'/'.newchecbox.'/'
+			call setpos('.', curp)
+		endif
+
+	endfunction
+
 endfunction
 
 
@@ -529,35 +569,44 @@ function GetLang()
 endfunction
 
 
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'active': {
-	  \			
-	  \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ],
-      \
-	  \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'buff', 'spell', 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-	  \ 
-      \ 'inactive': {
-	  \			
-	  \   'left': [ [ ],
-      \             [ 'readonly', 'filename', 'modified' ] ],
-      \
-	  \   'right': [ [ ],
-      \              [ ],
-      \              [ 'filetype' ] ]
-      \ },
-	  \ 
-	  \ 
-	  \ 'component': {
-	  \   'buff': '%{GetBuffCount()}',
-	  \   'char': '%-2.2B',
-      \ },
-	  \ }
 
+
+
+let g:lightline = {
+	\ 'colorscheme': 'jellybeans',
+	\ 'active': {
+	\			
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'readonly', 'filename', 'modified' ] ],
+	\
+	\   'right': [ [ 'lineinfo' ],
+	\              [ 'percent' ],
+	\              [ 'buff', 'spell', 'fileformat', 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 
+	\ 'inactive': {
+	\			
+	\   'left': [ [ ],
+	\             [ 'readonly', 'filename', 'modified' ] ],
+	\
+	\   'right': [ [ ],
+	\              [ ],
+	\              [ 'filetype' ] ]
+	\ },
+	\ 
+	\ 
+	\ 'component': {
+	\   'buff': '%{GetBuffCount()}',
+	\   'char': '%-2.2B',
+	\ },
+	\ }
+
+
+
+" highlight LightlineLeft_insert_0 ctermbg=green
+" highlight LightlineRight_0 ctermbg=107
+
+" call lightline#highlight()
 
 
 "1<c-g>
@@ -573,7 +622,7 @@ let g:lightline = {
 "
 " vim.wikia.com/wiki/Search_patterns
 
-
+" https://stackoverflow.com/questions/7560911/vim-do-something-in-a-function-based-on-character-under-a-cursor?rq=1
 " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
 " https://www.vivaolinux.com.br/artigo/Corretor-Ortografico-no-Vim-Guia-definitivo
 " https://github.com/itchyny/lightline.vim/issues/223
@@ -584,21 +633,3 @@ let g:lightline = {
 ".'\u2026'
 "let g:NERDTreeDirArrowExpandable  = '·'
 "let g:NERDTreeDirArrowCollapsible = '*'
-
-
-
-
-
-
-"
-
-
-
-
-
-
-
-
-
-
-"
