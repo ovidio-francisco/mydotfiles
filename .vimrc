@@ -13,38 +13,38 @@ set hlsearch							" Highlight the search matches
 set ignorecase							" Ignore case in a pattern
 set smartcase							" Ignore case when the patter contais lowercase letters only
 set mouse=a								" Enable the mouse for all modes
-set showcmd                             " Show partial commands in the last line of the screen
-set backspace=indent,eol,start          " Allow backspacing over autoindent, line breaks and start of insert action
-set nostartofline                       " Stop certain movements from always going to the first character of a line.
-set autoindent                          " When opening a new line and no filetype-specific indenting is enabled.
+set showcmd								" Show partial commands in the last line of the screen
+set backspace=indent,eol,start			" Allow backspacing over autoindent, line breaks and start of insert action
+set nostartofline						" Stop certain movements from always going to the first character of a line.
+set autoindent							" When opening a new line and no filetype-specific indenting is enabled.
 set smartindent							" Autoindent new lines
-set ruler                               " Display the cursor position on the last line or in the status line
-set confirm                             " Instead raise a " dialogue asking if you wish to save changed files.
-set visualbell                          " Use visual bell instead of beeping when doing something wrong
-set t_vb=                               " Reset the terminal code for the visual bell. 
-set number                              " Display line numbers on the left
-set shiftwidth=4                        " Indentation settings for using hard tabs for indent. 
-set tabstop=4                           " Display tabs as four characters wide.
-set ttimeout ttimeoutlen=20             " Quickly time out on keycodes
-set notimeout                           " Never time out on mappings
+set ruler								" Display the cursor position on the last line or in the status line
+set confirm								" Instead raise a " dialogue asking if you wish to save changed files.
+set visualbell							" Use visual bell instead of beeping when doing something wrong
+set t_vb=								" Reset the terminal code for the visual bell. 
+set number								" Display line numbers on the left
+set shiftwidth=4						" Indentation settings for using hard tabs for indent. 
+set tabstop=4							" Display tabs as four characters wide.
+set ttimeout ttimeoutlen=20				" Quickly time out on keycodes
+set notimeout							" Never time out on mappings
 set pastetoggle=<F10>					" Specify F10 to toggle the 'paste' option
 set rtp+=~/.vim/bundle/Vundle.vim		" Sets the run time path, where vim will search for runtime files
 set showmatch							" Briefly jumps to the matching bracket when it is inserted
 set laststatus=2						" Determines that the window always have a status line
-set wrap                                " Soft wrap
-set linebreak                           " Break at word boundary
+set wrap								" Soft wrap
+set linebreak							" Break at word boundary
 set display=truncate					" When last line is too long, put the @ at line numbers and display text as much as possible
 set formatoptions=qro					" The letters which influence how to autoformat texts. Run :verb set formatopitions 
 set virtualedit=onemore,block			" Allow virtual editing and allow the cursor to move one more beyond the line end
 set spelllang=pt,en						" Sets the laguages when spell cheking is on
-set encoding=utf8                       " Set the encoding used to read the file
-set fileencoding=utf8                   " Set the encoding to use when saving the file
-set noshowmode                          " Do not show mode in status line
-set nojoinspaces                        " Do not insert an extra space after .?! with join command
-set clipboard=unnamedplus               " Use the + instead * that means it share the content with the OS
-set shortmess+=F                        " Don't give the file info when editing a file
-set gcr+=a:blinkon0                     " The cursor should look like in all modes and no blink
-set splitbelow                          " Put new windows below the current one
+set encoding=utf8						" Set the encoding used to read the file
+set fileencoding=utf8					" Set the encoding to use when saving the file
+set noshowmode							" Do not show mode in status line
+set nojoinspaces						" Do not insert an extra space after .?! with join command
+set clipboard=unnamedplus				" Use the + instead * that means it share the content with the OS
+set shortmess+=F						" Don't give the file info when editing a file
+set gcr+=a:blinkon0						" The cursor should look like in all modes and no blink
+set splitbelow							" Put new windows below the current one
 
 " set cpoptions-=n                        " Removes n from Vi-Compatible options. Number column will not be used for wrapped lines
 
