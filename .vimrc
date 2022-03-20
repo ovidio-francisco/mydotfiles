@@ -49,6 +49,7 @@ set splitbelow							" Put new windows below the current one
 " set cpoptions-=n                        " Removes n from Vi-Compatible options. Number column will not be used for wrapped lines
 
 
+
 colorscheme elflord
 
 
