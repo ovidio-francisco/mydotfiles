@@ -1,0 +1,135 @@
+
+
+
+
+
+
+
+
+
+! - For real transparency (composite): 
+urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
+
+
+!! Appearance
+urxvt.scrollBar: false
+
+rangerterm.scrollBar: false
+rangerterm*depth: 32
+rangerterm*background: rgba:0000/0000/0200/c800
+
+codetesting.scrollBar: false
+codetesting*depth: 32
+codetesting*background: rgba:0000/0000/0200/c800
+
+vimnotes.scrollBar: false
+vimnotes*depth: 32
+vimnotes*background: rgba:0000/0000/bbbb/7800
+vimnotes*font: xft:Fantasque Sans Mono:pixelsize=16 
+
+nmtuiwin.scrollBar: false
+nmtuiwin*depth: 32
+nmtuiwin*background: rgba:0000/0000/0200/c800
+
+
+floatingterminal.scrollBar: false
+floatingterminal*depth: 32
+floatingterminal*background: rgba:0000/0000/0200/c800
+
+
+
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
+! URxvt.keysym.Control-Right:  \033
+
+
+
+
+
+!! Font prefferenes
+! urxvt.font: xft:Noto Sans Mono:pixelsize=13
+! urxvt.font: xft:DejaVu Sans Mono:pixelsize=13
+! URxvt.font: xft:Fantasque Sans Mono:pixelsize=14,xft:DejaVu Sans Mono:size=9,xft:DejaVu Sans:size=9
+URxvt.font: xft:Fantasque Sans Mono:pixelsize=14
+URxvt.boldFont: xft:Fantasque Sans Mono:pixelsize=14:weight=bold
+! urxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=13:weight=bold
+URxvt.letterSpace: -1
+
+
+!! Larger history limit
+URxvt.saveLines: 1000000
+
+!! Perl extensions
+URxvt.perl-ext-common: default,matcher,font-size
+
+
+!! Open urls in browser with Control-Click
+URxvt.urlLauncher: /usr/bin/firefox
+URxvt.matcher.button: C1
+
+
+!! Change font size on Control-Plus/Minus
+URxvt.keysym.Control-0x2b: perl:font-size:increase
+URxvt.keysym.Control-0x2d: perl:font-size:decrease
+
+
+! special
+*.foreground:   #ffffff
+*.background:   #000000
+*.cursorBlink: 0
+URxvt.pointerBlank: 1
+
+
+! black
+*.color0:       #000000
+*.color8:       #4d4d4d
+
+! red
+! *.color1:       #cc0403
+! *.color9:       #3e0605
+*.color1:       #aa0000
+*.color9:       #ff5555
+
+! green
+*.color2:       #19cb00
+*.color10:      #23fd00
+
+! yellow
+*.color3:       #cecb00
+*.color11:      #fffd00
+
+! blue
+*.color4:       #001cd1
+*.color12:      #0026ff
+
+! magenta
+*.color5:       #cb1ed1
+*.color13:      #fd28ff
+
+! cyan
+*.color6:       #0dcdcd
+*.color14:      #14ffff
+
+! white
+*.color7:       #e5e5e5
+*.color15:      #ffffff
+
+
+
+
+! Transparency
+! https://ctkarch.org/documentation/tutorials/tuto.php?page=urxvt-transpa.xml
+
+
+
+! urxvt.termName: rxvt-unicode
+! urxvt*background: rgba:0000/0000/0200/c000
+
+! - For fake transparency: 
+! urxvt.background: black
+! urxvt*transparent: true
+! urxvt*shading: 50
+! *.cursorColor:  #ffffff
