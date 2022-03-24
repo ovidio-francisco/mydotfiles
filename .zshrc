@@ -12,6 +12,9 @@ ZSH_THEME="ojf2"
 source $ZSH/oh-my-zsh.sh
 
 
+export PATH="$HOME/bin:$PATH"
+
+
 alias rm='echo "don'"'"'t use this shit! - try trash"'
 alias mv='mv -iv'
 alias cp='cp -iv'
