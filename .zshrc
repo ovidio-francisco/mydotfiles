@@ -23,7 +23,7 @@ alias ld='ls -A | grep "^\."'
 
 alias ccat='ccat --bg=dark' # https://github.com/jingweno/ccat
 
-alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/.git/ --work-tree=$HOME'
+alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 stty -ixon   # desable the <ctrl-s>
 
