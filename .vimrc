@@ -184,8 +184,11 @@ nnoremap <F2>        :w<CR>
 vnoremap <F2> <ESC>  :w<cr>
 inoremap <F2> <ESC>  :w<cr>
 
-nnoremap ; :call NERDComment(0,"toggle")<cr>
-vnoremap ; :call NERDComment(0,"toggle")<cr>
+" nnoremap ; :call NERDComment(0,"toggle")<cr>
+" vnoremap ; :call NERDComment(0,"toggle")<cr>
+
+nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
 
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <leader><F3> :TagbarToggle<cr>
