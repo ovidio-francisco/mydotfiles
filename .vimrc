@@ -147,7 +147,7 @@ let g:ale_enabled = 0
 " set omnifunc=ale#completion#OmniFunc
 
 
-let g:user_emmet_leader_key='<C-V>'
+let g:user_emmet_leader_key='<C-C>'
 
 
 

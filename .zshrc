@@ -27,6 +27,9 @@ alias ld='ls -A | grep "^\."'
 alias ccat='ccat --bg=dark' # https://github.com/jingweno/ccat
 
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
+
+
 
 stty -ixon   # desable the <ctrl-s>
 
