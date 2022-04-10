@@ -45,8 +45,8 @@ set clipboard=unnamedplus              " Use the + instead * that means it share
 set shortmess+=F                       " Don't give the file info when editing a file
 set gcr+=a:blinkon0                    " The cursor should look like in all modes and no blink
 set splitbelow                         " Put new windows below the current one
-
 " set cpoptions-=n                     " Removes n from Vi-Compatible options. Number column will not be used for wrapped lines
+
 
 
 
@@ -186,11 +186,11 @@ nnoremap <F2>        :w<CR>
 vnoremap <F2> <ESC>  :w<cr>
 inoremap <F2> <ESC>  :w<cr>
 
-" nnoremap ; :call NERDComment(0,"toggle")<cr>
-" vnoremap ; :call NERDComment(0,"toggle")<cr>
+nnoremap ; :call NERDComment(0,"toggle")<cr>
+vnoremap ; :call NERDComment(0,"toggle")<cr>
 
-nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
-vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+" nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+" vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
 
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <leader><F3> :TagbarToggle<cr>
@@ -282,26 +282,6 @@ noremap <F9> :ALEToggle<cr>
 
 
 
-" Insert line in Normal Mode
-nnoremap m  i<CR><esc>
-nnoremap <leader>m  o<esc>
-nnoremap <leader>M  O<esc>
-nnoremap zm  o<esc>
-nnoremap zM  O<esc>
-
-
-
-" Scrool screen and move the cursor in the oposite direction
-nnoremap <down> <c-e>gj
-nnoremap <up>   <c-y>gk
-
-
-" Scrool screen Up
-nnoremap <s-up>   <c-y>gk
-nnoremap <c-s>    <c-e>gj
-
-nnoremap <silent>K kJ
-
 " Highlights the cursor line
 nnoremap <Leader>h  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
 
@@ -341,8 +321,29 @@ inoremap <s-tab> <esc><c-w>w
 " =========================
 
 
-" Break undo sequence, start new change        
-" See i_CTRL-G_u
+" Insert line in Normal Mode
+nnoremap m  i<CR><esc>
+nnoremap <leader>m  o<esc>
+nnoremap <leader>M  O<esc>
+nnoremap zm  o<esc>
+nnoremap zM  O<esc>
+
+
+" Scrool screen and move the cursor in the oposite direction
+nnoremap <down> <c-e>gj
+nnoremap <up>   <c-y>gk
+
+
+" Scrool screen Up
+nnoremap <s-up>   <c-y>gk
+nnoremap <c-s>    <c-e>gj
+
+
+" Join current line with the above
+nnoremap <silent>K kJ
+
+
+" Break undo sequence, start new change. See i_CTRL-G_u
 inoremap <space> <space><c-g>u
 inoremap <cr> <cr><c-g>u
 inoremap <bs> <bs><c-g>u
@@ -484,6 +485,8 @@ endfunction
 
 
 function SetHTMLConfig()
+	set background=dark   
+	colorscheme one
 
 	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
 	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
@@ -495,7 +498,13 @@ endfunction
 function SetJavaScriptConfig()
 	set background=dark   
 	colorscheme one
+
+	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
+	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
+
+	" see also: https://vi.stackexchange.com/questions/9672/how-to-generate-closing-tags-for-html
 endfunction
+
 
 function SetPythonConfig()
 	colorscheme one
