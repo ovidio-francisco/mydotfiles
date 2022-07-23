@@ -1,20 +1,20 @@
-" ------------------------------------
+"------------------------------------
 " Author:      Ovídio José Francisco
 " Description: My vim dotfile
 " Created:     July, 2017
 " ------------------------------------
 
 
-filetype indent plugin on              " Detect filetype, indent and load plugins for spefific file types
+filetype indent plugin on              " Detect filetype, indent and load plugins for specific file types
 syntax on                              " Enable syntax highlighting
-set nocompatible                       " Necesary for lots of cool vim things
-set wildmenu                           " Makes command-line completion operates in an anhanced mode
+set nocompatible                       " Necessary for lots of cool vim things
+set wildmenu                           " Makes command-line completion operates in an enhanced mode
 set hlsearch                           " Highlight the search matches
 set ignorecase                         " Ignore case in a pattern
 set smartcase                          " Ignore case when the patter contais lowercase letters only
 set mouse=a                            " Enable the mouse for all modes
 set showcmd                            " Show partial commands in the last line of the screen
-set backspace=indent,eol,start         " Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start         " Allow backspacing over auto indent, line breaks and start of insert action
 set nostartofline                      " Stop certain movements from always going to the first character of a line
 set autoindent                         " When opening a new line and no filetype-specific indenting is enabled
 set smartindent                        " Autoindent new lines
@@ -25,18 +25,19 @@ set t_vb=                              " Reset the terminal code for the visual 
 set number                             " Display line numbers on the left
 set shiftwidth=4                       " Indentation settings for using hard tabs for indent. 
 set tabstop=4                          " Display tabs as four characters wide.
-set ttimeout ttimeoutlen=20            " Quickly time out on keycodes
+set ttimeout ttimeoutlen=20            " Quickly time out on key codes
 set notimeout                          " Never time out on mappings
 set pastetoggle=<F10>                  " Specify F10 to toggle the 'paste' option
 set rtp+=~/.vim/bundle/Vundle.vim      " Sets the run time path, where vim will search for runtime files
 set showmatch                          " Briefly jumps to the matching bracket when it is inserted
+set matchtime=2						   " How briefly is the matching jump
 set laststatus=2                       " Determines that the window always have a status line
 set wrap                               " Soft wrap
 set linebreak                          " Break at word boundary
 set display=truncate                   " When last line is too long, put the @ at line numbers and display text as much as possible
 set formatoptions=qro                  " The letters which influence how to autoformat texts. Run :verb set formatopitions 
 set virtualedit=onemore,block          " Allow virtual editing and allow the cursor to move one more beyond the line end
-set spelllang=pt,en                    " Sets the laguages when spell cheking is on
+set spelllang=pt,en                    " Sets the languages when spell chequing is on
 set encoding=utf8                      " Set the encoding used to read the file
 set fileencoding=utf8                  " Set the encoding to use when saving the file
 set noshowmode                         " Do not show mode in status line
@@ -45,12 +46,12 @@ set clipboard=unnamedplus              " Use the + instead * that means it share
 set shortmess+=F                       " Don't give the file info when editing a file
 set gcr+=a:blinkon0                    " The cursor should look like in all modes and no blink
 set splitbelow                         " Put new windows below the current one
+
 " set cpoptions-=n                     " Removes n from Vi-Compatible options. Number column will not be used for wrapped lines
 
 
 
-
-colorscheme elflord
+" colorscheme elflord
 
 
 call vundle#begin() 
@@ -76,25 +77,26 @@ call vundle#end()
   
 
 
+
 " ------------------------------------------------------------
 " ----------------------- AUTO COMMANDS ----------------------
 " ------------------------------------------------------------
 
 
-" Execute automatically when the user doesn't press a key for the time specified with updatetime	
+" Execute automatically when the user doesn't press a key for the time specified with update time	
 
-autocmd CursorHold * checktime                             " Check if the file was chaged outside vim
+autocmd CursorHold * checktime                             " Check if the file was charged outside vim
 autocmd CursorHold * echo ''							   
 
 
 " Execute automatically on {event} for a file matching
 autocmd BufRead,BufNewFile *.tex  call SetTexConfig()
-autocmd BufRead,BufNewFile *.html call SetHTMLConfig()
 autocmd BufRead,BufNewFile *.js   call SetJavaScriptConfig()
+autocmd BufRead,BufNewFile *.html call SetHTMLConfig()
 autocmd BufRead,BufNewFile *.md   call SetMarkdownConfig()
 autocmd BufRead,BufNewFile *.py   call SetPythonConfig()
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd VimResized * call ChangeStatusLine()
+" autocmd VimResized * call ChangeStatusLine()
 
 
 
@@ -147,7 +149,7 @@ let g:ale_enabled = 0
 " set omnifunc=ale#completion#OmniFunc
 
 
-let g:user_emmet_leader_key='<C-C>'
+let g:user_emmet_leader_key='<c-c>'
 
 
 
@@ -169,8 +171,6 @@ let g:user_emmet_leader_key='<C-C>'
 " Make some shortcuts
 " =========================
 
-
-nnoremap <cr> zz
 
 nnoremap <backspace> g;
 
@@ -223,6 +223,7 @@ nnoremap <tab> ,
 " Do nothing 
 nnoremap ZZ        :echo "do nothing :)"<cr>
 noremap <c-w><c-q> :echo "do nothing :)"<cr>
+noremap <c-z>      :echo "do nothing :)"<cr>
 
 nnoremap B ge
 
@@ -257,7 +258,7 @@ nnoremap g. ylP
 " Clear current line
 nnoremap cl ^D
 
-" Set/unset Transparent Bakcground 
+" Set/unset Transparent Background 
 nnoremap <F5>      :call ToggleTransparentBG()<CR>    
 
 " Set/unset Show Blank chars
@@ -281,6 +282,29 @@ inoremap <s-F9> <c-o>:set spell!<cr>
 noremap <F9> :ALEToggle<cr>
 
 
+" Show/Hide Status Bar
+noremap <silent><F12> :call ToggleShowStatusBar()<cr>
+
+
+" Insert line in Normal Mode
+nnoremap m  i<CR><esc>
+nnoremap <leader>m  o<esc>
+nnoremap <leader>M  O<esc>
+nnoremap zm  o<esc>
+nnoremap zM  O<esc>
+
+
+
+" Scroll screen and move the cursor in the opposite direction
+nnoremap <down> <c-e>gj
+nnoremap <up>   <c-y>gk
+
+
+" Scroll screen Up
+nnoremap <s-up>   <c-y>gk
+nnoremap <c-s>    <c-e>gj
+
+nnoremap <silent>K kJ
 
 " Highlights the cursor line
 nnoremap <Leader>h  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
@@ -317,33 +341,12 @@ inoremap <s-tab> <esc><c-w>w
 
 
 " =========================
-" Make some improviments
+" Make some improvements
 " =========================
 
 
-" Insert line in Normal Mode
-nnoremap m  i<CR><esc>
-nnoremap <leader>m  o<esc>
-nnoremap <leader>M  O<esc>
-nnoremap zm  o<esc>
-nnoremap zM  O<esc>
-
-
-" Scrool screen and move the cursor in the oposite direction
-nnoremap <down> <c-e>gj
-nnoremap <up>   <c-y>gk
-
-
-" Scrool screen Up
-nnoremap <s-up>   <c-y>gk
-nnoremap <c-s>    <c-e>gj
-
-
-" Join current line with the above
-nnoremap <silent>K kJ
-
-
-" Break undo sequence, start new change. See i_CTRL-G_u
+" Break undo sequence, start new change        
+" See i_CTRL-G_u
 inoremap <space> <space><c-g>u
 inoremap <cr> <cr><c-g>u
 inoremap <bs> <bs><c-g>u
@@ -370,10 +373,16 @@ nnoremap ~ ~h
 
 
 
+" Change a misspelling word to the first vim suggestion 
+nnoremap = 1z=
+
+
+
+
 
 
 " ------------------------------------------------------------
-" ------------------------ FUNCITONS -------------------------
+" ------------------------ FUNCTIONS -------------------------
 " ------------------------------------------------------------
 
 
@@ -407,6 +416,28 @@ function ToggleShowBreaks()
 	let w:slb =! w:slb
 
 endfunction
+
+
+
+function ToggleShowStatusBar()
+
+	if &laststatus == 0
+		set laststatus=2
+		set noshowmode
+	else
+		if &laststatus == 1
+			set laststatus=0
+			set showmode
+		else 
+			if &laststatus == 2
+				set laststatus=0
+				set showmode
+			endif
+		endif
+	endif
+
+endfunction
+
 
 
 let s:sb = 0 " show blank chars
@@ -458,7 +489,6 @@ function SetTexConfig()
 
 	let w:myshowbreak='       '
 	set cpoptions+=n
-	call MakeTexAbrevs()
 
 	let w:slb = 0
 	call ToggleShowBreaks()
@@ -485,8 +515,6 @@ endfunction
 
 
 function SetHTMLConfig()
-	set background=dark   
-	colorscheme one
 
 	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
 	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
@@ -496,15 +524,9 @@ endfunction
 
 
 function SetJavaScriptConfig()
-	set background=dark   
+	" set background=dark   
 	colorscheme one
-
-	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
-	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
-
-	" see also: https://vi.stackexchange.com/questions/9672/how-to-generate-closing-tags-for-html
 endfunction
-
 
 function SetPythonConfig()
 	colorscheme one
@@ -673,18 +695,18 @@ endfunction
 
 
 
-function ChangeStatusLine()
+" function ChangeStatusLine()
 	
-	let w = winwidth(0)
+	" let w = winwidth(0)
 
-	if w < 60
-		set laststatus=0
-		set noshowmode
-	else
-		set laststatus=2
-		set showmode  
-	endif
-endfunction
+	" if w < 60
+		" set laststatus=0
+		" set noshowmode
+	" else
+		" set laststatus=2
+		" set showmode  
+	" endif
+" endfunction
 
 
 
@@ -844,6 +866,8 @@ let g:lightline.component_type = {
 
 
 let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
+
+
 
 
 
