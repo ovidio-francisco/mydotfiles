@@ -20,7 +20,7 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias ll='ls -gohX --group-directories-first'
 alias Ll='ls -gohXL'
-alias lh='ls -Ad .*' # list the hiddens
+alias lh='ls -Ad .*' # list the hidden
 alias ld='ls -A | grep "^\."'
 
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -78,7 +78,7 @@ tkdir() {
 set -o noclobber     # avoid override existing file
 unsetopt AUTO_CD     # no auto_cd
 bindkey -r "^[[Z"    # disable the shift tab
-stty -ixon           # desable the <ctrl-s>
+stty -ixon           # disable the <ctrl-s>
 
 
 # avoid the annoying bold slash (/) after a directory name
