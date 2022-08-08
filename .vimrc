@@ -69,7 +69,7 @@ call vundle#begin()
 	Plugin 'maximbaz/lightline-ale' 
 	Plugin 'jszakmeister/vim-togglecursor' 
 	Plugin 'jelera/vim-javascript-syntax'
-	" Themes
+" Themes
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
 call vundle#end()
@@ -96,7 +96,6 @@ autocmd BufRead,BufNewFile *.html call SetHTMLConfig()
 autocmd BufRead,BufNewFile *.md   call SetMarkdownConfig()
 autocmd BufRead,BufNewFile *.py   call SetPythonConfig()
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" autocmd VimResized * call ChangeStatusLine()
 
 
 
@@ -186,11 +185,11 @@ nnoremap <F2>        :w<CR>
 vnoremap <F2> <ESC>  :w<cr>
 inoremap <F2> <ESC>  :w<cr>
 
-nnoremap ; :call NERDComment(0,"toggle")<cr>
-vnoremap ; :call NERDComment(0,"toggle")<cr>
+" nnoremap ; :call NERDComment(0,"toggle")<cr>
+" vnoremap ; :call NERDComment(0,"toggle")<cr>
 
-" nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
-" vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
 
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <leader><F3> :TagbarToggle<cr>
@@ -221,7 +220,7 @@ nnoremap <tab> ,
 
 
 " Do nothing 
-nnoremap ZZ        :echo "do nothing :)"<cr>
+" nnoremap ZZ        :echo "do nothing :)"<cr>
 noremap <c-w><c-q> :echo "do nothing :)"<cr>
 noremap <c-z>      :echo "do nothing :)"<cr>
 
@@ -493,14 +492,13 @@ function SetTexConfig()
 	let w:slb = 0
 	call ToggleShowBreaks()
 
-	" Set/unset Show Blank chars
-	nnoremap <F6>      :call ToggleShowBlanks()<CR>
-	inoremap <F6> <c-o>:call ToggleShowBlanks()<CR>
-
 	" let g:text_comment_nospell=1
 	set spell
 
 	let g:NERDTreeIgnore = ['\.aux$']
+
+
+	nnoremap <c-i>  wbi\textit{<esc>ea}<esc>
 
 	hi texAbstract cterm=italic
 	
@@ -695,21 +693,6 @@ endfunction
 
 
 
-" function ChangeStatusLine()
-	
-	" let w = winwidth(0)
-
-	" if w < 60
-		" set laststatus=0
-		" set noshowmode
-	" else
-		" set laststatus=2
-		" set showmode  
-	" endif
-" endfunction
-
-
-
 
 " ------------------------------------------------------------
 " ------------------------ HIGHLIGHTS ------------------------
@@ -869,6 +852,17 @@ let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
 
 
 
+" ------------------------------------------------------------
+" ------------------ TO REMEMBER SHORTCUTS -------------------
+" ------------------------------------------------------------
+
+" grep -e '^"-->' ~/.vimrc
+
+"--> ========== VIMTEX ==========
+
+"--> \ll	start/stop compiler in continuous mode
+"--> \lc	clear auxiliary files
+"--> \le	show erros
 
 
 
