@@ -5,77 +5,77 @@
 " ------------------------------------
 
 
-filetype indent plugin on              " Detect filetype, indent and load plugins for specific file types
-syntax on                              " Enable syntax highlighting
-set nocompatible                       " Necessary for lots of cool vim things
-set wildmenu                           " Makes command-line completion operates in an enhanced mode
-set hlsearch                           " Highlight the search matches
-set ignorecase                         " Ignore case in a pattern
-set smartcase                          " Ignore case when the patter contais lowercase letters only
-set mouse=a                            " Enable the mouse for all modes
-set showcmd                            " Show partial commands in the last line of the screen
-set backspace=indent,eol,start         " Allow backspacing over auto indent, line breaks and start of insert action
-set nostartofline                      " Stop certain movements from always going to the first character of a line
-set autoindent                         " When opening a new line and no filetype-specific indenting is enabled
-set smartindent                        " Autoindent new lines
-set ruler                              " Display the cursor position on the last line or in the status line
-set confirm                            " Raise a dialogue asking if you wish to save changed files or override it
-set visualbell                         " Use visual bell instead of beeping when doing something wrong
-set t_vb=                              " Reset the terminal code for the visual bell. 
-set number                             " Display line numbers on the left
-set shiftwidth=4                       " Indentation settings for using hard tabs for indent. 
-set tabstop=4                          " Display tabs as four characters wide.
-set ttimeout ttimeoutlen=20            " Quickly time out on key codes
-set notimeout                          " Never time out on mappings
-set pastetoggle=<F10>                  " Specify F10 to toggle the 'paste' option
-set rtp+=~/.vim/bundle/Vundle.vim      " Sets the run time path, where vim will search for runtime files
-set showmatch                          " Briefly jumps to the matching bracket when it is inserted
-set matchtime=2						   " How briefly is the matching jump
-set laststatus=2                       " Determines that the window always have a status line
-set wrap                               " Soft wrap
-set linebreak                          " Break at word boundary
-set display=truncate                   " When last line is too long, put the @ at line numbers and display text as much as possible
-set formatoptions=qro                  " The letters which influence how to autoformat texts. Run :verb set formatopitions 
-set virtualedit=onemore,block          " Allow virtual editing and allow the cursor to move one more beyond the line end
-set spelllang=pt,en                    " Sets the languages when spell chequing is on
-set encoding=utf8                      " Set the encoding used to read the file
-set fileencoding=utf8                  " Set the encoding to use when saving the file
-set noshowmode                         " Do not show mode in status line
-set nojoinspaces                       " Do not insert an extra space after .?! with join command
-set clipboard=unnamedplus              " Use the + instead * that means it share the content with the OS
-set shortmess+=F                       " Don't give the file info when editing a file
-set gcr+=a:blinkon0                    " The cursor should look like in all modes and no blink
-set splitbelow                         " Put new windows below the current one
-
-" set cpoptions-=n                     " Removes n from Vi-Compatible options. Number column will not be used for wrapped lines
+" -[ Backend ]-
+" -[ .notes file type ]-
 
 
+filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
+syntax on                           " Enable syntax highlighting
+set hlsearch                        " Highlight the search matches
+set incsearch                       " Show search matches while typing
+set ignorecase                      " Ignore case in a pattern
+set smartcase                       " Ignore case when the patter contais lowercase letters only
+set backspace=indent,eol,start      " Allow backspacing over auto indent, line breaks and start of insert action
+set nostartofline                   " Stop certain movements from always going to the first character of a line
+set autoindent                      " When opening a new line and no filetype-specific indenting is enabled
+set smartindent                     " Autoindent new lines
+set confirm                         " Raise a dialogue asking if you wish to save changed files or override it
+set number                          " Display line numbers on the left
+set shiftwidth=4                    " Indentation settings for using hard tabs for indent.
+set tabstop=4                       " Display tabs as four characters wide.
+set ttimeout ttimeoutlen=20         " Quickly time out on key codes
+set notimeout                       " Never time out on mappings
+set pastetoggle=<F10>               " Specify F10 to toggle the 'paste' option
+set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
+set showmatch                       " Briefly jumps to the matching bracket when it is inserted
+set matchtime=2                     " How briefly is the matching jump
+set mouse=a                         " Enable the mouse for all modes
+set linebreak                       " Break at word boundary
+set display=truncate                " When last line is too long, put an @ at line number and show as much as possible
+set formatoptions=qro               " How to autoformat texts. Run :verb set formatopitions 
+set virtualedit=block               " Allow virtual editing and ...
+set spelllang=pt,en                 " Set the languages when spell chequing is on
+set encoding=utf8                   " Set the encoding used to read the file
+set fileencoding=utf8               " Set the encoding to use when saving the file
+set nojoinspaces                    " Do not insert an extra space after .?! with join command
+set clipboard=unnamedplus           " Use the + instead * that means it share the content with the OS
+set splitbelow                      " Put new windows below the current one
+set showcmd                         " Show partial commands in the last line
+set wildmenu                        " Makes command-line completion operates in an enhanced mode
+set breakindent
+set breakindentopt=sbr
+set shiftround
+set showmode                        " Show mode in status line
+set laststatus=0                    " Determines how to display a status line
+set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
-" colorscheme elflord
+" set rulerformat=%l,%v%=%P
 
+if !has('nvim')
 
 call vundle#begin() 
-	Plugin 'scrooloose/nerdtree'
 	Plugin 'VundleVim/Vundle.vim'
 	Plugin 'itchyny/lightline.vim'
 	Plugin 'junegunn/goyo.vim'
-	Plugin 'mattn/emmet-vim'
 	Plugin 'tpope/vim-surround'
-	Plugin 'majutsushi/tagbar'
+	Plugin 'preservim/tagbar'
 	Plugin 'scrooloose/nerdcommenter' 
+	Plugin 'scrooloose/nerdtree'
 	Plugin 'lervag/vimtex'
 	Plugin 'dkarter/bullets.vim'
-	Plugin 'dense-analysis/ale'
-	Plugin 'maximbaz/lightline-ale' 
-	Plugin 'jszakmeister/vim-togglecursor' 
-	Plugin 'jelera/vim-javascript-syntax'
-" Themes
+	Plugin 'mattn/emmet-vim'
+	" Themes
+	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
+	" Telescope
+	Plugin 'nvim-lua/plenary.nvim'
+	Plugin 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+	" Games
+	" Plugin 'ThePrimeagen/vim-be-good'
 call vundle#end()
 
-  
-
+endif
 
 
 " ------------------------------------------------------------
@@ -85,18 +85,25 @@ call vundle#end()
 
 " Execute automatically when the user doesn't press a key for the time specified with update time	
 
-autocmd CursorHold * checktime                             " Check if the file was charged outside vim
-autocmd CursorHold * echo ''							   
+autocmd CursorHold * checktime                             " Check if the file was loaded outside vim
+autocmd CursorHold * echo ''
 
 
 " Execute automatically on {event} for a file matching
-autocmd BufRead,BufNewFile *.tex  call SetTexConfig()
-autocmd BufRead,BufNewFile *.js   call SetJavaScriptConfig()
-autocmd BufRead,BufNewFile *.html call SetHTMLConfig()
-autocmd BufRead,BufNewFile *.md   call SetMarkdownConfig()
-autocmd BufRead,BufNewFile *.py   call SetPythonConfig()
+autocmd BufRead,BufNewFile *.tex        call SetTexConfig()
+autocmd BufRead,BufNewFile *.md         call SetMarkdownConfig()
+autocmd BufRead,BufNewFile *.kn,*.notes call SetNotesConfig()
+autocmd BufRead,BufNewFile *.html       call SetHTMLConfig()
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+augroup devfiles
+	autocmd!
+	autocmd BufReadPre,BufNewFile *.js,*.html,*.py,*.java,*.c,*.cpp call SetDevConfig()
+	autocmd BufReadPre,BufNewFile *.sql call SetDevConfig()
+	autocmd BufReadPre,BufNewFile *.rs  call SetDevConfig()
+	autocmd BufReadPre,BufNewFile *.lua call SetDevConfig()
+	autocmd BufReadPre,BufNewFile .vimrc set relativenumber 
+augroup end 
 
 
 
@@ -110,12 +117,10 @@ let g:vimtex_complete_close_braces = 1
 let g:tex_flavor = 'latex'
 
 
-" Markdown
-let g:vim_markdown_folding_disabled = 1
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh'] " https://github.com/tpope/vim-markdown
-
-
 " NERDTree
+
+let g:NERDTreeHijackNetrw=0                   " Avoid starts when open a directory fom command line (vim .)
+
 let NERDTreeQuitOnOpen = 1
 let NERDTreeHighlightCursorline=1
 let NERDTreeMinimalUI = 1
@@ -129,6 +134,7 @@ let g:tagbar_iconchars = ['▸', '▾']
 " BULLETS
 let g:bullets_enabled_file_types = [ 
 	\ 'markdown',
+	\ 'notes',
     \ 'text'
     \]
 
@@ -155,15 +161,27 @@ let g:user_emmet_leader_key='<c-c>'
 
 
 
+
 " ------------------------------------------------------------
 " ------------------------ My remaps -------------------------
 " ------------------------------------------------------------
 
-" Free key maps
-" <C-\> 
-" <C-p> 
-" <C-b> 
 
+
+" =========================
+" Changing some defaults
+" =========================
+
+" My leader
+let mapleader = ' '
+nnoremap <space> <nop>
+
+
+" make j and k go to the next/previous visual line
+nnoremap j gj
+nnoremap k gk
+
+nnoremap Y y$
 
 
 " =========================
@@ -178,57 +196,36 @@ inoremap <C-L> <ESC>
 
 
 " Save & Quit
-nnoremap <F1>        :q<CR> 
-vnoremap <F1> <ESC>  :q<CR> 
+nnoremap <F1> :q<CR>
+nnoremap <F2> :w<CR>:echo ''<cr>
+vnoremap <F1> <ESC>:q<CR>
+vnoremap <F2> <ESC>:w<cr>
 inoremap <F1> <ESC>
-nnoremap <F2>        :w<CR>
-vnoremap <F2> <ESC>  :w<cr>
-inoremap <F2> <ESC>  :w<cr>
+inoremap <F2> <ESC>:w<cr>
+" nnoremap <leader>l :w<cr>
 
-" nnoremap ; :call NERDComment(0,"toggle")<cr>
-" vnoremap ; :call NERDComment(0,"toggle")<cr>
 
-nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
-vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+" Comments
+nnoremap <leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
+vnoremap <leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
+nnoremap <leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
+nnoremap <leader>A :call nerdcommenter#Comment(0,"append")<cr>
+nnoremap <leader>I :call nerdcommenter#Comment(0,"insert")<cr>i
 
+
+
+" Explore directories
 nnoremap <F3> :NERDTreeToggle<cr>
-nnoremap <leader><F3> :TagbarToggle<cr>
+
+" Explore Tags
+map <F15> <S-F3>
+nnoremap <s-F3> :TagbarToggle<cr>
+
+nnoremap <leader>dl :Explore<cr>
 
 
-
-" =========================
-" Changing some defaults
-" =========================
-
-
-" make j and k go to the next/previous visual line
-nnoremap j gj
-nnoremap k gk
-
-nnoremap gg gg^
-
-nnoremap p gp
-nnoremap P gP
-
-nnoremap Y y$
-
-
-" Go to next char search
-" Go to previous char search
-nnoremap , ;   
-nnoremap <tab> ,
-
-
-" Do nothing 
-" nnoremap ZZ        :echo "do nothing :)"<cr>
-noremap <c-w><c-q> :echo "do nothing :)"<cr>
-noremap <c-z>      :echo "do nothing :)"<cr>
-
-nnoremap B ge
-
-
-" Goyo --> Distraction Free Writing
-nnoremap <F4><F4>      :Goyo<CR>
+" Goyo -- Distraction Free Writing
+nnoremap <silent><F4>      :Goyo<CR>
 
 
 
@@ -238,9 +235,20 @@ nnoremap <F4><F4>      :Goyo<CR>
 " =========================
 
 
+" define line highlight color
+highlight LineHighlight ctermbg=green ctermfg=white
 
-nnoremap <space> viw
-vnoremap <space> v
+" highlight the current line
+nnoremap <leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')<cr>
+vnoremap <leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')<cr>
+
+" clear all the highlighted lines
+nnoremap <leader>h :call clearmatches()<cr>
+
+
+" Select a function
+vnoremap af Va{V
+
 
 " Move lines
 nnoremap <C-j>      :m .+1 <CR>==
@@ -249,92 +257,94 @@ vnoremap <C-j>      :m '>+1<CR>gv=gv
 vnoremap <C-k>      :m '<-2<CR>gv=gv
 
 " Duplicate current line
-nnoremap <C-L> <ESC>:t.<CR>l
+nnoremap <c-l> :t.<CR>
 
 " Replicate the current char
 nnoremap g. ylP
 
 " Clear current line
-nnoremap cl ^D
+nnoremap <c-c><c-c> ^D
 
 " Set/unset Transparent Background 
-nnoremap <F5>      :call ToggleTransparentBG()<CR>    
+nnoremap <F5> :call ToggleTransparentBG()<CR>
 
-" Set/unset Show Blank chars
-nnoremap <F6>      :call ToggleShowBlanks()<CR>:call ToggleShowBreaks()<cr>
-
+" Set colorscheme 
+map <F17> <s-F5>
+nnoremap <S-F5><F6> :colorscheme one<CR>      :highlight Normal ctermbg=NONE<cr>
+nnoremap <S-F5><F7> :colorscheme gruvbox<CR>  :highlight Normal ctermbg=NONE<cr>
 
 " Spot the cursor
-nnoremap <F7><F7>      :call ToggleHiglightTheCursor()<CR>
-
+nnoremap <F7><F7> :set cursorline!<CR>
 
 " Relative line numbers
-nnoremap <F7><F8> : set rnu<cr>:set cursorline<cr>:highlight CursorLineNr ctermfg=white<cr>: highlight LineNr  ctermfg=darkgray<cr>
+nnoremap <F7><F8> :call ToggleRelativeNumber()<cr>
+
+" Set/unset Show Blank chars
+nnoremap <F6> :call ToggleShowBlanks()<CR>:call ToggleShowBreaks()<cr>
+
+" Change vertical movement behave
+nnoremap <leader>j :call ToggleVerticalMovement()<cr>
 
 
 " Toggle Spell Check
-nnoremap <s-F9>      :set spell!<cr>
-inoremap <s-F9> <c-o>:set spell!<cr>
+map <F21> <s-F9>
+nnoremap <S-F9>      :set spell!<cr>
 
 
 " Code check
-noremap <F9> :ALEToggle<cr>
+nnoremap <F9> :ALEToggle<cr>
 
+" Show File name and filetype
+nnoremap g1 :echo expand('%:r'). ' - ' . &filetype<cr>
 
 " Show/Hide Status Bar
-noremap <silent><F12> :call ToggleShowStatusBar()<cr>
+nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
 
 
 " Insert line in Normal Mode
 nnoremap m  i<CR><esc>
 nnoremap <leader>m  o<esc>
 nnoremap <leader>M  O<esc>
-nnoremap zm  o<esc>
-nnoremap zM  O<esc>
 
+nnoremap <leader>o  mzo<esc>`z
+nnoremap <leader>o  mzO<esc>`z
 
 
 " Scroll screen and move the cursor in the opposite direction
-nnoremap <down> <c-e>gj
-nnoremap <up>   <c-y>gk
+nnoremap <up>    <c-y>gk
+nnoremap <down>  <c-e>gj
+
+nnoremap <c-q>   <c-y>gk
+nnoremap <c-s>   <c-e>gj
 
 
-" Scroll screen Up
-nnoremap <s-up>   <c-y>gk
-nnoremap <c-s>    <c-e>gj
-
+" Join with the line above
 nnoremap <silent>K kJ
-
-" Highlights the cursor line
-nnoremap <Leader>h  :set cursorline!<cr>:highlight CursorLineNr ctermfg=darkred<cr>
 
 nnoremap <Leader>w  :set wrap!<cr>
 
-nnoremap <Leader>\| :vsplit<cr>
-nnoremap <Leader>-  :split<cr>
+nnoremap <Leader><bar> :vsplit<cr>
+nnoremap <Leader>-     :split<cr>
 
 
 " Disable/Enable highlight in search
-let hlstate=1
-nnoremap <silent><f8> :if (hlstate == 1) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate =! hlstate<cr>
-
-
-nnoremap <Leader>_ :new<cr>
+nnoremap <silent><f8> : set hlsearch!<cr>
 
 
 " Create an empty Window at the Left
-nnoremap <f4><f1>  :vnew<cr>
 nnoremap <Leader>n :vnew<cr>
 
 " Create an empty Window at the Bottom
 nnoremap <Leader>_ :new<cr>
-nnoremap <f4><f1>  :new<cr>
  
 " Change to next window
 nnoremap <s-tab> <c-w>w
 inoremap <s-tab> <esc><c-w>w
 		
 
+" Change to next/previous buffer
+nnoremap <leader><tab>   :bn<cr>
+nnoremap <leader><s-tab> :bp<cr>
 
 
 
@@ -344,7 +354,7 @@ inoremap <s-tab> <esc><c-w>w
 " =========================
 
 
-" Break undo sequence, start new change        
+" Break undo sequence, start new change
 " See i_CTRL-G_u
 inoremap <space> <space><c-g>u
 inoremap <cr> <cr><c-g>u
@@ -354,6 +364,7 @@ inoremap , ,<c-g>u
 
 
 " Black hole register
+nnoremap <del> "_
 vnoremap <leader>d "_d
 nnoremap <leader>x "_x
 nnoremap <leader>s "_s
@@ -364,16 +375,19 @@ nnoremap <leader>S "_S
 nnoremap <leader>b "_
 
 
-nnoremap ~ ~h
+" Replace selected without yank
+vnoremap <leader>p "_dP
+
+
 
 " Indent/Unindent and reselect
-:vnoremap < <gv
-:vnoremap > >gv
+vnoremap < <gv
+vnoremap > >gv
 
 
 
 " Change a misspelling word to the first vim suggestion 
-nnoremap = 1z=
+nnoremap <leader>= 1z=
 
 
 
@@ -384,59 +398,67 @@ nnoremap = 1z=
 " ------------------------ FUNCTIONS -------------------------
 " ------------------------------------------------------------
 
+" function AdjustVerticalMovementToRelativeNumbers()
+
+function ToggleVerticalMovement()
+	
+	if mapcheck("j", "n") != ""
+		nunmap j
+		nunmap k
+	else
+		nnoremap j gj
+		nnoremap k gk
+	endif
+
+endfunction
+
+
+
+
+function ToggleRelativeNumber()
+	set relativenumber!
+
+	if &relativenumber
+		nunmap j
+		nunmap k
+	else
+		nnoremap j gj
+		nnoremap k gk
+	endif
+endfunction
 
 
 let s:tb = 0 "transparent background
 function ToggleTransparentBG()
+
 	if s:tb 
 		highlight Normal ctermbg=NONE
 	else
 		highlight Normal ctermbg=black
 	endif
 
+
 	let s:tb =! s:tb
 endfunction
 
 
 
-let w:myshowbreak=' →  ' 
-let w:slb=0 "show line breaks
+let s:myshowbreak=' →  '
+let s:slb=0 "show line breaks
 function ToggleShowBreaks()
 
-	if w:slb
+	if s:slb
 		set showbreak=""
-		set cpoptions-=n " Removes n from Vi-Compatible options. 
+		set cpoptions-=n " Removes n from Vi-Compatible options.
 		                 " Number column will not be used for wrapped lines
 	else
-		let &showbreak=w:myshowbreak
+		let &showbreak=s:myshowbreak
 		set cpoptions+=n
 	endif
 
-	let w:slb =! w:slb
+	let s:slb =! s:slb
 
 endfunction
-
-
-
-function ToggleShowStatusBar()
-
-	if &laststatus == 0
-		set laststatus=2
-		set noshowmode
-	else
-		if &laststatus == 1
-			set laststatus=0
-			set showmode
-		else 
-			if &laststatus == 2
-				set laststatus=0
-				set showmode
-			endif
-		endif
-	endif
-
-endfunction
-
 
 
 let s:sb = 0 " show blank chars
@@ -456,27 +478,28 @@ function ToggleShowBlanks()
 endfunction
 
 
-let s:hc = 1  " Highlight the Cursor
-function ToggleHiglightTheCursor() 
-	
-	if s:hc
-		set cursorline
-		set cursorcolumn
-	
-		let l:color = '234'	
 
-		exe 'highlight CursorLine   cterm=NONE ctermbg=' . l:color
-		" exe 'highlight CursorColumn cterm=NONE ctermbg=' . l:color
+
+
+function ToggleShowStatusBar()
+
+	if &laststatus == 0
+		set laststatus=1
+		set noshowmode
+		echo "laststatus = 1: if splitted"
 	else
-		set nocursorline
-		set nocursorcolumn
-
-		highlight CursorLine   cterm=NONE ctermbg=none
-		highlight CursorColumn cterm=NONE ctermbg=none
-		highlight CursorLineNr cterm=NONE ctermfg=lightgray
+		if &laststatus == 1
+			set laststatus=2
+			set showmode
+			echo "laststatus = 2: always"
+		else 
+			if &laststatus == 2
+				set laststatus=0
+				set showmode
+				echo "laststatus = 0: never"
+			endif
+		endif
 	endif
-
-	let s:hc =! s:hc
 
 endfunction
 
@@ -487,18 +510,16 @@ function SetTexConfig()
 	set filetype=tex  " to avoid the plaintex filetype - note it's plainTEX not plainTEXT
 
 	let w:myshowbreak='       '
+	let &showbreak=w:myshowbreak
 	set cpoptions+=n
 
 	let w:slb = 0
-	call ToggleShowBreaks()
+	" call ToggleShowBreaks()
 
 	" let g:text_comment_nospell=1
 	set spell
 
 	let g:NERDTreeIgnore = ['\.aux$']
-
-
-	nnoremap <c-i>  wbi\textit{<esc>ea}<esc>
 
 	hi texAbstract cterm=italic
 	
@@ -511,6 +532,18 @@ function SetTexConfig()
 endfunction
 
 
+function SetDevConfig()
+	set relativenumber
+	" unmap j
+	" unmap k
+	map j j
+	map k k
+	" colorscheme one
+	" colorscheme gruvbox
+	" colorscheme rose-pine
+	highlight Normal ctermbg=NONE
+endfunction
+
 
 function SetHTMLConfig()
 
@@ -521,35 +554,44 @@ function SetHTMLConfig()
 endfunction
 
 
-function SetJavaScriptConfig()
-	" set background=dark   
-	colorscheme one
+
+function! CheckTheBox()
+
+	let line = getline(".")
+	" let rege = "^\\s*\\zs-\\s*\\[[\\".g:markDownCheckBoxUnCheckedChar.g:markDownCheckBoxCheckedChar."]\\]"
+	let rege = "^\\s*\\zs-\\s*\\[[\\".g:markDownCheckBoxUnCheckedChar.g:markDownCheckBoxUnDefinedChar.g:markDownCheckBoxCheckedChar."]\\]"
+	let startBox = match(line, rege)  		
+	let endBox = match(line, "^\\s*-\\s*\\[[\\ x".g:markDownCheckBoxUnDefinedChar."]\\zs\\]")
+
+	if startBox < 0
+		exec 'normal viw'
+		return
+	endif
+
+	let colu = col(".")-1
+	let char = line[endBox-1]
+	let curp = getcurpos()
+
+	if colu >= startBox && colu <= endBox
+		if char == g:markDownCheckBoxCheckedChar   | let newchecbox = '['.g:markDownCheckBoxUnCheckedChar.']' | endi	
+		if char == g:markDownCheckBoxUnCheckedChar | let newchecbox = '['.g:markDownCheckBoxCheckedChar.  ']' | endi	
+		if char == g:markDownCheckBoxUnDefinedChar | let newchecbox = '['.g:markDownCheckBoxCheckedChar.  ']' | endi	
+			
+		let brackets = "\\[[\\".char."]\\]"
+
+		exec 's/'.brackets.'/'.newchecbox.'/'
+		call setpos('.', curp)
+	endif
 endfunction
 
-function SetPythonConfig()
-	colorscheme one
-	highlight Normal ctermfg=white
-	set expandtab!
-endfunction
+
+
 
 function SetMarkdownConfig()
-
-	syn match markdownRightArrow "^\s*-->"
-	syn match markdownRightArrow "-->"
-
-	syn region markdownBox start="+-" end="-+"
-	syn match  markdownBox "^\s*|"
-	syn match  markdownBox "|\s*$"
 
 	syn match markdownTimeSep     "\d\{1,2\}\zs[:hm]\ze\d\{1,2\}" contained
 	syn match markdownTime              "\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
 	syn match markdownTime    "\d\{1,2\}h\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
-
-	syn match markdownQuote  "\"" contained
-	syn match markdownString "\".*\"" contains=markdownQuote
-
-	syn match markdownQuote2  "\'" contained
-	syn match markdownString2 "\'.*\'" contains=markdownQuote2
 
 	syn match markdownTagSep   "[;,.]"  contained
 	syn match markdownBrackts  "[\[\]]" contained
@@ -562,30 +604,20 @@ function SetMarkdownConfig()
 	syn match markdownBrackts2  "[<>]" contained
 	syn match markdownTags2     "<.*>" contains=markdownBrackts2,markdownTagSep2
 
-	syn match markdownOKBoxText "\[\zs\s*\(OK\|SIM\)\s*\ze\]"  
-	syn match markdownNOBoxText "\[\zs\s*\(NO\|NAO\)\s*\ze\]"  
-	syn match markdownOKBox    "^\s*\[\s*\(OK\|SIM\)\s*\]"        contains=markdownOKBoxText
-	syn match markdownNOBox    "^\s*\[\s*\(NO\|NAO\)\s*\]"        contains=markdownNOBoxText
-	syn match markdownNOEmpty  "^\s*\[\s*\]"
 
 	syn match markdownCheckBoxX "\[\zsx\ze\]"  
 	syn match markdownCheckBox  "^\s*-\s*\[[\ x]\]"        contains=markdownCheckBoxX
 
-	syn match markdownOK "^OK\ze\s."
 
 
 	" --------------------------------------------------------------------------------	
 	" --------------------------------------------------------------------------------	
 
 
-	hi markdownOK               ctermfg=green 
 	hi markdownBox              ctermfg=green
-	hi markdownOKBox            ctermfg=red
-	hi markdownNOBox            ctermfg=red
-	hi markdownNOEmpty          ctermfg=red
-	hi markdownOKBoxText        ctermfg=green
-	hi markdownNOBoxText        ctermfg=gray
+
 	hi markdownArrow            ctermfg=red
+
 	hi markdownTime             ctermfg=cyan
 	hi markdownTimeSep          ctermfg=darkcyan
 	hi markdownString           cterm=italic
@@ -598,22 +630,21 @@ function SetMarkdownConfig()
 	hi markdownTags2            cterm=italic ctermfg=darkred
 	hi markdownBrackts2         ctermfg=red
 	hi markdownTagSep2          ctermfg=red
-	hi markdownSectionMarker    ctermfg=blue
+	" hi markdownSectionMarker    ctermfg=blue
 	hi markdownDashedText       cterm=italic
 	hi markdownDashedTextDashes ctermfg=white
 
-	hi def link markdownRightArrow            markdownArrow
 	hi def link markdownBox                   markdownBox
-	hi def link markdownCheckBox			  markdownArrow
 
+	hi def link markdownCheckBox			  markdownArrow
 	hi def link markdownCheckBoxX			  markdownBox
 
 
-	hi markdownH2                cterm=none ctermfg=cyan 
-	hi markdownH3                cterm=none ctermfg=darkcyan 
+	hi markdownH2                cterm=none ctermfg=cyan
+	hi markdownH3                cterm=none ctermfg=darkcyan
 	hi markdownH4                cterm=none ctermfg=magenta
-	hi markdownH5                cterm=none ctermfg=darkmagenta 
-	hi markdownH6                cterm=none ctermfg=red 
+	hi markdownH5                cterm=none ctermfg=darkmagenta
+	hi markdownH6                cterm=none ctermfg=red
 	hi markdownListMarker        cterm=bold ctermfg=red
 	hi markdownOrderedListMarker cterm=none ctermfg=red
 	hi markdownRule                         ctermfg=darkcyan
@@ -621,75 +652,173 @@ function SetMarkdownConfig()
 
 	let g:markDownCheckBoxCheckedChar='x'
 	let g:markDownCheckBoxUnCheckedChar=' '
-	function! CheckTheBox() 
-
-		let line = getline(".")
-		let rege = "^\\s*\\zs-\\s*\\[[\\".g:markDownCheckBoxUnCheckedChar.g:markDownCheckBoxCheckedChar."]\\]"
-		let startBox = match(line, rege)  		
-		let endBox = match(line, "^\\s*-\\s*\\[[\\ x]\\zs\\]")
-
-		if startBox < 0  
-			exec 'normal viw'
-			return  
-		endif
-
-		let colu = col(".")-1
-		let char = line[endBox-1]
-		let curp = getcurpos()
-
-		" echo "debug: box".colu."-".char."=".startBox." ".endBox
-
-		if colu >= startBox && colu <= endBox
-			if char == g:markDownCheckBoxCheckedChar   | let newchecbox = '['.g:markDownCheckBoxUnCheckedChar.']' | endi	
-			if char == g:markDownCheckBoxUnCheckedChar | let newchecbox = '['.g:markDownCheckBoxCheckedChar.  ']' | endi	
-				
-			let brackets = "\\[[\\".char."]\\]"
-
-			exec 's/'.brackets.'/'.newchecbox.'/'
-			call setpos('.', curp)
-		endif
-	endfunction
-
+	let g:markDownCheckBoxUnDefinedChar='-'
 	" Check/Uncheck the CheckBox
-	nnoremap <buffer><silent> <space> :call CheckTheBox()<cr>
+	nnoremap <buffer><silent> <leader><space> :call CheckTheBox()<cr>
 endfunction
 
 
+"      - ̗̀ AGORA SIM!  ̖́-
+
+function SetNotesConfig()
+	set filetype=notes  
+	nnoremap <buffer><silent> <leader><space> :call CheckTheBox()<cr>
+	let g:markDownCheckBoxCheckedChar='x'
+	let g:markDownCheckBoxUnCheckedChar=' '
+	let g:markDownCheckBoxUnDefinedChar='-'
+
+	hi markdownTagSep           ctermfg=yellow
+	hi markdownBrackts          ctermfg=yellow
+	hi markdownTags             cterm=italic ctermfg=darkyellow
+
+	syn match notesHighlighterDelimiterBegin "\]-\|-\[" 	contained
+	syn match notesHighlighter               "-\[.*\]-"		contains=notesHighlighterDelimiterBegin
+
+	syn match markdownTagSep   "[;,.]"  contained
+	syn match markdownBrackts  "[\[\]]" contained
+	syn match markdownTags     "\[.*\]" contains=markdownBrackts,markdownTagSep
+
+	syn match notesHeaderMarker "^#\{,6}" contained
+
+	syn match notesH1 "^\zs#\s.*\ze" contains=notesHeaderMarker
+	syn match notesH2 "^\zs##\s.*\ze" contains=notesHeaderMarker
+	syn match notesH3 "^\zs###\s.*\ze" contains=notesHeaderMarker
+	syn match notesH4 "^\zs####\s.*\ze" contains=notesHeaderMarker
+	syn match notesH5 "^\zs#####\s.*\ze" contains=notesHeaderMarker
+	syn match notesH6 "^\zs######\s.*\ze" contains=notesHeaderMarker
+
+
+	syn match notesHeaderRule1 "^\s*\zs.*\ze\n\s*=\{3,}$"
+	syn match notesHeaderRule2 "^\s*\zs.*\ze\n\s*\-\{3,}$"
+	syn match notesHeaderRule3 "^\s*\zs.*\ze\n\s*\~\{3,}$"
+	syn match notesRule1       "^\s*\zs=\{3,}$" 
+	syn match notesRule2       "^\s*\zs\-\{3,}$" 
+	syn match notesRule3       "^\s*\zs\~\{3,}$" 
+
+	syn match notesComment "{.*}"
+	
+	syn match notesQuote  /"/ contained
+	syn region notesQuoted start=/"/ end=/"/ end=/$/ contains=notesQuote
+
+	syn match matchURL /\v(https?:\/\/\S+)|(www\d*\.\S+\.\S+)/	
+	hi matchURL cterm=italic ctermfg=cyan
 
 
 
-" ----------------------------
-" Functions for the status bar
-" ----------------------------
+	syn match notesNumber "\<\d\+\([.,]\d\+\)\=\>%\?"
+	hi notesNumber cterm=italic ctermfg=green
+
+	syn match notesListMarker        "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs[-*+]\ze\s.*" 
+	syn match notesOrderedListMarker "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs\d\+\.\ze\s.*" 
+
+	syn match notesEmphasisBetweenDashes "--\s.*\s--"
+	syn match notesEmphasisBetweenEquals "==\s.*\s=="
+	
+	syn match boldDelimiter        "\*"   contained
+	syn match italicDelimiter      "\^"   contained
+	syn match underlineDelimiter   "[_]"  contained
+	syn match bolditalicDelimiter  "\*\/" contained
+	syn match bolditalicDelimiter  "\/\*" contained
+	syn match strikDelimiter       "\~"   contained
 
 
-function GetBuffCount()
-	return len(getbufinfo({'buflisted':1}))
+	syn region notesBoldContent        start="\*\w" end="\w\*" 			keepend contains=boldDelimiter
+	syn region notesItalicContent      start="\^\w" end="\w\^" 			keepend contains=italicDelimiter 
+	syn region underlineItalicContent  start="__\w"  end="\w__" 		keepend contains=underlineDelimiter 
+	syn region notesItalicBoldContent  start="\*\/\w" end="\w\/\*" 		keepend contains=bolditalicDelimiter 
+	syn region notesStrikeContent      start="\~\w" end="\w\~" 			keepend contains=strikDelimiter
+
+
+	syn match markdownRightArrow "-\{2,}>\|=\{2,}>"
+	syn match markdownLeftArrow "<-\{2,}\|<=\{2,}"
+	
+	syn region markdownBox start="+-" end="-+"
+	syn match  markdownBox "\v\|"
+
+
+
+
+	syn match markdownOKBoxText "\[\zs\s*\(OK\|SIM\)\s*\ze\]"
+	syn match markdownNOBoxText "\[\zs\s*\(NO\|NAO\)\s*\ze\]"
+	syn match markdownOKBox     "^\s*\[\s*\(OK\|SIM\)\s*\]"        contains=markdownOKBoxText
+	syn match markdownNOBox     "^\s*\[\s*\(NO\|NAO\)\s*\]"        contains=markdownNOBoxText
+	syn match markdownNOEmpty   "^\s*\[\s*\]"
+
+	syn match markdownOK "^OK\ze\s."
+
+	syn match markdownCheckBoxX         "\[\zsx\ze\]"  
+	syn match markdownCheckBoxUndefined "\[\zs-\ze\]"  
+	syn match markdownCheckBox          "^\s*-\s*\[[\ x-]\]"        contains=markdownCheckBoxX,markdownCheckBoxUndefined
+
+" --------------------------------------------------------------------------------
+
+	hi notesHighlighter					cterm=none ctermfg=black  ctermbg=yellow
+	hi notesHighlighterDelimiterBegin	cterm=none ctermfg=black  ctermbg=yellow
+
+	hi notesEmphasisBetweenDashes	cterm=italic
+	hi notesEmphasisBetweenEquals	cterm=bold ctermfg=white
+
+	hi notesListMarker				cterm=none ctermfg=red 
+	hi notesOrderedListMarker 		cterm=none ctermfg=red 
+
+	hi notesHeaderMarker	  cterm=none ctermfg=darkgray
+
+	hi notesH1                cterm=bold ctermfg=white
+	hi notesH2                cterm=bold ctermfg=darkgray
+	hi notesH3                cterm=none ctermfg=darkgray
+	hi notesH4                cterm=none ctermfg=darkmagenta
+	hi notesH5                cterm=none ctermfg=darkyellow
+	hi notesH6                cterm=none ctermfg=yellow 
+
+
+	hi def link notesHeaderRule1  	  notesH1
+	hi def link notesHeaderRule2  	  notesH2
+	hi def link notesHeaderRule3  	  notesH3
+	hi          notesRule1   	      cterm=none ctermfg=darkcyan
+	hi          notesRule2   	      cterm=none ctermfg=darkgray
+	hi          notesRule3   	      cterm=none ctermfg=red
+
+	hi notesComment cterm=italic ctermfg=darkgray
+
+	hi notesQuote   cterm=italic ctermfg=darkmagenta
+	hi notesQuoted  cterm=italic 
+
+
+	hi markdownArrow            ctermfg=red
+
+	hi markdownOK               ctermfg=green 
+	hi markdownBox              ctermfg=green
+	hi markdownOKBox            ctermfg=red
+	hi markdownNOBox            ctermfg=red
+	hi markdownNOEmpty          ctermfg=red
+	hi markdownOKBoxText        ctermfg=green
+	hi markdownNOBoxText        ctermfg=gray
+
+
+
+	hi def link markdownCheckBox			markdownArrow
+	hi def link markdownCheckBoxX			markdownBox
+
+	hi markdownCheckBoxUndefined	cterm=bold ctermfg=darkgray
+
+
+	hi def link boldDelimiter			Normal
+	hi def link italicDelimiter			Normal
+	hi def link bolditalicDelimiter		Normal
+	hi def link strikDelimiter			Normal
+
+
+	hi notesBoldContent       cterm=bold
+	hi notesItalicContent     cterm=italic
+	hi underlineItalicContent cterm=underline
+	hi notesStrikeContent     cterm=strikethrough
+	hi notesItalicBoldContent cterm=italic,bold
+
+	hi markdownRightArrow            ctermfg=red
+	hi markdownLeftArrow             ctermfg=red 
+
+	" echo "Notes"
 endfunction
-
-
-function GetLang() 
-	if &spell
-		return &spelllang
-	else
-		return 'no spell'
-	endif
-endfunction
-
-function GetMode() 
-	let mode = lightline#mode()
-
-	if mode == 'NORMAL'
-		return '      '
-	else
-		return mode
-
-endfunction
-
-
-function MyLineInfo()                               " replacing the original component 'lineinfo'
-	return printf('%d:%d', line('.'), col('.'))
-endfunction 
 
 
 
@@ -698,9 +827,21 @@ endfunction
 " ------------------------ HIGHLIGHTS ------------------------
 " ------------------------------------------------------------
 
+" set guicursor="n-v-c-sm:block,i-ci:block-iCursor/iCursor,r-cr-o:hor20"
 
-highlight CursorLine   cterm=NONE ctermbg=none
-highlight CursorColumn cterm=NONE ctermbg=none
+" highlight iCursor ctermbg=DarkYellow
+
+highlight Cursor guifg=white guibg=black
+highlight iCursor guibg=DarkYellow
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
+
+
+
+
+highlight CursorLine   cterm=NONE ctermbg=234
 highlight CursorLineNr cterm=NONE ctermfg=lightgray
 
 
@@ -742,9 +883,51 @@ hi def link htmlTag	htmlEndTag
 " ------------------------ STATUS BAR ------------------------
 " ------------------------------------------------------------
 
+if !has('nvim')
+
+
+" ----------------------------
+" Functions for the status bar
+" ----------------------------
+
+
+function GetBuffCount()
+	return len(getbufinfo({'buflisted':1}))
+	" return len(getbufinfo({'bufloaded':1}))
+endfunction
+
+
+function GetLang()
+	if &spell
+		return &spelllang
+	else
+		return 'no spell'
+	endif
+endfunction
+
+function GetMode()
+	let mode = lightline#mode()
+
+	if mode == 'NORMAL'
+		return '      '
+	else
+		return mode
+	endif
+
+endfunction
+
+
+function MyLineInfo()                               " replacing the original component 'lineinfo'
+	return printf('%d:%d', line('.'), col('.'))
+endfunction
+
+
+
+" ----------------------------
+" Colors for the status bar
+" ----------------------------
 
 " Color scheme based on jellybeans
-" Delete de colorschemes folder, it is not necessary
 
 
 let s:none    = [ '#000000', 'none' ]
@@ -757,6 +940,12 @@ let s:cyan    = [ '#8fbfdc', 110 ]
 let s:green   = [ '#000000', 71 ]
 let s:blue    = [ '#000000', '31' ]
 let s:pink    = [ '#000000', '205' ]
+
+
+" ----------------------------
+" Components for the status bar
+" ----------------------------
+
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
@@ -785,23 +974,25 @@ let g:lightline#colorscheme#myojf#palette = lightline#colorscheme#flatten(s:p)
 
 let lineComponent1 = { 
 	\   'buff': '%{GetBuffCount()}',
-	\   'mylineinfo': '%3.6l:%-3.6c',
+	\   'mylineinfo': '%3.6l:%-3.6v',
 	\   'char': '%-2.2B',
 	\ }
 
 
 let lineComponent2 = { 
 	\   'mymode': '%{GetMode()}',
-	\   'mylineinfo': '%3.6l:%-3.6c',
+	\   'mylineinfo': '%3.6l:%-3.6v',
 	\   'char': '%-2.2B',
 	\ }
 
 let lineActive1 = {
 	\   'left' : [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
-	\   'right': [ [ 'mylineinfo' ],
+	\   'right': [ 
 	\              [ 'percent' ],
+	\              [ 'mylineinfo' ],
 	\              [ 'buff', 'spell', 'fileformat', 'fileencoding', 'filetype' ],
-	\              [ 'linter_errors', 'linter_warnings'] ]
+	\              [ 'linter_errors', 'linter_warnings'] 
+	\            ]
 	\ }
 
 let lineActive2 = {
@@ -848,22 +1039,144 @@ let g:lightline.component_type = {
 	  \ } 
 
 
-let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
+let g:lightline.subseparator = { 'left': '', 'right': '|' }
+" let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
+
+
+endif
+
+
+
+
+" ---------------------- WASTE COMMANDS -----------------------
+
+" Do nothing 
+nnoremap <c-z>      :echo "do nothing :)"<cr>
+
+
+
+
+
 
 
 
 " ------------------------------------------------------------
-" ------------------ TO REMEMBER SHORTCUTS -------------------
+" ----------------------- TO REMEMBER ------------------------
 " ------------------------------------------------------------
 
-" grep -e '^"-->' ~/.vimrc
 
-"--> ========== VIMTEX ==========
+"--> ========== VIMTEX =========
 
 "--> \ll	start/stop compiler in continuous mode
 "--> \lc	clear auxiliary files
 "--> \le	show erros
 
+
+"--> ========== VIM ==========
+
+"--> gi		Insert text in the previous position
+"--> gd		Go to defition of word in the current function
+"--> gD		Go to defition of word in the current file
+"--> gn		Go to next last used search pattern and select it
+"--> = 		Format selected text
+"--> ==		Format current Line
+"--> z=		Give spelling suggestions
+"--> ]s		Go to next misspeled word
+"--> [s		Go to previous misspeled word
+"--> zg		Mark work as correctly spelled
+"--> zw		Mark work as incorrectly spelled
+"--> @@		Repeat last macro
+"--> gf		Open the file whose name is under the cursor
+"--> gx		Open the URL whose is under the cursor
+"--> gm		Go to the middle of the screen line
+"--> gM		Go to the middle of the text line
+"--> gu		Make lowercase after move
+"--> gv		Reselect visual area
+"--> zz		Redraw and put current line at center of window
+"--> zt		Redraw and put current line at top of window
+"--> zb		Redraw and put current line at bottom of window
+"--> zy		yank without trailing spaces
+"--> +		Go to the line above in the first no-blank character
+"--> -		Go to the line below in the first no-blank character
+"--> (		Go to previous sentence
+"--> )		Go to next sentence
+"--> {		Go to previous paragraph
+"--> }		Go to next paragraph
+
+"    Make a search with / and press Enter, then
+"--> dgn	delete the next search pattern
+"--> cgn	change the next search pattern
+"    The press . to do it in next occurrences
+
+
+"--> ''		Go to older position in jump list
+
+"--> \cs	Sexy comment
+"--> \c$	Comment from the cursor to the line end
+"--> \cm	Comment with a minimal style
+"--> \cy    Yank and comment 
+"--> \cA	Append a comment to the end of line and goes into insert mode between them
+"--> \cI	Adds comment at the cursor and insert between
+"--> \ci	Toggles selected lines
+
+
+"--> ysaw '  Surround a word
+"--> yss '   Surround sentence
+"--> ysas '  Surround arround sentence
+"--> ysap '  Surround arround paragraph
+
+
+
+
+
+" --> ========== Various Motions ==========
+
+" --> [(			go to priveous unmatched ( 		samor for { 
+" --> ](			go to next     unmatched ( 		samor for { 
+
+" --> [m			go to next start of a method
+" --> [M			go to next end   of a method
+
+" --> ]m			go to next start of a method
+" --> ]M			go to next end   of a method
+
+" --> ]*			go to next start of a comment
+" --> [*			go to next end   of a comment
+
+
+
+" --> ========== Object Motions ========== 
+
+" --> a(
+" --> ab		a block
+" --> i(
+" --> ib		inner block
+
+" --> a<		a <> block      same for {} and () blocks
+" --> i<		inner <> block
+
+" --> at		a tag block
+" --> it		inner tag block
+
+" --> a"		a quoted string same for ' and `
+" --> i"		inner quoted string
+
+
+" ------------------------------------------------------------
+" ------------------ SHELL COMMANDS -------------------
+" ------------------------------------------------------------
+
+"--> grep -e '^"-->' ~/.vimrc  	Print my hints
+
+
+
+
+" ------------------------------------------------------------
+" ---------------------- NICE WEBPAGES -----------------------
+" ------------------------------------------------------------
+
+" https://www.cs.swarthmore.edu/oldhelp/vim/home.html
+" https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f#545a
 
 
 
