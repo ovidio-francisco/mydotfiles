@@ -24,7 +24,7 @@ alias lh='ls -Ad .*' # list the hidden
 alias ld='ls -A | grep "^\."'
 
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias       giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
+alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 
 alias vim='vim -O'
 alias nvim='nvim -O'
