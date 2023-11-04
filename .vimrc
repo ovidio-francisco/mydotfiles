@@ -21,7 +21,6 @@ set autoindent                      " When opening a new line and no filetype-sp
 set smartindent                     " Autoindent new lines
 set confirm                         " Raise a dialogue asking if you wish to save changed files or override it
 set number                          " Display line numbers on the left
-set shiftwidth=4                    " Indentation settings for using hard tabs for indent.
 set tabstop=4                       " Display tabs as four characters wide.
 set ttimeout ttimeoutlen=20         " Quickly time out on key codes
 set notimeout                       " Never time out on mappings
@@ -42,9 +41,10 @@ set clipboard=unnamedplus           " Use the + instead * that means it share th
 set splitbelow                      " Put new windows below the current one
 set showcmd                         " Show partial commands in the last line
 set wildmenu                        " Makes command-line completion operates in an enhanced mode
-set breakindent
-set breakindentopt=sbr
-set shiftround
+set breakindent                     " Indent wrapped lines in order to preserve horizontal blocks
+set breakindentopt=sbr              " Settings for 'breakindent'
+set shiftwidth=4                    " Indentation settings for using hard tabs for indent.
+set shiftround                      " Round indent to a multiple of 'shiftwidth'. Applied to > and <
 set showmode                        " Show mode in status line
 set laststatus=0                    " Determines how to display a status line
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
@@ -827,9 +827,6 @@ endfunction
 " ------------------------ HIGHLIGHTS ------------------------
 " ------------------------------------------------------------
 
-" set guicursor="n-v-c-sm:block,i-ci:block-iCursor/iCursor,r-cr-o:hor20"
-
-" highlight iCursor ctermbg=DarkYellow
 
 highlight Cursor guifg=white guibg=black
 highlight iCursor guibg=DarkYellow
@@ -837,8 +834,6 @@ set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkwait10
-
-
 
 
 highlight CursorLine   cterm=NONE ctermbg=234
