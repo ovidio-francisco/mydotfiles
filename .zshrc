@@ -14,7 +14,8 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/bin:$PATH"
 
-alias term='echo -e "Term = $TERM\n"'
+alias term='echo -e "Term = $TERM"'
+alias so='source ~/.zshrc'
 
 alias rm='echo "don'"'"'t use this shit! - try trash"'
 alias mv='mv -iv'
@@ -29,14 +30,24 @@ alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 
 alias vim='vim -O'
 alias nvim='nvim -O'
-alias v='vim -O --clean'
-alias n='nvim -O --clean'
+alias v='vim -O'
+alias n='nvim -O'
+alias cv='vim -O --clean'
+alias cn='nvim -O --clean'
+
 alias rg='urxvt -e ranger'
+
 alias grep='grep --color=auto -i'
 alias ping='ping 8.8.8.8 -c5'
 
 alias o='xdg-open' 
+
 alias ..='cd ..' 
+alias ~='cd ~' 
+alias -1='cd -1' 
+alias -2='cd -2' 
+alias -3='cd -3' 
+alias -4='cd -4' 
 
 alias cmatrix='cmatrix -b' 
 alias hl='highlight'
