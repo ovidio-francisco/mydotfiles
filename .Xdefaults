@@ -8,6 +8,7 @@ urxvt*background: rgba:0000/0000/0200/c800
 !! Appearance
 urxvt.scrollBar: false
 
+
 rangerterm.scrollBar: false
 rangerterm*depth: 32
 rangerterm*background: rgba:0000/0000/0200/c800
