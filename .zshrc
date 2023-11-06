@@ -13,6 +13,7 @@ ZSH_THEME="ojf3"
 source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/bin:$PATH"
+export PATH="/snap/bin:$PATH"
 
 alias term='echo -e "Term = $TERM"'
 alias so='source ~/.zshrc'
