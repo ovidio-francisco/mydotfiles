@@ -9,7 +9,7 @@ export COMMANDS="~/Storage/.scripts/i3"
 export COMMANDS="$HOME/Storage/.scripts/i3"
 
 export ZSH="$HOME/.oh-my-zsh" 
-ZSH_THEME="ojf2"
+ZSH_THEME="ojf3"
 source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/bin:$PATH"
@@ -28,9 +28,9 @@ alias ld='ls -A | grep "^\."'
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 
-alias vim= 'XDG_CONFIG_HOME=/tmp \
-            XDG_DATA_HOME=/tmp \
-            nvim -u ~/.vimrc -O'
+alias vim='XDG_CONFIG_HOME=/tmp \
+           XDG_DATA_HOME=/tmp \
+           nvim -u ~/.vimrc -O'
 
 # alias vim='vim -O'
 alias nvim='nvim -O'
