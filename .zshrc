@@ -28,12 +28,14 @@ alias ld='ls -A | grep "^\."'
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 
-alias vim='vim -O'
+alias vim= 'XDG_CONFIG_HOME=/tmp \
+            XDG_DATA_HOME=/tmp \
+            nvim -u ~/.vimrc -O'
+
+# alias vim='vim -O'
 alias nvim='nvim -O'
 alias v='vim -O'
 alias n='nvim -O'
-alias cv='vim -O --clean'
-alias cn='nvim -O --clean'
 
 alias rg='urxvt -e ranger'
 
