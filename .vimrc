@@ -34,6 +34,7 @@ set display=truncate                " When last line is too long, put an @ at li
 set formatoptions=qro               " How to autoformat texts. Run :verb set formatopitions 
 set virtualedit=block               " Allow virtual editing and ...
 set spelllang=pt,en                 " Set the languages when spell chequing is on
+set spellsuggest=fast,20            " Don't show too much suggestions. 'fast' for check simple changes
 set encoding=utf8                   " Set the encoding used to read the file
 set fileencoding=utf8               " Set the encoding to use when saving the file
 set nojoinspaces                    " Do not insert an extra space after .?! with join command
@@ -51,7 +52,12 @@ set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 " set rulerformat=%l,%v%=%P
 
-if !has('nvim')
+
+let isNeoVimFull   =  has('nvim') && !exists($XDG_CONFIG_HOME) " [~] nvim
+let isNeoVimSimple =  has('nvim') &&  exists($XDG_CONFIG_HOME) " [~] vim
+let isVim          = !has('nvim')                              " [~] v
+
+if !exists($XDG_CONFIG_HOME) 	
 
 call vundle#begin() 
 	Plugin 'VundleVim/Vundle.vim'
@@ -68,11 +74,6 @@ call vundle#begin()
 	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
-	" Telescope
-	Plugin 'nvim-lua/plenary.nvim'
-	Plugin 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-	" Games
-	" Plugin 'ThePrimeagen/vim-be-good'
 call vundle#end()
 
 endif
@@ -878,7 +879,7 @@ hi def link htmlTag	htmlEndTag
 " ------------------------ STATUS BAR ------------------------
 " ------------------------------------------------------------
 
-if !has('nvim')
+" if !has('nvim')
 
 
 " ----------------------------
@@ -1038,7 +1039,7 @@ let g:lightline.subseparator = { 'left': '', 'right': '|' }
 " let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
 
 
-endif
+" endif
 
 
 
