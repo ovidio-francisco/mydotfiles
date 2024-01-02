@@ -1,14 +1,11 @@
-"------------------------------------
-" Author:      Ovídio José Francisco
-" Description: My vim dotfile
-" Created:     July, 2017
-" ------------------------------------
+"------------------------------------             __   _ _ _ __ ___  _ __ ___  
+" Author:      Ovídio José Francisco              \ \ / / | '_ ` _ \| '__/ __| 
+" Description: My vim dotfile                     _\ V /| | | | | | | | | (__  
+" Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| " -----------------------------------                                          
 
 
-" -[ Backend ]-
-" -[ .notes file type ]-
-
-
+                            
+                           
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
 syntax on                           " Enable syntax highlighting
 set hlsearch                        " Highlight the search matches
@@ -25,12 +22,11 @@ set tabstop=4                       " Display tabs as four characters wide.
 set ttimeout ttimeoutlen=20         " Quickly time out on key codes
 set notimeout                       " Never time out on mappings
 set pastetoggle=<F10>               " Specify F10 to toggle the 'paste' option
-set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
 set showmatch                       " Briefly jumps to the matching bracket when it is inserted
 set matchtime=2                     " How briefly is the matching jump
 set mouse=a                         " Enable the mouse for all modes
 set linebreak                       " Break at word boundary
-set display=truncate                " When last line is too long, put an @ at line number and show as much as possible
+set display=truncate                " If last line is too long, put an @ at line number and show as much as possible
 set formatoptions=qro               " How to autoformat texts. Run :verb set formatopitions 
 set virtualedit=block               " Allow virtual editing and ...
 set spelllang=pt,en                 " Set the languages when spell chequing is on
@@ -48,9 +44,10 @@ set shiftwidth=4                    " Indentation settings for using hard tabs f
 set shiftround                      " Round indent to a multiple of 'shiftwidth'. Applied to > and <
 set showmode                        " Show mode in status line
 set laststatus=0                    " Determines how to display a status line
-set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
+set guicursor=i:block,r:hor20       " Cursor shapes
+set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
 
-" set rulerformat=%l,%v%=%P
+set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 
 let isNeoVimFull   =  has('nvim') && !exists($XDG_CONFIG_HOME) " [~] nvim
@@ -88,6 +85,9 @@ endif
 
 autocmd CursorHold * checktime                             " Check if the file was loaded outside vim
 autocmd CursorHold * echo ''
+
+" F1 to exit on Netrw
+autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 
 
 " Execute automatically on {event} for a file matching
@@ -140,24 +140,16 @@ let g:bullets_enabled_file_types = [
     \]
 
 
-" LIGHTLINE-ALE
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = " "
-let g:lightline#ale#indicator_errors = " "
-let g:lightline#ale#indicator_ok = ""
 
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
-let g:ale_change_sign_column_color = 1
-let g:ale_enabled = 0
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_highlight_linenrs = 1
-" set omnifunc=ale#completion#OmniFunc
-
-
+" Emmet
 let g:user_emmet_leader_key='<c-c>'
 
 
+" Netrw
+" Makes netrw start hidding the dotfiles
+" '^\.[^\.\/].*$'
+" let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide='^\.[^\.\/].*$'
 
 
 
@@ -166,6 +158,27 @@ let g:user_emmet_leader_key='<c-c>'
 " ------------------------------------------------------------
 " ------------------------ My remaps -------------------------
 " ------------------------------------------------------------
+
+map <F15> <S-F3>
+map <F17> <S-F5>
+map <F19> <S-F7>
+map <F21> <S-F9>
+map <F23> <S-F11>
+map <F24> <S-F12>
+
+map <F35> <c-F11>
+map <F36> <c-F12>
+
+
+map [15;2~ <S-F5>
+map [18;2~ <S-F7>
+map [20;2~ <S-F9>
+map [23;2~ <S-F11>
+map [24;2~ <S-F12>
+
+map [23;5~ <c-F11>
+map [24;5~ <c-F12>
+
 
 
 
@@ -189,11 +202,18 @@ nnoremap Y y$
 " Make some shortcuts
 " =========================
 
+" Selects the previous changed or yanked
+nnoremap gp `[v`]
 
+" Yank all
+nnoremap yA :%y+<cr>
+
+" Go to older position in change list
 nnoremap <backspace> g;
 
 " Back to Normal Mode
 inoremap <C-L> <ESC>
+
 
 
 " Save & Quit
@@ -213,13 +233,17 @@ nnoremap <leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
 nnoremap <leader>A :call nerdcommenter#Comment(0,"append")<cr>
 nnoremap <leader>I :call nerdcommenter#Comment(0,"insert")<cr>i
 
+" Window resizing
+nnoremap <s-F11> 5<c-w><
+nnoremap <s-F12> 5<c-w>>
+nnoremap <c-F11> 1<c-w>-
+nnoremap <c-F12> 1<c-w>+
 
 
 " Explore directories
 nnoremap <F3> :NERDTreeToggle<cr>
 
 " Explore Tags
-map <F15> <S-F3>
 nnoremap <s-F3> :TagbarToggle<cr>
 
 nnoremap <leader>dl :Explore<cr>
@@ -270,15 +294,15 @@ nnoremap <c-c><c-c> ^D
 nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
-map <F17> <s-F5>
 nnoremap <S-F5><F6> :colorscheme one<CR>      :highlight Normal ctermbg=NONE<cr>
 nnoremap <S-F5><F7> :colorscheme gruvbox<CR>  :highlight Normal ctermbg=NONE<cr>
 
 " Spot the cursor
-nnoremap <F7><F7> :set cursorline!<CR>
+nnoremap <F7>       :set cursorline!<CR>
+nnoremap <s-F7><F7> :set cursorcolumn!<CR>
 
 " Relative line numbers
-nnoremap <F7><F8> :call ToggleRelativeNumber()<cr>
+nnoremap <s-F7><F8> :call ToggleRelativeNumber()<cr>
 
 " Set/unset Show Blank chars
 nnoremap <F6> :call ToggleShowBlanks()<CR>:call ToggleShowBreaks()<cr>
@@ -288,8 +312,7 @@ nnoremap <leader>j :call ToggleVerticalMovement()<cr>
 
 
 " Toggle Spell Check
-map <F21> <s-F9>
-nnoremap <S-F9>      :set spell!<cr>
+noremap <S-F9>      :set spell!<cr>
 
 
 " Code check
@@ -308,7 +331,7 @@ nnoremap <leader>m  o<esc>
 nnoremap <leader>M  O<esc>
 
 nnoremap <leader>o  mzo<esc>`z
-nnoremap <leader>o  mzO<esc>`z
+nnoremap <leader>O  mzO<esc>`z
 
 
 " Scroll screen and move the cursor in the opposite direction
@@ -320,7 +343,7 @@ nnoremap <c-s>   <c-e>gj
 
 
 " Join with the line above
-nnoremap <silent>K kJ
+nnoremap <silent>K kJ==
 
 nnoremap <Leader>w  :set wrap!<cr>
 
@@ -659,6 +682,9 @@ function SetMarkdownConfig()
 endfunction
 
 
+
+
+
 "      - ̗̀ AGORA SIM!  ̖́-
 
 function SetNotesConfig()
@@ -699,15 +725,13 @@ function SetNotesConfig()
 	syn match notesComment "{.*}"
 	
 	syn match notesQuote  /"/ contained
-	syn region notesQuoted start=/"/ end=/"/ end=/$/ contains=notesQuote
+	syn region notesQuoted start=/"/ end=/"/ keepend contains=notesQuote
+
+
 
 	syn match matchURL /\v(https?:\/\/\S+)|(www\d*\.\S+\.\S+)/	
-	hi matchURL cterm=italic ctermfg=cyan
-
-
 
 	syn match notesNumber "\<\d\+\([.,]\d\+\)\=\>%\?"
-	hi notesNumber cterm=italic ctermfg=green
 
 	syn match notesListMarker        "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs[-*+]\ze\s.*" 
 	syn match notesOrderedListMarker "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs\d\+\.\ze\s.*" 
@@ -765,11 +789,13 @@ function SetNotesConfig()
 	hi notesHeaderMarker	  cterm=none ctermfg=darkgray
 
 	hi notesH1                cterm=bold ctermfg=white
-	hi notesH2                cterm=bold ctermfg=darkgray
-	hi notesH3                cterm=none ctermfg=darkgray
-	hi notesH4                cterm=none ctermfg=darkmagenta
-	hi notesH5                cterm=none ctermfg=darkyellow
-	hi notesH6                cterm=none ctermfg=yellow 
+	hi notesH2                cterm=bold ctermfg=024
+	hi notesH3                cterm=bold ctermfg=033
+	hi notesH4                cterm=bold ctermfg=037
+	hi notesH5                cterm=bold ctermfg=023
+	hi notesH6                cterm=bold ctermfg=029
+
+	" https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 
 
 	hi def link notesHeaderRule1  	  notesH1
@@ -795,7 +821,9 @@ function SetNotesConfig()
 	hi markdownOKBoxText        ctermfg=green
 	hi markdownNOBoxText        ctermfg=gray
 
-
+	hi matchURL cterm=italic ctermfg=cyan
+	
+	hi def link noetsNumber Normal
 
 	hi def link markdownCheckBox			markdownArrow
 	hi def link markdownCheckBoxX			markdownBox
@@ -829,15 +857,9 @@ endfunction
 " ------------------------------------------------------------
 
 
-highlight Cursor guifg=white guibg=black
-highlight iCursor guibg=DarkYellow
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
-
 
 highlight CursorLine   cterm=NONE ctermbg=234
+highlight CursorColumn cterm=bold ctermbg=234
 highlight CursorLineNr cterm=NONE ctermfg=lightgray
 
 
@@ -1156,6 +1178,10 @@ nnoremap <c-z>      :echo "do nothing :)"<cr>
 
 " --> a"		a quoted string same for ' and `
 " --> i"		inner quoted string
+
+" Netrw
+" --> a"		Cycle through the modes (normal/hiding/show)
+" --> gh"		Show hide the dotfiles/dotdirs
 
 
 " ------------------------------------------------------------
