@@ -2,7 +2,7 @@
 
 window:
   dimensions:
-    columns: 130
+    columns: 110
     lines: 35
 
   decorations: none
@@ -11,11 +11,13 @@ window:
 font:
   normal:
     # family: Iosevka
+    # family: Mononoki Nerd Font
     family: Fantasquesansmono
     style: Light
 
   bold:
     # family: Iosevka
+    # family: Mononoki Nerd Font Mono
     family: Fantasquesansmono
     style: Bold
 
@@ -23,6 +25,7 @@ font:
     # family: Iosevka
     # style: "Light Italic"
     family: Fantasquesansmono
+    # family: Mononoki Nerd Font Mono
     style: Italic
 
   size: 13.0
@@ -54,6 +57,7 @@ colors:
     green:   '0x00AA00'
     yellow:  '0xFFFF55'
     blue:    '0x5555FF'
+    # blue:    '0x3465A4'
     magenta: '0xFF55FF'
     cyan:    '0x55FFFF'
     white:   '0xFFFFFF'
