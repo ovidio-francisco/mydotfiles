@@ -33,7 +33,7 @@ alias vim='XDG_CONFIG_HOME="$HOME/.config/alter_nvin" \
 		   XDG_DATA_HOME="$HOME/.config/alter_nvin" \
 		   nvim -u ~/.vimrc -O'
 
-
+alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 
 alias nvim='nvim -O'
 alias v='/usr/bin/vim -O'
