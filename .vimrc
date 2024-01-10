@@ -49,11 +49,12 @@ set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will sea
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 
-let isVim       = !has('nvim')                              " [~] v
-let isNeoVim    =  has('nvim') && !exists($XDG_CONFIG_HOME) " [~] vim
-let isNeoVimLua =  has('nvim') &&  exists($XDG_CONFIG_HOME) " [~] nvim
+let isVim       = !has('nvim')                                " [~] v
+let isNeoVim    =  has('nvim')                                " [~] vim
+let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " [~] nvim
 
-if !exists($XDG_CONFIG_HOME) 	
+" if !exists($XDG_CONFIG_HOME) 	
+if !isNeoVimLua
 
 call vundle#begin() 
 	Plugin 'VundleVim/Vundle.vim'
@@ -302,8 +303,9 @@ nnoremap <c-c><c-c> ^D
 nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
-nnoremap <S-F5><F6> :colorscheme one<CR>      :highlight Normal ctermbg=NONE<cr>
-nnoremap <S-F5><F7> :colorscheme gruvbox<CR>  :highlight Normal ctermbg=NONE<cr>
+nnoremap <S-F5><F6> :colorscheme one      \| hi normal ctermbg=none<cr>
+nnoremap <S-F5><F7> :colorscheme gruvbox  \| hi normal ctermbg=none<cr>
+nnoremap <S-F5><F1> :colorscheme default  \| hi normal ctermbg=none \| hi LineNr ctermfg=darkgrey<cr>
 
 " Spot the cursor
 nnoremap <F7>       :set cursorline!<CR>
@@ -936,167 +938,167 @@ hi def link htmlTag	htmlEndTag
 " ------------------------ STATUS BAR ------------------------
 " ------------------------------------------------------------
 
-" if !has('nvim')
+if !(isNeoVimLua)
+
+	" ----------------------------
+	" Functions for the status bar
+	" ----------------------------
 
 
-" ----------------------------
-" Functions for the status bar
-" ----------------------------
+	function! GetBuffCount()
+		return len(getbufinfo({'buflisted':1}))
+		" return len(getbufinfo({'bufloaded':1}))
+	endfunction
 
 
-function! GetBuffCount()
-	return len(getbufinfo({'buflisted':1}))
-	" return len(getbufinfo({'bufloaded':1}))
-endfunction
+	function! GetLang()
+		if &spell
+			return &spelllang
+		else
+			return 'no spell'
+		endif
+	endfunction
+
+	function! GetMode()
+		let mode = lightline#mode()
+
+		if mode == 'NORMAL'
+			return '      '
+		else
+			return mode
+		endif
+
+	endfunction
 
 
-function! GetLang()
-	if &spell
-		return &spelllang
-	else
-		return 'no spell'
-	endif
-endfunction
-
-function! GetMode()
-	let mode = lightline#mode()
-
-	if mode == 'NORMAL'
-		return '      '
-	else
-		return mode
-	endif
-
-endfunction
-
-
-function! MyLineInfo()                               " replacing the original component 'lineinfo'
-	return printf('%d:%d', line('.'), col('.'))
-endfunction
-
-
-
-" ----------------------------
-" Colors for the status bar
-" ----------------------------
-
-" Color scheme based on jellybeans
-
-
-let s:none    = [ '#000000', 'none' ]
-let s:gray1   = [ '#666656', 239  ]
-" let s:gray1   = [ '#666656', 241  ]
-let s:yellow  = [ '#ffb964', 215 ]
-let s:red     = [ '#cf6a4c', 196 ]
-let s:magenta = [ '#f0a0c0', 125 ]
-let s:cyan    = [ '#8fbfdc', 110 ]
-let s:green   = [ '#000000', 71 ]
-let s:blue    = [ '#000000', '31' ]
-let s:pink    = [ '#000000', '205' ]
-
-
-" ----------------------------
-" Components for the status bar
-" ----------------------------
-
-
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
-
-let s:p.normal.left    = [ [ s:blue, s:none, ], [ s:gray1, s:none ] ]
-let s:p.normal.right   = [ [ s:none, s:none ], [ s:none, s:none ] ]
-let s:p.normal.middle  = [ [ s:gray1, s:none ] ]
-let s:p.normal.error   = [ [ s:red, s:none ] ]
-let s:p.normal.warning = [ [ s:yellow, s:none ] ]
-
-let s:p.insert.left    = [ [ s:green, s:none ],   [ s:gray1, s:none ] ]
-let s:p.replace.left   = [ [ s:red, s:none ],     [ s:gray1, s:none ] ]
-let s:p.visual.left    = [ [ s:pink, s:none ],    [ s:gray1, s:none ] ]
-
-let s:p.inactive.right  = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
-let s:p.inactive.left   = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
-let s:p.inactive.middle = [ [ s:gray1, s:none ] ]
-
-let s:p.tabline.left    = [ [ s:none, s:gray1 ] ]
-let s:p.tabline.tabsel  = [ [ s:none, s:none ] ]
-let s:p.tabline.middle  = [ [ s:none, s:none ] ]
-let s:p.tabline.right   = copy(s:p.normal.right)
-
-let g:lightline#colorscheme#myojf#palette = lightline#colorscheme#flatten(s:p)
+	function! MyLineInfo()                               " replacing the original component 'lineinfo'
+		return printf('%d:%d', line('.'), col('.'))
+	endfunction
 
 
 
-let lineComponent1 = { 
-	\   'buff': '%{GetBuffCount()}',
-	\   'mylineinfo': '%3.6l:%-3.6v',
-	\   'char': '%-2.2B',
-	\ }
+	" ----------------------------
+	" Colors for the status bar
+	" ----------------------------
+
+	" Color scheme based on jellybeans
 
 
-let lineComponent2 = { 
-	\   'mymode': '%{GetMode()}',
-	\   'mylineinfo': '%3.6l:%-3.6v',
-	\   'char': '%-2.2B',
-	\ }
-
-let lineActive1 = {
-	\   'left' : [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
-	\   'right': [ 
-	\              [ 'percent' ],
-	\              [ 'mylineinfo' ],
-	\              [ 'buff', 'spell', 'fileformat', 'fileencoding', 'filetype' ],
-	\              [ 'linter_errors', 'linter_warnings'] 
-	\            ]
-	\ }
-
-let lineActive2 = {
-	\   'left' : [ [ 'mymode'] ],
-	\   'right': [ [ 'mylineinfo' ],
-	\              [ 'percent' ],
-	\              [ 'spell', 'paste', 'readonly', 'modified', 'filename', 'filetype' ],
-	\              [ 'linter_errors', 'linter_warnings'] ]
-	\ }
-
-let lineInactive1 = {
-	\   'left' : [ [ ], [ 'readonly', 'filename', 'modified' ] ],
-	\   'right': [ [ ], [ ], [ 'filetype' ] ]
-	\ }
-
-let line1 = {
-	\ 'colorscheme': 'myojf',
-	\ 'active'     : lineActive1, 
-	\ 'inactive'   : lineInactive1,
-	\ 'component'  : lineComponent1,
-	\ }
-
-let line2 = {
-	\ 'colorscheme': 'myojf',
-	\ 'active'     : lineActive2, 
-	\ 'inactive'   : lineInactive1,
-	\ 'component'  : lineComponent2,
-	\ }
+	let s:none    = [ '#000000', 'none' ]
+	let s:gray1   = [ '#666656', 239  ]
+	" let s:gray1   = [ '#666656', 241  ]
+	let s:yellow  = [ '#ffb964', 215 ]
+	let s:red     = [ '#cf6a4c', 196 ]
+	let s:magenta = [ '#f0a0c0', 125 ]
+	let s:cyan    = [ '#8fbfdc', 110 ]
+	let s:green   = [ '#000000', 71 ]
+	let s:blue    = [ '#000000', '31' ]
+	let s:pink    = [ '#000000', '205' ]
 
 
-let g:lightline = line1
+	" ----------------------------
+	" Components for the status bar
+	" ----------------------------
 
 
-let g:lightline.component_expand = {
-	  \  'linter_checking': 'lightline#ale#checking',
-	  \  'linter_warnings': 'lightline#ale#warnings',
-	  \  'linter_errors': 'lightline#ale#errors',
-	  \  'linter_ok': 'lightline#ale#ok',
-	  \ }
+	let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-let g:lightline.component_type = {
-	  \     'linter_warnings': 'warning',
-	  \     'linter_errors': 'error',
-	  \ } 
+	let s:p.normal.left    = [ [ s:blue, s:none, ], [ s:gray1, s:none ] ]
+	let s:p.normal.right   = [ [ s:none, s:none ], [ s:none, s:none ] ]
+	let s:p.normal.middle  = [ [ s:gray1, s:none ] ]
+	let s:p.normal.error   = [ [ s:red, s:none ] ]
+	let s:p.normal.warning = [ [ s:yellow, s:none ] ]
+
+	let s:p.insert.left    = [ [ s:green, s:none ],   [ s:gray1, s:none ] ]
+	let s:p.replace.left   = [ [ s:red, s:none ],     [ s:gray1, s:none ] ]
+	let s:p.visual.left    = [ [ s:pink, s:none ],    [ s:gray1, s:none ] ]
+
+	let s:p.inactive.right  = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
+	let s:p.inactive.left   = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
+	let s:p.inactive.middle = [ [ s:gray1, s:none ] ]
+
+	let s:p.tabline.left    = [ [ s:none, s:gray1 ] ]
+	let s:p.tabline.tabsel  = [ [ s:none, s:none ] ]
+	let s:p.tabline.middle  = [ [ s:none, s:none ] ]
+	let s:p.tabline.right   = copy(s:p.normal.right)
+
+	let g:lightline#colorscheme#myojf#palette = lightline#colorscheme#flatten(s:p)
 
 
-let g:lightline.subseparator = { 'left': '', 'right': '|' }
-" let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
+
+	let lineComponent1 = { 
+				\   'buff': '%{GetBuffCount()}',
+				\   'mylineinfo': '%3.6l:%-3.6v',
+				\   'char': '%-2.2B',
+				\ }
 
 
-" endif
+	let lineComponent2 = { 
+				\   'mymode': '%{GetMode()}',
+				\   'mylineinfo': '%3.6l:%-3.6v',
+				\   'char': '%-2.2B',
+				\ }
+
+	let lineActive1 = {
+				\   'left' : [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+				\   'right': [ 
+				\              [ 'percent' ],
+				\              [ 'mylineinfo' ],
+				\              [ 'buff', 'spell', 'fileformat', 'fileencoding', 'filetype' ],
+				\              [ 'linter_errors', 'linter_warnings'] 
+				\            ]
+				\ }
+
+	let lineActive2 = {
+				\   'left' : [ [ 'mymode'] ],
+				\   'right': [ [ 'mylineinfo' ],
+				\              [ 'percent' ],
+				\              [ 'spell', 'paste', 'readonly', 'modified', 'filename', 'filetype' ],
+				\              [ 'linter_errors', 'linter_warnings'] ]
+				\ }
+
+	let lineInactive1 = {
+				\   'left' : [ [ ], [ 'readonly', 'filename', 'modified' ] ],
+				\   'right': [ [ ], [ ], [ 'filetype' ] ]
+				\ }
+
+	let line1 = {
+				\ 'colorscheme': 'myojf',
+				\ 'active'     : lineActive1, 
+				\ 'inactive'   : lineInactive1,
+				\ 'component'  : lineComponent1,
+				\ }
+
+	let line2 = {
+				\ 'colorscheme': 'myojf',
+				\ 'active'     : lineActive2, 
+				\ 'inactive'   : lineInactive1,
+				\ 'component'  : lineComponent2,
+				\ }
+
+
+	let g:lightline = line1
+
+
+	let g:lightline.component_expand = {
+				\  'linter_checking': 'lightline#ale#checking',
+				\  'linter_warnings': 'lightline#ale#warnings',
+				\  'linter_errors': 'lightline#ale#errors',
+				\  'linter_ok': 'lightline#ale#ok',
+				\ }
+
+	let g:lightline.component_type = {
+				\     'linter_warnings': 'warning',
+				\     'linter_errors': 'error',
+				\ } 
+
+
+	let g:lightline.subseparator = { 'left': '', 'right': '|' }
+	" let g:lightline.subseparator = { 'left': '', 'right': ' ⃓' }
+
+
+
+endif        " End of Status Bar for Vim
 
 
 
