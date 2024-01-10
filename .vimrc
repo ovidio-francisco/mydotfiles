@@ -1,8 +1,8 @@
 "------------------------------------             __   _ _ _ __ ___  _ __ ___  
 " Author:      Ovídio José Francisco              \ \ / / | '_ ` _ \| '__/ __| 
 " Description: My vim dotfile                     _\ V /| | | | | | | | | (__  
-" Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| " -----------------------------------                                          
-
+" Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| 
+" -----------------------------------                                          
 
                             
                            
@@ -21,12 +21,11 @@ set number                          " Display line numbers on the left
 set tabstop=4                       " Display tabs as four characters wide.
 set ttimeout ttimeoutlen=20         " Quickly time out on key codes
 set notimeout                       " Never time out on mappings
-set pastetoggle=<F10>               " Specify F10 to toggle the 'paste' option
 set showmatch                       " Briefly jumps to the matching bracket when it is inserted
 set matchtime=2                     " How briefly is the matching jump
 set mouse=a                         " Enable the mouse for all modes
 set linebreak                       " Break at word boundary
-set display=truncate                " If last line is too long, put an @ at line number and show as much as possible
+set display=truncate                " If last line can't fit, put an @ at line number and show as much as possible
 set formatoptions=qro               " How to autoformat texts. Run :verb set formatopitions 
 set virtualedit=block               " Allow virtual editing and ...
 set spelllang=pt,en                 " Set the languages when spell chequing is on
@@ -50,9 +49,9 @@ set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will sea
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 
-let isNeoVimFull   =  has('nvim') && !exists($XDG_CONFIG_HOME) " [~] nvim
-let isNeoVimSimple =  has('nvim') &&  exists($XDG_CONFIG_HOME) " [~] vim
-let isVim          = !has('nvim')                              " [~] v
+let isVim       = !has('nvim')                              " [~] v
+let isNeoVim    =  has('nvim') && !exists($XDG_CONFIG_HOME) " [~] vim
+let isNeoVimLua =  has('nvim') &&  exists($XDG_CONFIG_HOME) " [~] nvim
 
 if !exists($XDG_CONFIG_HOME) 	
 
@@ -159,26 +158,30 @@ let g:netrw_list_hide='^\.[^\.\/].*$'
 " ------------------------ My remaps -------------------------
 " ------------------------------------------------------------
 
-map <F15> <S-F3>
-map <F17> <S-F5>
-map <F19> <S-F7>
-map <F21> <S-F9>
-map <F23> <S-F11>
-map <F24> <S-F12>
+if (isNeoVim)
 
-map <F35> <c-F11>
-map <F36> <c-F12>
+	map <F15> <S-F3>
+	map <F17> <S-F5>
+	map <F19> <S-F7>
+	map <F21> <S-F9>
+	map <F23> <S-F11>
+	map <F24> <S-F12>
 
+	map <F35> <c-F11>
+	map <F36> <c-F12>
 
-map [15;2~ <S-F5>
-map [18;2~ <S-F7>
-map [20;2~ <S-F9>
-map [23;2~ <S-F11>
-map [24;2~ <S-F12>
+else
 
-map [23;5~ <c-F11>
-map [24;5~ <c-F12>
+	nmap [15;2~ <S-F5>
+	nmap [18;2~ <S-F7>
+	nmap [20;2~ <S-F9>
+	nmap [23;2~ <S-F11>
+	nmap [24;2~ <S-F12>
 
+	nmap [23;5~ <c-F11>
+	nmap [24;5~ <c-F12>
+
+endif
 
 
 
@@ -260,8 +263,13 @@ nnoremap <silent><F4>      :Goyo<CR>
 " =========================
 
 
-" define line highlight color
-highlight LineHighlight ctermbg=green ctermfg=white
+" Source selected lines
+vnoremap <F10> :<C-u>for line in getline("'<", "'>") \| execute line \| endfor<CR><esc> :echo "Selected lines has sourced"<cr>
+
+" Source the file
+nnoremap <F10> :%so<cr> :echo "File has sourced"<cr>
+
+
 
 " highlight the current line
 nnoremap <leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')<cr>
@@ -424,7 +432,7 @@ nnoremap <leader>= 1z=
 
 " function AdjustVerticalMovementToRelativeNumbers()
 
-function ToggleVerticalMovement()
+function! ToggleVerticalMovement()
 	
 	if mapcheck("j", "n") != ""
 		nunmap j
@@ -439,7 +447,7 @@ endfunction
 
 
 
-function ToggleRelativeNumber()
+function! ToggleRelativeNumber()
 	set relativenumber!
 
 	if &relativenumber
@@ -453,7 +461,7 @@ endfunction
 
 
 let s:tb = 0 "transparent background
-function ToggleTransparentBG()
+function! ToggleTransparentBG()
 
 	if s:tb 
 		highlight Normal ctermbg=NONE
@@ -469,7 +477,7 @@ endfunction
 
 let s:myshowbreak=' →  '
 let s:slb=0 "show line breaks
-function ToggleShowBreaks()
+function! ToggleShowBreaks()
 
 	if s:slb
 		set showbreak=""
@@ -486,7 +494,7 @@ endfunction
 
 
 let s:sb = 0 " show blank chars
-function ToggleShowBlanks()
+function! ToggleShowBlanks()
 
 	if s:sb
 		set nolist
@@ -505,7 +513,7 @@ endfunction
 
 
 
-function ToggleShowStatusBar()
+function! ToggleShowStatusBar()
 
 	if &laststatus == 0
 		set laststatus=1
@@ -530,7 +538,7 @@ endfunction
 
 
 
-function SetTexConfig() 
+function! SetTexConfig() 
 	set filetype=tex  " to avoid the plaintex filetype - note it's plainTEX not plainTEXT
 
 	let w:myshowbreak='       '
@@ -556,7 +564,7 @@ function SetTexConfig()
 endfunction
 
 
-function SetDevConfig()
+function! SetDevConfig()
 	set relativenumber
 	" unmap j
 	" unmap k
@@ -569,7 +577,7 @@ function SetDevConfig()
 endfunction
 
 
-function SetHTMLConfig()
+function! SetHTMLConfig()
 
 	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
 	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
@@ -611,7 +619,7 @@ endfunction
 
 
 
-function SetMarkdownConfig()
+function! SetMarkdownConfig()
 
 	syn match markdownTimeSep     "\d\{1,2\}\zs[:hm]\ze\d\{1,2\}" contained
 	syn match markdownTime              "\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
@@ -673,6 +681,7 @@ function SetMarkdownConfig()
 	hi markdownOrderedListMarker cterm=none ctermfg=red
 	hi markdownRule                         ctermfg=darkcyan
 
+	hi Error ctermfg=red ctermbg=none
 
 	let g:markDownCheckBoxCheckedChar='x'
 	let g:markDownCheckBoxUnCheckedChar=' '
@@ -687,7 +696,7 @@ endfunction
 
 "      - ̗̀ AGORA SIM!  ̖́-
 
-function SetNotesConfig()
+function! SetNotesConfig()
 	set filetype=notes  
 	nnoremap <buffer><silent> <leader><space> :call CheckTheBox()<cr>
 	let g:markDownCheckBoxCheckedChar='x'
@@ -762,6 +771,11 @@ function SetNotesConfig()
 
 
 
+	syn match notesDescriptionSep     ":\s*[→>:]"               contained 
+	syn match notesDescriptionItem    "\zs.*\ze:\s*[→>:]"       contained contains=notesDescriptionSep
+	syn region notesDescription start=/\v.*\:\s*[→>:]/  end=/$/ contains=notesDescriptionSep, notesDescriptionItem
+
+
 
 	syn match markdownOKBoxText "\[\zs\s*\(OK\|SIM\)\s*\ze\]"
 	syn match markdownNOBoxText "\[\zs\s*\(NO\|NAO\)\s*\ze\]"
@@ -788,14 +802,24 @@ function SetNotesConfig()
 
 	hi notesHeaderMarker	  cterm=none ctermfg=darkgray
 
-	hi notesH1                cterm=bold ctermfg=white
-	hi notesH2                cterm=bold ctermfg=024
-	hi notesH3                cterm=bold ctermfg=033
-	hi notesH4                cterm=bold ctermfg=037
-	hi notesH5                cterm=bold ctermfg=023
-	hi notesH6                cterm=bold ctermfg=029
+
+	" hi notesH1                cterm=bold ctermfg=white
+	" hi notesH2                cterm=bold ctermfg=033
+	" hi notesH3                cterm=bold ctermfg=081
+	" hi notesH4                cterm=bold ctermfg=121
+	" hi notesH5                cterm=bold ctermfg=023
+	" hi notesH6                cterm=bold ctermfg=029
 
 	" https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+	" 033 024 037 023 029
+
+
+	hi notesH1    cterm=bold ctermfg=white                
+	hi notesH2    cterm=bold ctermfg=cyan                   
+	hi notesH3    cterm=none ctermfg=darkcyan               
+	hi notesH4    cterm=bold ctermfg=magenta                
+	hi notesH5    cterm=none ctermfg=darkmagenta            
+	hi notesH6    cterm=bold ctermfg=red                    
 
 
 	hi def link notesHeaderRule1  	  notesH1
@@ -812,6 +836,13 @@ function SetNotesConfig()
 
 
 	hi markdownArrow            ctermfg=red
+
+
+	hi notesDescription     cterm=italic
+	hi notesDescriptionItem cterm=bold
+	hi notesDescriptionSep  ctermfg=cyan
+	" hi notesDescriptionSep  ctermfg=033
+
 
 	hi markdownOK               ctermfg=green 
 	hi markdownBox              ctermfg=green
@@ -856,11 +887,15 @@ endfunction
 " ------------------------ HIGHLIGHTS ------------------------
 " ------------------------------------------------------------
 
+highlight Pmenu    ctermbg=none 	ctermfg=none 
+highlight PmenuSel ctermbg=red 		ctermfg=black 
 
 
-highlight CursorLine   cterm=NONE ctermbg=234
-highlight CursorColumn cterm=bold ctermbg=234
-highlight CursorLineNr cterm=NONE ctermfg=lightgray
+highlight LineHighlight ctermbg=green ctermfg=white
+
+highlight CursorLine   cterm=none ctermbg=234
+highlight CursorColumn cterm=none ctermbg=234
+highlight CursorLineNr cterm=none ctermfg=lightgray
 
 
 highlight ALESignColumnWithErrors              ctermbg=none
@@ -909,13 +944,13 @@ hi def link htmlTag	htmlEndTag
 " ----------------------------
 
 
-function GetBuffCount()
+function! GetBuffCount()
 	return len(getbufinfo({'buflisted':1}))
 	" return len(getbufinfo({'bufloaded':1}))
 endfunction
 
 
-function GetLang()
+function! GetLang()
 	if &spell
 		return &spelllang
 	else
@@ -923,7 +958,7 @@ function GetLang()
 	endif
 endfunction
 
-function GetMode()
+function! GetMode()
 	let mode = lightline#mode()
 
 	if mode == 'NORMAL'
@@ -935,7 +970,7 @@ function GetMode()
 endfunction
 
 
-function MyLineInfo()                               " replacing the original component 'lineinfo'
+function! MyLineInfo()                               " replacing the original component 'lineinfo'
 	return printf('%d:%d', line('.'), col('.'))
 endfunction
 
