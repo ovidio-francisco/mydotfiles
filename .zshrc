@@ -28,6 +28,9 @@ alias ld='ls -A | grep "^\."'
 
 alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
+alias 'gitdotfiles add .'="echo don't use add . in a bare repository"
+
+
 
 alias vim='XDG_CONFIG_HOME="$HOME/.config/alter_nvin" \
 		   XDG_DATA_HOME="$HOME/.config/alter_nvin" \
