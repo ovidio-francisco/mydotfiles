@@ -53,7 +53,7 @@ let isVim       = !has('nvim')                                " [~] v
 let isNeoVim    =  has('nvim')                                " [~] vim
 let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " [~] nvim
 
-" if !exists($XDG_CONFIG_HOME) 	
+
 if !isNeoVimLua
 
 call vundle#begin() 
@@ -81,7 +81,7 @@ endif
 " ------------------------------------------------------------
 
 
-" Execute automatically when the user doesn't press a key for the time specified with update time	
+" Execute automatically when the user doesn't press a key for the time
 
 autocmd CursorHold * checktime                             " Check if the file was loaded outside vim
 autocmd CursorHold * echo ''
@@ -91,20 +91,11 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 
 
 " Execute automatically on {event} for a file matching
-autocmd BufRead,BufNewFile *.tex        call SetTexConfig()
-autocmd BufRead,BufNewFile *.md         call SetMarkdownConfig()
-autocmd BufRead,BufNewFile *.kn,*.notes call SetNotesConfig()
-autocmd BufRead,BufNewFile *.html       call SetHTMLConfig()
+autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
+autocmd BufRead,BufNewFile     *.md         call SetMarkdownConfig()
+autocmd BufRead,BufNewFile     *.kn,*.notes call SetNotesConfig()
+autocmd BufReadPre,BufNewFile  .vimrc       set  relativenumber 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-augroup devfiles
-	autocmd!
-	autocmd BufReadPre,BufNewFile *.js,*.html,*.py,*.java,*.c,*.cpp call SetDevConfig()
-	autocmd BufReadPre,BufNewFile *.sql call SetDevConfig()
-	autocmd BufReadPre,BufNewFile *.rs  call SetDevConfig()
-	autocmd BufReadPre,BufNewFile *.lua call SetDevConfig()
-	autocmd BufReadPre,BufNewFile .vimrc set relativenumber 
-augroup end 
 
 
 
@@ -146,10 +137,7 @@ let g:user_emmet_leader_key='<c-c>'
 
 
 " Netrw
-" Makes netrw start hidding the dotfiles
-" '^\.[^\.\/].*$'
-" let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide='^\.[^\.\/].*$'
+let g:netrw_list_hide='^\.[^\.\/].*$' " Makes netrw start hidding the dotfiles
 
 
 
@@ -161,29 +149,35 @@ let g:netrw_list_hide='^\.[^\.\/].*$'
 
 if (isNeoVim)
 
-	map <F15> <S-F3>
-	map <F17> <S-F5>
-	map <F19> <S-F7>
-	map <F21> <S-F9>
-	map <F23> <S-F11>
-	map <F24> <S-F12>
-
-	map <F35> <c-F11>
-	map <F36> <c-F12>
+	map <F13> <S-F1>  | map <F25> <c-F1>  | map <F37> <c-s-f1>
+	map <F14> <S-F2>  | map <F26> <c-F2>  | map <F38> <c-s-f2>
+	map <F15> <S-F3>  | map <F27> <c-F3>  | map <F39> <c-s-f3>
+	map <F16> <S-F4>  | map <F28> <c-F4>  | map <F40> <c-s-f4>
+	map <F17> <S-F5>  | map <F29> <c-F5>  | map <F41> <c-s-f5>
+	map <F18> <S-F6>  | map <F30> <c-F6>  | map <F42> <c-s-f6>
+	map <F19> <S-F7>  | map <F31> <c-F7>  | map <F43> <c-s-f7>
+	map <F20> <S-F8>  | map <F32> <c-F8>  | map <F44> <c-s-f8>
+	map <F21> <S-F9>  | map <F33> <c-F9>  | map <F45> <c-s-f9>
+	map <F22> <S-F10> | map <F34> <c-F10> | map <F46> <c-s-f10>
+	map <F23> <S-F11> | map <F35> <c-F11> | map <F47> <c-s-f11>
+	map <F24> <S-F12> | map <F36> <c-F12> | map <F48> <c-s-f12>
 
 else
 
-	nmap [15;2~ <S-F5>
-	nmap [18;2~ <S-F7>
-	nmap [20;2~ <S-F9>
-	nmap [23;2~ <S-F11>
-	nmap [24;2~ <S-F12>
-
-	nmap [23;5~ <c-F11>
-	nmap [24;5~ <c-F12>
+	map [1;2P  <S-F1>  | map [1;5P  <c-F1>  | map [1;6P  <c-s-f1>   
+	map [1;2Q  <S-F2>  | map [1;5Q  <c-F2>  | map [1;6Q  <c-s-f2>   
+	map [1;2R  <S-F3>  | map [1;5R  <c-F3>  | map [1;6R  <c-s-f3>   
+	map [1;2S  <S-F4>  | map [1;5S  <c-F4>  | map [1;6S  <c-s-f4>   
+	map [15;2~ <S-F5>  | map [15;5~ <c-F5>  | map [15;6~ <c-s-f5>   
+	map [17;2~ <S-F6>  | map [17;5~ <c-F6>  | map [17;6~ <c-s-f6>   
+	map [18;2~ <S-F7>  | map [18;5~ <c-F7>  | map [18;6~ <c-s-f7>   
+	map [19;2~ <S-F8>  | map [19;5~ <c-F8>  | map [19;6~ <c-s-f8>   
+	map [20;2~ <S-F9>  | map [20;5~ <c-F9>  | map [20;6~ <c-s-f9>   
+	map [21;2~ <S-F10> | map [21;5~ <c-F10> | map [21;6~ <c-s-f10>  
+	map [23;2~ <S-F11> | map [23;5~ <c-F11> | map [20;6~ <c-s-f11>  
+	map [24;2~ <S-F12> | map [24;5~ <c-F12> | map [24;6~ <c-s-f12>  
 
 endif
-
 
 
 " =========================
@@ -264,11 +258,28 @@ nnoremap <silent><F4>      :Goyo<CR>
 " =========================
 
 
+" Move tabs
+nnoremap <c-F5> :tabmove-<cr>
+nnoremap <c-F6> :tabmove+<cr>
+
+" Circle tabs
+nnoremap <c-F7> gT
+nnoremap <c-F8> gt
+
+
+" Place each buffer in its own tab
+nnoremap <c-s-f11> :tab      sball \| tabfirst<cr>
+nnoremap <c-s-f10> :vertical sball <cr>
+
+
 " Source selected lines
-vnoremap <F10> :<C-u>for line in getline("'<", "'>") \| execute line \| endfor<CR><esc> :echo "Selected lines has sourced"<cr>
+vnoremap <s-F10> :<C-u>for line in getline("'<", "'>") \| execute line \| endfor \| echo "Selected lines has sourced"<cr>
+
+" Source the line under the cursor
+nnoremap <c-F10> :execute getline(".") \| echo "Line has sourced"<cr>
 
 " Source the file
-nnoremap <F10> :%so<cr> :echo "File has sourced"<cr>
+nnoremap <s-F10> :%so \| "File has sourced"<cr>
 
 
 
@@ -299,20 +310,31 @@ nnoremap g. ylP
 " Clear current line
 nnoremap <c-c><c-c> ^D
 
-" Set/unset Transparent Background 
+" Toggle Transparent Background 
 nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
-nnoremap <S-F5><F6> :colorscheme one      \| hi normal ctermbg=none<cr>
-nnoremap <S-F5><F7> :colorscheme gruvbox  \| hi normal ctermbg=none<cr>
-nnoremap <S-F5><F1> :colorscheme default  \| hi normal ctermbg=none \| hi LineNr ctermfg=darkgrey<cr>
+nnoremap <silent><S-F1>  :colorscheme default    \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
+nnoremap <silent><S-F4>  :colorscheme one        \| hi normal ctermbg=none \|     colorscheme <cr>
+nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none \|     colorscheme <cr>
+nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none \| hi LineNr ctermbg=none \| colorscheme <cr>
+" nnoremap <silent><S-F10> :colorscheme lunaperche \| hi normal ctermbg=none \|     colorscheme <cr>
+" nnoremap <silent><S-F11> :colorscheme ron        \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
+" nnoremap <silent><S-F12> :colorscheme peachpuff  <cr>
+
+
+
+nnoremap <silent><S-F2>  :colorscheme lunaperche \| hi normal ctermbg=none \|     colorscheme <cr>
+nnoremap <silent><S-F8>  :colorscheme peachpuff  <cr>
+" slate habamax
+
 
 " Spot the cursor
 nnoremap <F7>       :set cursorline!<CR>
-nnoremap <s-F7><F7> :set cursorcolumn!<CR>
+nnoremap <F19><F7> :set cursorcolumn!<CR>
 
 " Relative line numbers
-nnoremap <s-F7><F8> :call ToggleRelativeNumber()<cr>
+nnoremap <F19><F8> :call ToggleRelativeNumber()<cr>
 
 " Set/unset Show Blank chars
 nnoremap <F6> :call ToggleShowBlanks()<CR>:call ToggleShowBreaks()<cr>
@@ -331,8 +353,14 @@ nnoremap <F9> :ALEToggle<cr>
 " Show File name and filetype
 nnoremap g1 :echo expand('%:r'). ' - ' . &filetype<cr>
 
-" Show/Hide Status Bar
+" Show/Hide Statusbar
 nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
+
+" Show/Hide Tabsbar
+nnoremap <silent><F11> :call ToggleShowTabBar()<cr>
+
+" Show/Hide Winbar
+nnoremap <silent><F10> :call ToggleShowWinBar()<cr>
 
 
 " Insert line in Normal Mode
@@ -388,8 +416,7 @@ nnoremap <leader><s-tab> :bp<cr>
 " =========================
 
 
-" Break undo sequence, start new change
-" See i_CTRL-G_u
+" Break undo sequence
 inoremap <space> <space><c-g>u
 inoremap <cr> <cr><c-g>u
 inoremap <bs> <bs><c-g>u
@@ -413,16 +440,13 @@ nnoremap <leader>b "_
 vnoremap <leader>p "_dP
 
 
-
 " Indent/Unindent and reselect
 vnoremap < <gv
 vnoremap > >gv
 
 
-
 " Change a misspelling word to the first vim suggestion 
 nnoremap <leader>= 1z=
-
 
 
 
@@ -513,24 +537,22 @@ endfunction
 
 
 
-
-
 function! ToggleShowStatusBar()
 
 	if &laststatus == 0
 		set laststatus=1
-		set noshowmode
-		echo "laststatus = 1: if splitted"
+		set showmode
+		echo "laststatus=1 → if splitted"
 	else
 		if &laststatus == 1
 			set laststatus=2
-			set showmode
-			echo "laststatus = 2: always"
+			set noshowmode
+			echo "laststatus=2 → always"
 		else 
 			if &laststatus == 2
 				set laststatus=0
 				set showmode
-				echo "laststatus = 0: never"
+				echo "laststatus=0 → never"
 			endif
 		endif
 	endif
@@ -538,10 +560,37 @@ function! ToggleShowStatusBar()
 endfunction
 
 
+function! ToggleShowTabBar()
+
+	if &showtabline == 0
+		set showtabline=1
+		echo "tabline=1 → if more than 1 tab pages"
+	else
+		if &showtabline == 1
+			set showtabline=2
+			echo "tabline=2 → always"
+		else
+			if &showtabline == 2
+				set showtabline=0
+				echo "tabline=0 → never"
+			endif
+		endif
+	endif
+
+endfunction
+
+
+function! ToggleShowWinBar()
+	if empty(&winbar)
+		set winbar=File\ %f\ %R%M
+	else
+		set winbar=
+	endif
+endfunction
 
 
 function! SetTexConfig() 
-	set filetype=tex  " to avoid the plaintex filetype - note it's plainTEX not plainTEXT
+	set filetype=tex  
 
 	let w:myshowbreak='       '
 	let &showbreak=w:myshowbreak
@@ -563,28 +612,6 @@ function! SetTexConfig()
 	hi VimtexTocSec1 ctermfg=gray cterm=none
 	hi VimtexTocSec2 ctermfg=darkgray cterm=none
 
-endfunction
-
-
-function! SetDevConfig()
-	set relativenumber
-	" unmap j
-	" unmap k
-	map j j
-	map k k
-	" colorscheme one
-	" colorscheme gruvbox
-	" colorscheme rose-pine
-	highlight Normal ctermbg=NONE
-endfunction
-
-
-function! SetHTMLConfig()
-
-	inoremap <buffer> >> ></<C-x><C-o><esc>F<i
-	inoremap <buffer> >. ></<C-x><C-o><esc>F<i<cr><esc>O
-
-	" see also: https://vi.stackexchange.com/questions/9672/how-to-generate-closing-tags-for-html
 endfunction
 
 
@@ -889,24 +916,20 @@ endfunction
 " ------------------------ HIGHLIGHTS ------------------------
 " ------------------------------------------------------------
 
-highlight Pmenu    ctermbg=none 	ctermfg=none 
-highlight PmenuSel ctermbg=red 		ctermfg=black 
+
+highlight Pmenu    ctermbg=none			ctermfg=none 
+highlight PmenuSel ctermbg=darkmagenta 	ctermfg=white
 
 
-highlight LineHighlight ctermbg=green ctermfg=white
+highlight LineHighlight ctermbg=blue ctermfg=white
+
 
 highlight CursorLine   cterm=none ctermbg=234
 highlight CursorColumn cterm=none ctermbg=234
 highlight CursorLineNr cterm=none ctermfg=lightgray
 
 
-highlight ALESignColumnWithErrors              ctermbg=none
-highlight ALESignColumnWithoutErrors           ctermbg=none
-highlight ALEErrorSign            ctermfg=red  ctermbg=none
-
-
 " Status Line
-" darkgray and black block
 highlight statuslinenc ctermbg=0 ctermfg=239
 highlight statusline   ctermbg=0 ctermfg=239
 
@@ -985,8 +1008,8 @@ if !(isNeoVimLua)
 
 
 	let s:none    = [ '#000000', 'none' ]
-	let s:gray1   = [ '#666656', 239  ]
-	" let s:gray1   = [ '#666656', 241  ]
+	let s:gray    = [ '#666656', 239  ]
+	let s:white   = [ '#ffffff', 'white']
 	let s:yellow  = [ '#ffb964', 215 ]
 	let s:red     = [ '#cf6a4c', 196 ]
 	let s:magenta = [ '#f0a0c0', 125 ]
@@ -1003,23 +1026,23 @@ if !(isNeoVimLua)
 
 	let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-	let s:p.normal.left    = [ [ s:blue, s:none, ], [ s:gray1, s:none ] ]
+	let s:p.normal.left    = [ [ s:blue, s:none, ], [ s:gray, s:none ] ]
 	let s:p.normal.right   = [ [ s:none, s:none ], [ s:none, s:none ] ]
-	let s:p.normal.middle  = [ [ s:gray1, s:none ] ]
+	let s:p.normal.middle  = [ [ s:gray, s:none ] ]
 	let s:p.normal.error   = [ [ s:red, s:none ] ]
 	let s:p.normal.warning = [ [ s:yellow, s:none ] ]
 
-	let s:p.insert.left    = [ [ s:green, s:none ],   [ s:gray1, s:none ] ]
-	let s:p.replace.left   = [ [ s:red, s:none ],     [ s:gray1, s:none ] ]
-	let s:p.visual.left    = [ [ s:pink, s:none ],    [ s:gray1, s:none ] ]
+	let s:p.insert.left    = [ [ s:green, s:none ],   [ s:gray, s:none ] ]
+	let s:p.replace.left   = [ [ s:red, s:none ],     [ s:gray, s:none ] ]
+	let s:p.visual.left    = [ [ s:pink, s:none ],    [ s:gray, s:none ] ]
 
-	let s:p.inactive.right  = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
-	let s:p.inactive.left   = [ [ s:gray1, s:none ], [ s:gray1, s:none ] ]
-	let s:p.inactive.middle = [ [ s:gray1, s:none ] ]
+	let s:p.inactive.right  = [ [ s:gray, s:none ], [ s:gray, s:none ] ]
+	let s:p.inactive.left   = [ [ s:gray, s:none ], [ s:gray, s:none ] ]
+	let s:p.inactive.middle = [ [ s:gray, s:none ] ]
 
-	let s:p.tabline.left    = [ [ s:none, s:gray1 ] ]
-	let s:p.tabline.tabsel  = [ [ s:none, s:none ] ]
-	let s:p.tabline.middle  = [ [ s:none, s:none ] ]
+	let s:p.tabline.left    = [ [ s:gray, s:none ] ]
+	let s:p.tabline.tabsel  = [ [ s:white, s:none ] ]
+	let s:p.tabline.middle  = [ [ s:gray, s:none ] ]
 	let s:p.tabline.right   = copy(s:p.normal.right)
 
 	let g:lightline#colorscheme#myojf#palette = lightline#colorscheme#flatten(s:p)
