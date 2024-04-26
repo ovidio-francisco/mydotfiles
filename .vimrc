@@ -4,8 +4,7 @@
 " Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| 
 " -----------------------------------                                          
 
-                            
-                           
+
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
 syntax on                           " Enable syntax highlighting
 set hlsearch                        " Highlight the search matches
@@ -45,6 +44,7 @@ set showmode                        " Show mode in status line
 set laststatus=0                    " Determines how to display a status line
 set guicursor=i:block,r:hor20       " Cursor shapes
 set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
+set rtp+=~/.vim/myhelps
 
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
@@ -67,6 +67,7 @@ call vundle#begin()
 	Plugin 'lervag/vimtex'
 	Plugin 'dkarter/bullets.vim'
 	Plugin 'mattn/emmet-vim'
+
 	" Themes
 	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
@@ -251,8 +252,6 @@ nnoremap <leader>dl :Explore<cr>
 nnoremap <silent><F4>      :Goyo<CR>
 
 
-
-
 " =========================
 " Make some functionalities
 " =========================
@@ -279,13 +278,23 @@ vnoremap <s-F10> :<C-u>for line in getline("'<", "'>") \| execute line \| endfor
 nnoremap <c-F10> :execute getline(".") \| echo "Line has sourced"<cr>
 
 " Source the file
-nnoremap <s-F10> :%so \| "File has sourced"<cr>
+nnoremap <s-F10> :%so \| echo "File has sourced"<cr>
 
 
 
-" highlight the current line
-nnoremap <leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')<cr>
-vnoremap <leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')<cr>
+" highlight lines
+nnoremap <leader>l :call matchadd('LineHighlight',  '\%'.line('.').'l')<cr>
+nnoremap <leader>1 :call matchadd('LineHighlight1', '\%'.line('.').'l')<cr>
+nnoremap <leader>2 :call matchadd('LineHighlight2', '\%'.line('.').'l')<cr>
+nnoremap <leader>3 :call matchadd('LineHighlight3', '\%'.line('.').'l')<cr>
+nnoremap <leader>4 :call matchadd('LineHighlight4', '\%'.line('.').'l')<cr>
+nnoremap <leader>5 :call matchadd('LineHighlight5', '\%'.line('.').'l')<cr>
+vnoremap <leader>l :call matchadd('LineHighlight',  '\%'.line('.').'l')<cr>
+vnoremap <leader>1 :call matchadd('LineHighlight1', '\%'.line('.').'l')<cr>
+vnoremap <leader>2 :call matchadd('LineHighlight2', '\%'.line('.').'l')<cr>
+vnoremap <leader>3 :call matchadd('LineHighlight3', '\%'.line('.').'l')<cr>
+vnoremap <leader>4 :call matchadd('LineHighlight4', '\%'.line('.').'l')<cr>
+vnoremap <leader>5 :call matchadd('LineHighlight5', '\%'.line('.').'l')<cr>
 
 " clear all the highlighted lines
 nnoremap <leader>h :call clearmatches()<cr>
@@ -352,6 +361,9 @@ nnoremap <F9> :ALEToggle<cr>
 
 " Show File name and filetype
 nnoremap g1 :echo expand('%:r'). ' - ' . &filetype<cr>
+
+" Copy full path to the clipboard
+nnoremap <silent>g2 :call CopyFullPath() \| echo "Full path has copied"<cr>
 
 " Show/Hide Statusbar
 nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
@@ -448,7 +460,11 @@ vnoremap > >gv
 " Change a misspelling word to the first vim suggestion 
 nnoremap <leader>= 1z=
 
-
+" Add a header underline
+nnoremap <Leader><Leader>= yypVr=k
+nnoremap <Leader><Leader>~ yypVr~k
+nnoremap <Leader><Leader>- yypVr-k
+nnoremap <Leader><Leader>. yypVr.k
 
 
 
@@ -457,6 +473,13 @@ nnoremap <leader>= 1z=
 " ------------------------------------------------------------
 
 " function AdjustVerticalMovementToRelativeNumbers()
+"
+
+function! CopyFullPath()
+	let @+ = expand('%:p')
+endfunction 
+
+
 
 function! ToggleVerticalMovement()
 	
@@ -797,6 +820,10 @@ function! SetNotesConfig()
 	
 	syn region markdownBox start="+-" end="-+"
 	syn match  markdownBox "\v\|"
+	
+
+	" syn region markdownBox start="+-" end="-+"
+	" syn match  markdownBox "\v\|"
 
 
 
@@ -817,6 +844,20 @@ function! SetNotesConfig()
 	syn match markdownCheckBoxX         "\[\zsx\ze\]"  
 	syn match markdownCheckBoxUndefined "\[\zs-\ze\]"  
 	syn match markdownCheckBox          "^\s*-\s*\[[\ x-]\]"        contains=markdownCheckBoxX,markdownCheckBoxUndefined
+
+
+
+	syn match dotMark "^\zs\s*\.\ze\s*\s.*"
+	syn match dotMarkedLine "^\zs\s*\.\s.*\ze" contains=dotMark,notesQuoted
+
+	" syn match barMark "^\zs\s*\\|\ze\s*\s.*"
+	" syn match barMarkedLine "^\zs\s*\\|\s.*\ze" contains=dotMark
+
+	hi dotMark cterm=bold ctermfg=red
+	hi dotMarkedLine cterm=none 
+	
+	" hi barMarkedLine cterm=none ctermfg=blue
+	" hi barMark cterm=bold ctermfg=yellow
 
 " --------------------------------------------------------------------------------
 
@@ -870,6 +911,8 @@ function! SetNotesConfig()
 	hi notesDescription     cterm=italic
 	hi notesDescriptionItem cterm=bold
 	hi notesDescriptionSep  ctermfg=cyan
+	hi notesDescriptionSep  ctermfg=161
+	" hi notesDescriptionSep  guifg=#f92672
 	" hi notesDescriptionSep  ctermfg=033
 
 
@@ -921,7 +964,12 @@ highlight Pmenu    ctermbg=none			ctermfg=none
 highlight PmenuSel ctermbg=darkmagenta 	ctermfg=white
 
 
-highlight LineHighlight ctermbg=blue ctermfg=white
+highlight LineHighlight  ctermbg=233 ctermfg=white
+highlight LineHighlight1 ctermbg=228 ctermfg=black
+highlight LineHighlight2 ctermbg=17  ctermfg=white
+highlight LineHighlight3 ctermbg=52  ctermfg=white
+highlight LineHighlight4 ctermbg=10  ctermfg=white
+highlight LineHighlight5 ctermbg=217 ctermfg=white
 
 
 highlight CursorLine   cterm=none ctermbg=234
@@ -1259,8 +1307,27 @@ nnoremap <c-z>      :echo "do nothing :)"<cr>
 
 " https://www.cs.swarthmore.edu/oldhelp/vim/home.html
 " https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f#545a
+" https://www.ditig.com/publications/256-colors-cheat-sheet
+" https://askubuntu.com/questions/821157/print-a-256-color-test-pattern-in-the-terminal
 
 
 
+" -------------------------------------------------------------------------------
+" ------------------------------- [ MASTERS OF COMBAT ] -------------------------
+" ---------------------------------[by Ice Queen Zero]---------------------------
+" --------------------------------- [ Master System ]----------------------------
+" -------------------------------------------------------------------------------
+
+" o---------------------o
+"       INTRODUCTION
+" o---------------------o
+                           
+
+" | It is often used as the last activation function of a neural network to normalize the 
+" | output of a network to a probability distribution over predicted output classes. — 
+" | Wikipedia [link]
+
+
+" Get the file path
 
 

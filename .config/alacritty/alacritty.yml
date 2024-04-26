@@ -30,6 +30,13 @@ font:
 
   size: 13.0
 
+cursor:
+  style:
+    shape: Block
+
+    # Never Off On Always
+    # blinking: On
+  blink_interval:   410
 
 draw_bold_text_with_bright_colors: true
 

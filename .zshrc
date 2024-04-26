@@ -40,6 +40,7 @@ alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 
 alias nvim='nvim -O'
 alias v='/usr/bin/vim -O'
+alias tvim='vim /tmp/tmp.txt'
 
 alias rg='urxvt -e ranger'
 
@@ -54,6 +55,7 @@ alias -1='cd -1'
 alias -2='cd -2' 
 alias -3='cd -3' 
 alias -4='cd -4' 
+alias tmp='cd /tmp'
 
 alias cmatrix='cmatrix -b' 
 alias hl='highlight'
