@@ -197,6 +197,16 @@ nnoremap k gk
 nnoremap Y y$
 
 
+" ----- WASTED MAPS -----
+
+" Do nothing 
+nnoremap <c-z>    :echo 'do nothing :)'<cr>
+nnoremap g!       :echo 'wasted map'<cr>
+nnoremap g2       :echo 'wasted map'<cr>
+
+
+
+
 " =========================
 " Make some shortcuts
 " =========================
@@ -222,7 +232,6 @@ vnoremap <F1> <ESC>:q<CR>
 vnoremap <F2> <ESC>:w<cr>
 inoremap <F1> <ESC>
 inoremap <F2> <ESC>:w<cr>
-" nnoremap <leader>l :w<cr>
 
 
 " Comments
@@ -243,7 +252,7 @@ nnoremap <c-F12> 1<c-w>+
 nnoremap <F3> :NERDTreeToggle<cr>
 
 " Explore Tags
-nnoremap <s-F3> :TagbarToggle<cr>
+nnoremap g<F3> :TagbarToggle<cr>
 
 nnoremap <leader>dl :Explore<cr>
 
@@ -324,22 +333,17 @@ nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
 nnoremap <silent><S-F1>  :colorscheme default    \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
-nnoremap <silent><S-F4>  :colorscheme one        \| hi normal ctermbg=none \|     colorscheme <cr>
-nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none \|     colorscheme <cr>
-nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none \| hi LineNr ctermbg=none \| colorscheme <cr>
-" nnoremap <silent><S-F10> :colorscheme lunaperche \| hi normal ctermbg=none \|     colorscheme <cr>
-" nnoremap <silent><S-F11> :colorscheme ron        \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
-" nnoremap <silent><S-F12> :colorscheme peachpuff  <cr>
-
-
-
-nnoremap <silent><S-F2>  :colorscheme lunaperche \| hi normal ctermbg=none \|     colorscheme <cr>
-nnoremap <silent><S-F8>  :colorscheme peachpuff  <cr>
-" slate habamax
+nnoremap <silent><S-F2>  :colorscheme lunaperche \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><S-F3>  :colorscheme habamax    \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><S-F4>  :colorscheme one        \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
+" nnoremap <silent><S-F7>  :colorscheme ron        \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
+nnoremap <silent><S-F8>  :colorscheme slate      \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
 
 
 " Spot the cursor
-nnoremap <F7>       :set cursorline!<CR>
+nnoremap <F7>      :set cursorline!<CR>
 nnoremap <F19><F7> :set cursorcolumn!<CR>
 
 " Relative line numbers
@@ -605,7 +609,7 @@ endfunction
 
 function! ToggleShowWinBar()
 	if empty(&winbar)
-		set winbar=File\ %f\ %R%M
+		set winbar=File\ \-\ %f\ %R%M
 	else
 		set winbar=
 	endif
@@ -797,9 +801,12 @@ function! SetNotesConfig()
 	syn match notesListMarker        "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs[-*+]\ze\s.*" 
 	syn match notesOrderedListMarker "\(\(^\s*\)\|\(\t\| \{4,}\)\)\zs\d\+\.\ze\s.*" 
 
-	syn match notesEmphasisBetweenDashes "--\s.*\s--"
+	" syn match notesEmphasisBetweenDashes "--\s.*\s--"
+	syn match notesEmphasisBetweenDashes "--\s\([^|-].*\)\s--" " excludes the | between dashes 
 	syn match notesEmphasisBetweenEquals "==\s.*\s=="
-	
+
+
+
 	syn match boldDelimiter        "\*"   contained
 	syn match italicDelimiter      "\^"   contained
 	syn match underlineDelimiter   "[_]"  contained
@@ -818,13 +825,6 @@ function! SetNotesConfig()
 	syn match markdownRightArrow "-\{2,}>\|=\{2,}>"
 	syn match markdownLeftArrow "<-\{2,}\|<=\{2,}"
 	
-	syn region markdownBox start="+-" end="-+"
-	syn match  markdownBox "\v\|"
-	
-
-	" syn region markdownBox start="+-" end="-+"
-	" syn match  markdownBox "\v\|"
-
 
 
 	syn match notesDescriptionSep     ":\s*[→>:]"               contained 
@@ -847,17 +847,41 @@ function! SetNotesConfig()
 
 
 
-	syn match dotMark "^\zs\s*\.\ze\s*\s.*"
-	syn match dotMarkedLine "^\zs\s*\.\s.*\ze" contains=dotMark,notesQuoted
 
-	" syn match barMark "^\zs\s*\\|\ze\s*\s.*"
-	" syn match barMarkedLine "^\zs\s*\\|\s.*\ze" contains=dotMark
+
+
+
+
+
+
+
+
+
+	syn match dotMark       "^\zs\s*\.\ze\s*\s.*"
+	syn match dotMarkedLine "^\zs\s*\.\s.*\ze" contains=dotMark,notesQuoted
 
 	hi dotMark cterm=bold ctermfg=red
 	hi dotMarkedLine cterm=none 
 	
-	" hi barMarkedLine cterm=none ctermfg=blue
-	" hi barMark cterm=bold ctermfg=yellow
+	syn match barMark       "^\s*|" contained
+	syn match barMarkedLine "^\s*|\s\+\([^|]\+\)$" contains=barMark
+
+	hi barMark ctermfg=darkcyan
+	hi barMarkedLine cterm=italic ctermfg=gray
+
+	
+
+	" Table
+	syn region tableline start="+-" end="-+"
+
+	syntax match tablerow '\v\|.*\|' contains=tablebound
+
+	syntax match tablebound '\v\|' contained
+
+	" syn region tableline start="\v\|\s+-" end="\v-\s+\|" 
+
+
+
 
 " --------------------------------------------------------------------------------
 
@@ -948,6 +972,9 @@ function! SetNotesConfig()
 
 	hi markdownRightArrow            ctermfg=red
 	hi markdownLeftArrow             ctermfg=red 
+
+	hi tableline  ctermfg=green
+	hi tableBound ctermfg=green
 
 	" echo "Notes"
 endfunction
@@ -1171,13 +1198,6 @@ if !(isNeoVimLua)
 
 endif        " End of Status Bar for Vim
 
-
-
-
-" ---------------------- WASTE COMMANDS -----------------------
-
-" Do nothing 
-nnoremap <c-z>      :echo "do nothing :)"<cr>
 
 
 
