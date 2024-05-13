@@ -72,6 +72,7 @@ call vundle#begin()
 	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
+	Plugin 'fxn/vim-monochrome'
 call vundle#end()
 
 endif
@@ -83,8 +84,7 @@ endif
 
 
 " Execute automatically when the user doesn't press a key for the time
-
-autocmd CursorHold * checktime                             " Check if the file was loaded outside vim
+autocmd CursorHold * checktime                " Check if the file was loaded outside vim
 autocmd CursorHold * echo ''
 
 " F1 to exit on Netrw
@@ -111,7 +111,6 @@ let g:tex_flavor = 'latex'
 
 
 " NERDTree
-
 let g:NERDTreeHijackNetrw=0                   " Avoid starts when open a directory fom command line (vim .)
 
 let NERDTreeQuitOnOpen = 1
@@ -141,7 +140,7 @@ let g:user_emmet_leader_key='<c-c>'
 let g:netrw_list_hide='^\.[^\.\/].*$' " Makes netrw start hidding the dotfiles
 
 
-
+let g:monochrome_italic_comments = 1
 
 
 " ------------------------------------------------------------
@@ -150,33 +149,33 @@ let g:netrw_list_hide='^\.[^\.\/].*$' " Makes netrw start hidding the dotfiles
 
 if (isNeoVim)
 
-	map <F13> <S-F1>  | map <F25> <c-F1>  | map <F37> <c-s-f1>
-	map <F14> <S-F2>  | map <F26> <c-F2>  | map <F38> <c-s-f2>
-	map <F15> <S-F3>  | map <F27> <c-F3>  | map <F39> <c-s-f3>
-	map <F16> <S-F4>  | map <F28> <c-F4>  | map <F40> <c-s-f4>
-	map <F17> <S-F5>  | map <F29> <c-F5>  | map <F41> <c-s-f5>
-	map <F18> <S-F6>  | map <F30> <c-F6>  | map <F42> <c-s-f6>
-	map <F19> <S-F7>  | map <F31> <c-F7>  | map <F43> <c-s-f7>
-	map <F20> <S-F8>  | map <F32> <c-F8>  | map <F44> <c-s-f8>
-	map <F21> <S-F9>  | map <F33> <c-F9>  | map <F45> <c-s-f9>
-	map <F22> <S-F10> | map <F34> <c-F10> | map <F46> <c-s-f10>
-	map <F23> <S-F11> | map <F35> <c-F11> | map <F47> <c-s-f11>
-	map <F24> <S-F12> | map <F36> <c-F12> | map <F48> <c-s-f12>
+	map <F13> <S-F1>|  map <F25> <c-F1>|  map <F37> <c-s-f1>
+	map <F14> <S-F2>|  map <F26> <c-F2>|  map <F38> <c-s-f2>
+	map <F15> <S-F3>|  map <F27> <c-F3>|  map <F39> <c-s-f3>
+	map <F16> <S-F4>|  map <F28> <c-F4>|  map <F40> <c-s-f4>
+	map <F17> <S-F5>|  map <F29> <c-F5>|  map <F41> <c-s-f5>
+	map <F18> <S-F6>|  map <F30> <c-F6>|  map <F42> <c-s-f6>
+	map <F19> <S-F7>|  map <F31> <c-F7>|  map <F43> <c-s-f7>
+	map <F20> <S-F8>|  map <F32> <c-F8>|  map <F44> <c-s-f8>
+	map <F21> <S-F9>|  map <F33> <c-F9>|  map <F45> <c-s-f9>
+	map <F22> <S-F10>| map <F34> <c-F10>| map <F46> <c-s-f10>
+	map <F23> <S-F11>| map <F35> <c-F11>| map <F47> <c-s-f11>
+	map <F24> <S-F12>| map <F36> <c-F12>| map <F48> <c-s-f12>
 
 else
 
-	map [1;2P  <S-F1>  | map [1;5P  <c-F1>  | map [1;6P  <c-s-f1>   
-	map [1;2Q  <S-F2>  | map [1;5Q  <c-F2>  | map [1;6Q  <c-s-f2>   
-	map [1;2R  <S-F3>  | map [1;5R  <c-F3>  | map [1;6R  <c-s-f3>   
-	map [1;2S  <S-F4>  | map [1;5S  <c-F4>  | map [1;6S  <c-s-f4>   
-	map [15;2~ <S-F5>  | map [15;5~ <c-F5>  | map [15;6~ <c-s-f5>   
-	map [17;2~ <S-F6>  | map [17;5~ <c-F6>  | map [17;6~ <c-s-f6>   
-	map [18;2~ <S-F7>  | map [18;5~ <c-F7>  | map [18;6~ <c-s-f7>   
-	map [19;2~ <S-F8>  | map [19;5~ <c-F8>  | map [19;6~ <c-s-f8>   
-	map [20;2~ <S-F9>  | map [20;5~ <c-F9>  | map [20;6~ <c-s-f9>   
-	map [21;2~ <S-F10> | map [21;5~ <c-F10> | map [21;6~ <c-s-f10>  
-	map [23;2~ <S-F11> | map [23;5~ <c-F11> | map [20;6~ <c-s-f11>  
-	map [24;2~ <S-F12> | map [24;5~ <c-F12> | map [24;6~ <c-s-f12>  
+	map [1;2P  <S-F1>|  map [1;5P  <c-F1>|  map [1;6P  <c-s-f1>   
+	map [1;2Q  <S-F2>|  map [1;5Q  <c-F2>|  map [1;6Q  <c-s-f2>   
+	map [1;2R  <S-F3>|  map [1;5R  <c-F3>|  map [1;6R  <c-s-f3>   
+	map [1;2S  <S-F4>|  map [1;5S  <c-F4>|  map [1;6S  <c-s-f4>   
+	map [15;2~ <S-F5>|  map [15;5~ <c-F5>|  map [15;6~ <c-s-f5>   
+	map [17;2~ <S-F6>|  map [17;5~ <c-F6>|  map [17;6~ <c-s-f6>   
+	map [18;2~ <S-F7>|  map [18;5~ <c-F7>|  map [18;6~ <c-s-f7>   
+	map [19;2~ <S-F8>|  map [19;5~ <c-F8>|  map [19;6~ <c-s-f8>   
+	map [20;2~ <S-F9>|  map [20;5~ <c-F9>|  map [20;6~ <c-s-f9>   
+	map [21;2~ <S-F10>| map [21;5~ <c-F10>| map [21;6~ <c-s-f10>  
+	map [23;2~ <S-F11>| map [23;5~ <c-F11>| map [20;6~ <c-s-f11>  
+	map [24;2~ <S-F12>| map [24;5~ <c-F12>| map [24;6~ <c-s-f12>  
 
 endif
 
@@ -203,7 +202,10 @@ nnoremap Y y$
 nnoremap <c-z>    :echo 'do nothing :)'<cr>
 nnoremap g!       :echo 'wasted map'<cr>
 nnoremap g2       :echo 'wasted map'<cr>
-
+nnoremap 1g1      :echo 'wasted map'<cr>
+nnoremap <S-Up>   :echo 'wasted map'<cr>
+nnoremap <C-Up>   :echo 'wasted map'<cr>
+nnoremap gy       :echo 'wasted map'<cr>
 
 
 
@@ -221,7 +223,7 @@ nnoremap yA :%y+<cr>
 nnoremap <backspace> g;
 
 " Back to Normal Mode
-inoremap <C-L> <ESC>
+inoremap <c-l> <ESC>
 
 
 
@@ -252,8 +254,9 @@ nnoremap <c-F12> 1<c-w>+
 nnoremap <F3> :NERDTreeToggle<cr>
 
 " Explore Tags
-nnoremap g<F3> :TagbarToggle<cr>
+nnoremap <S-F3> :TagbarToggle<cr>
 
+" Open Netrw Directory Listing
 nnoremap <leader>dl :Explore<cr>
 
 
@@ -332,22 +335,29 @@ nnoremap <c-c><c-c> ^D
 nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
-nnoremap <silent><S-F1>  :colorscheme default    \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
-nnoremap <silent><S-F2>  :colorscheme lunaperche \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><S-F3>  :colorscheme habamax    \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><S-F4>  :colorscheme one        \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
+nnoremap <silent><C-F1>  :colorscheme default    \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
+nnoremap <silent><C-F2>  :colorscheme lunaperche \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F3>  :colorscheme habamax    \| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F4>  :colorscheme one        \| hi normal ctermbg=none     \| colorscheme <cr>
+" nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none     \| colorscheme <cr>
+" nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
 " nnoremap <silent><S-F7>  :colorscheme ron        \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
-nnoremap <silent><S-F8>  :colorscheme slate      \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
+" nnoremap <silent><S-F8>  :colorscheme slate      \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
 
+" Next/Previous colorsheme
+" TODO
+
+" My helps
+nnoremap <S-F1> :help myhelp.txt<cr>
 
 " Spot the cursor
-nnoremap <F7>      :set cursorline!<CR>
-nnoremap <F19><F7> :set cursorcolumn!<CR>
+nnoremap <F7>        :set cursorline!<CR>
+nnoremap <S-F7><F7>  :set cursorcolumn!<CR>
+nnoremap <S-F7><F19> :set cursorcolumn!<CR>
 
-" Relative line numbers
-nnoremap <F19><F8> :call ToggleRelativeNumber()<cr>
+" Toggle relative line numbers
+nnoremap <S-F7><F8>  :call ToggleRelativeNumber()<cr>
+nnoremap <S-F7><F20> :call ToggleRelativeNumber()<cr>
 
 " Set/unset Show Blank chars
 nnoremap <F6> :call ToggleShowBlanks()<CR>:call ToggleShowBreaks()<cr>
@@ -396,18 +406,19 @@ nnoremap <c-q>   <c-y>gk
 nnoremap <c-s>   <c-e>gj
 
 
-" Join with the line above
-nnoremap <silent>K kJ==
-
-nnoremap <Leader>w  :set wrap!<cr>
-
-nnoremap <Leader><bar> :vsplit<cr>
-nnoremap <Leader>-     :split<cr>
-
-
 " Disable/Enable highlight in search
 nnoremap <silent><f8> : set hlsearch!<cr>
 
+" Join with the line above
+nnoremap <silent>K kJ==
+
+" Toggle line wrap
+nnoremap <Leader>w  :set wrap!<cr>
+
+
+" Window splits
+nnoremap <Leader><bar> :vsplit<cr>
+nnoremap <Leader>-     :split<cr>
 
 " Create an empty Window at the Left
 nnoremap <Leader>n :vnew<cr>
@@ -442,6 +453,7 @@ inoremap , ,<c-g>u
 
 " Black hole register
 nnoremap <del> "_
+nnoremap <leader>b "_
 vnoremap <leader>d "_d
 nnoremap <leader>x "_x
 nnoremap <leader>s "_s
@@ -449,7 +461,6 @@ nnoremap <leader>dd "_dd
 nnoremap <leader>D "_D
 nnoremap <leader>C "_C
 nnoremap <leader>S "_S
-nnoremap <leader>b "_
 
 
 " Replace selected without yank
@@ -1198,137 +1209,6 @@ if !(isNeoVimLua)
 
 endif        " End of Status Bar for Vim
 
-
-
-
-
-
-
-
-
-" ------------------------------------------------------------
-" ----------------------- TO REMEMBER ------------------------
-" ------------------------------------------------------------
-
-
-"--> ========== VIMTEX =========
-
-"--> \ll	start/stop compiler in continuous mode
-"--> \lc	clear auxiliary files
-"--> \le	show erros
-
-
-"--> ========== VIM ==========
-
-"--> gi		Insert text in the previous position
-"--> gd		Go to defition of word in the current function
-"--> gD		Go to defition of word in the current file
-"--> gn		Go to next last used search pattern and select it
-"--> = 		Format selected text
-"--> ==		Format current Line
-"--> z=		Give spelling suggestions
-"--> ]s		Go to next misspeled word
-"--> [s		Go to previous misspeled word
-"--> zg		Mark work as correctly spelled
-"--> zw		Mark work as incorrectly spelled
-"--> @@		Repeat last macro
-"--> gf		Open the file whose name is under the cursor
-"--> gx		Open the URL whose is under the cursor
-"--> gm		Go to the middle of the screen line
-"--> gM		Go to the middle of the text line
-"--> gu		Make lowercase after move
-"--> gv		Reselect visual area
-"--> zz		Redraw and put current line at center of window
-"--> zt		Redraw and put current line at top of window
-"--> zb		Redraw and put current line at bottom of window
-"--> zy		yank without trailing spaces
-"--> +		Go to the line above in the first no-blank character
-"--> -		Go to the line below in the first no-blank character
-"--> (		Go to previous sentence
-"--> )		Go to next sentence
-"--> {		Go to previous paragraph
-"--> }		Go to next paragraph
-
-"    Make a search with / and press Enter, then
-"--> dgn	delete the next search pattern
-"--> cgn	change the next search pattern
-"    The press . to do it in next occurrences
-
-
-"--> ''		Go to older position in jump list
-
-"--> \cs	Sexy comment
-"--> \c$	Comment from the cursor to the line end
-"--> \cm	Comment with a minimal style
-"--> \cy    Yank and comment 
-"--> \cA	Append a comment to the end of line and goes into insert mode between them
-"--> \cI	Adds comment at the cursor and insert between
-"--> \ci	Toggles selected lines
-
-
-"--> ysaw '  Surround a word
-"--> yss '   Surround sentence
-"--> ysas '  Surround arround sentence
-"--> ysap '  Surround arround paragraph
-
-
-
-
-
-" --> ========== Various Motions ==========
-
-" --> [(			go to priveous unmatched ( 		samor for { 
-" --> ](			go to next     unmatched ( 		samor for { 
-
-" --> [m			go to next start of a method
-" --> [M			go to next end   of a method
-
-" --> ]m			go to next start of a method
-" --> ]M			go to next end   of a method
-
-" --> ]*			go to next start of a comment
-" --> [*			go to next end   of a comment
-
-
-
-" --> ========== Object Motions ========== 
-
-" --> a(
-" --> ab		a block
-" --> i(
-" --> ib		inner block
-
-" --> a<		a <> block      same for {} and () blocks
-" --> i<		inner <> block
-
-" --> at		a tag block
-" --> it		inner tag block
-
-" --> a"		a quoted string same for ' and `
-" --> i"		inner quoted string
-
-" Netrw
-" --> a"		Cycle through the modes (normal/hiding/show)
-" --> gh"		Show hide the dotfiles/dotdirs
-
-
-" ------------------------------------------------------------
-" ------------------ SHELL COMMANDS -------------------
-" ------------------------------------------------------------
-
-"--> grep -e '^"-->' ~/.vimrc  	Print my hints
-
-
-
-
-" ------------------------------------------------------------
-" ---------------------- NICE WEBPAGES -----------------------
-" ------------------------------------------------------------
-
-" https://www.cs.swarthmore.edu/oldhelp/vim/home.html
-" https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f#545a
-" https://www.ditig.com/publications/256-colors-cheat-sheet
-" https://askubuntu.com/questions/821157/print-a-256-color-test-pattern-in-the-terminal
 
 
 
