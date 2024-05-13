@@ -17,10 +17,6 @@ codetesting.scrollBar: false
 codetesting*depth: 32
 codetesting*background: rgba:0000/0000/0200/c800
 
-vimnotes.scrollBar: false
-vimnotes*depth: 32
-vimnotes*background: rgba:0000/0000/bbbb/7800
-vimnotes*font: xft:Fantasque Sans Mono:pixelsize=16 
 
 nmtuiwin.scrollBar: false
 nmtuiwin*depth: 32
@@ -41,15 +37,9 @@ URxvt.keysym.Control-Right:  \033[1;5C
 
 
 
-
-
 !! Font prefferenes
-! urxvt.font: xft:Noto Sans Mono:pixelsize=13
-! urxvt.font: xft:DejaVu Sans Mono:pixelsize=13
-! URxvt.font: xft:Fantasque Sans Mono:pixelsize=14,xft:DejaVu Sans Mono:size=9,xft:DejaVu Sans:size=9
-URxvt.font: xft:Fantasque Sans Mono:pixelsize=14
-URxvt.boldFont: xft:Fantasque Sans Mono:pixelsize=14:weight=bold
-! urxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=13:weight=bold
+URxvt.font: xft:Fantasque Sans Mono:pixelsize=18
+URxvt.boldFont: xft:Fantasque Sans Mono:pixelsize=18:weight=bold
 URxvt.letterSpace: -1
 
 
