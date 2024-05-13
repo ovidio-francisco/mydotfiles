@@ -1,3 +1,9 @@
 myhelp	myhelp.txt	/*myhelp*
+myhelp-vimtex	myhelp.txt	/*vimtex*
+myhelp-vim	myhelp.txt	/*vim*
+
+
+
 myhelp-normal	myhelp.txt	/*myhelp-normal*
 myhelp.txt	myhelp.txt	/*myhelp.txt*
+vimtex	myhelp.txt	/*vimtex*/

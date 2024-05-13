@@ -26,7 +26,7 @@ alias Ll='ls -gohXL'
 alias lh='ls -Ad .*' # list the hidden
 alias ld='ls -A | grep "^\."'
 
-alias gitdotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 alias 'gitdotfiles add .'="echo don't use add . in a bare repository"
 
@@ -41,6 +41,11 @@ alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 alias nvim='nvim -O'
 alias v='/usr/bin/vim -O'
 alias tvim='vim /tmp/tmp.txt'
+alias .vimrc='vim ~/.vimrc'
+alias .zshrc='vim ~/.zshrc'
+
+alias fzf='fzf --preview="cat {}"'
+alias fzfvim='vim $(fzf --preview="cat {}")'
 
 alias rg='urxvt -e ranger'
 

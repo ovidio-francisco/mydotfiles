@@ -1,19 +1,347 @@
-*myhelp.txt*    For Vim version 7.4 Last change: 2014 October 8
-*myhelp*
+*myhelp.txt*    For Vim version 9.1 Created: 2024 May 7
 
-Matt's cheat sheet of Vim stuff he always forgets.
 
-=====================================================
-CONTENTS
+================================================================================
+CONTENTS                                                                  *myhelp*
 
-    1. Normal Mode...................................|myhelp-normal|
-    2. Visual Mode.......................................|myhelp-visual|
-    3. Insert Mode.........................|myhelp-insert|
+  1. VimTeX..........................................|vimtex|
+  2. Visual Mode.....................................|myhelp-visual|
+  3. Insert Mode.....................................|myhelp-insert|
 
-===============================================================================
-1. Normal Mode                                         *myhelp-normal*
 
-   - :wall : Save modified buffers
-   :x : Save buffer only if modified, then exit (better than :wq)
-   - ]] : next section
-   - ]m : next method
+================================================================================
+VIMTEX                                                                    *vimtex*
+
+  \ll			start/stop compiler in continuous mode
+  \lc			clear auxiliary files
+  \le			show erros
+
+
+--------------------------------------------------------------------------------
+SOME SHORTCUTS                                                  *myhelp-shortcuts*
+
+
+  gp 			`Selects` the previous changed or yanked
+  yA 			Yank all
+
+
+
+--------------------------------------------------------------------------------
+VIM                                                                   *myhelp-vim*
+
+  gn			Go to next last used search pattern and select it
+
+
+--------------------------------------------------------------------------------
+WINDOW RESIZING                                                   *myhelp-windows*
+
+  <s-F11>		Decrease  window width 
+  <s-F12>		Inncrease window width 
+  <c-F11>		Decrease  window height   
+  <c-F12>		Inncrease window width  
+
+
+--------------------------------------------------------------------------------
+PROGRAMMING                                                   *myhelp-programming*
+
+  gd			Go to defition of word in the current function
+  gD			Go to defition of word in the current file
+
+--------------------------------------------------------------------------------
+SPELLING                                                         *myhelp-spelling*
+
+  z=			Give spelling suggestions
+  ]s			Go to next misspeled word
+  [s			Go to previous misspeled word
+  zg			Mark work as correctly spelled
+  zw			Mark work as incorrectly spelled
+
+  <leader>=		Change a misspelling word to the first vim suggestion 
+
+--------------------------------------------------------------------------------
+HIGHLIGHT LINES                                           *myhelp-highlight-lines*
+
+  <leader>l,1..5	Hightlight the current line or the selected ones
+  
+
+  <leader>h		Clear all the highlighted lines
+
+
+--------------------------------------------------------------------------------
+SET COLORSCHEME                                           *myhelp-set-colorscheme*
+
+  <C-F1..F4>		Set a colorscheme
+
+
+--------------------------------------------------------------------------------
+SPOT THE CURSOR                                           *myhelp-spot-the-cursor*
+
+  <F7>			Highligh current line
+  <S-F7><F7> 		Highligh current column
+
+
+--------------------------------------------------------------------------------
+RELATIVE LINE NUMBERS                               *myhelp-relative-line-numbers*
+
+  <S-F7><F8>		Toggle relative line numbers
+
+
+--------------------------------------------------------------------------------
+FILE INFOS                                                     *myhelp-file-infos*
+
+  g1			Show File name and filetype
+  g2			Copy full path to the clipboard
+  <F12>			Show/Hide Statusbar
+  <F11>			Show/Hide Tabsbar
+  <F10>			Show/Hide Winbar
+
+
+--------------------------------------------------------------------------------
+INSERT LINES                                                    *myhelp-nice-movs*
+
+
+  m			Break the line at cursor position
+  <leader>m		Insert a new line below and inserts to its begging
+  <leader>M		Insert a new line above and inserts to its begging
+
+  <leader>o		Insert a new line below, but don't move
+  <leader>O		Insert a new line above, but don't move
+
+
+--------------------------------------------------------------------------------
+NEW BUFFERS AND WINDOWS                               *myhelp-new-buffers-windows*
+
+
+  <Leader>|		Split window vertically
+  <Leader>-		Split window horizontally. 
+			The result is two viewports on the same file.
+
+  <Leader>n		Create an empty Window at the Left
+  <Leader>_		Create an empty Window at the Bottom
+ 
+
+--------------------------------------------------------------------------------
+HEARDER UNDERLINES                                      *myhelp-header-underlines*
+
+  <Leader><Leader>=	Insert a nice line below with =s
+  <Leader><Leader>~	Insert a nice line below with ~s
+  <Leader><Leader>-	Insert a nice line below with -s
+  <Leader><Leader>.	Insert a nice line below with .s
+		
+
+--------------------------------------------------------------------------------
+NICE MOVIMENTS                                                  *myhelp-nice-movs*
+
+  gm			Go to the middle of the screen line
+  gM			Go to the middle of the text line
+  (			Go to previous sentence
+  )			Go to next sentence
+  {			Go to previous paragraph
+  }			Go to next paragraph
+
+  gn			Search forward for the last used search pattern, like
+			with `n`, and start Visual mode to select the match.
+			If an operator is pending, operates on the match.
+			E.g., `dgn` deletes the text of the next match.
+
+			Trick:~
+			Make a search with / and press Enter, then
+			dgn	delete the next search pattern
+			cgn	change the next search pattern
+			The press . to do it in next occurrences
+
+  ''			Go to older position in jump list
+
+  [( 			go to preveous unmatched (
+  ]( 			go to next     unmatched (
+
+  [{ 			go to preveous unmatched { 
+  ]{ 			go to next     unmatched { 
+
+  [m 			go to next start of a method
+  [M 			go to next end   of a method
+
+  ]m 			go to next start of a method
+  ]M 			go to next end   of a method
+
+  ]* 			go to next start of a comment
+  [* 			go to next end   of a comment
+
+
+
+--------------------------------------------------------------------------------
+OBJECTS                                                           *myhelp-objects*
+
+  a(
+  ab			a block
+  i(
+  ib			inner block
+
+  a<			a <> block      
+  i<			inner <> block
+			same for {} and () blocks
+
+  at			a tag block
+  it			inner tag block
+
+  a"			a quoted string same for ' and `
+  i"			inner quoted string
+
+
+--------------------------------------------------------------------------------
+NETRW                                                              *myhelp-netrw*
+ 
+  a"			Cycle through the modes (normal/hiding/show)
+  gh"			Show hide the dotfiles/dotdirs
+
+
+
+--------------------------------------------------------------------------------
+COMMENTS                                                         *myhelp-comments*
+
+  <leader>ci		Toggles selected lines
+  <leader>cs		Sexy comment
+  <leader>c$		Comment from the cursor to the line end
+  <leader>cm		Comment with a minimal style
+  <leader>cy		Yank and comment 
+  <leader>cA		Append a comment to the end of line and inserts between them
+  <leader>cI		Adds comment at the cursor and insert between
+
+
+  <leader>s 		Sexy comment
+  <leader>A 		Append a comment
+  <leader>I 		Adds comment at the cursor and insert between
+
+
+--------------------------------------------------------------------------------
+SURROUNDS                                                       *myhelp-surrounds*
+   
+ysaw '			Surround a word
+yss ' 			Surround sentence
+ysas '			Surround arround sentence
+ysap '			Surround arround paragraph
+
+
+
+--------------------------------------------------------------------------------
+SHELL COMMANDS                                             *myhelp-shell-commands*
+
+grep -e '^"-->' ~/.vimrc	Print my hints
+
+
+
+--------------------------------------------------------------------------------
+NICE WEBPAGES                                               *myhelp-nice-webpages*
+
+  https://www.cs.swarthmore.edu/oldhelp/vim/home.html
+  https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f#545a
+  https://www.ditig.com/publications/256-colors-cheat-sheet
+  https://askubuntu.com/questions/821157/print-a-256-color-test-pattern-in-the-terminal
+
+
+--------------------------------------------------------------------------------
+HELP PAGES                                                     *myhelp-help-pages*
+
+  CTRL-]		Jumps to subjects between ||bars| and 
+  CTRL-T		Jumps back
+
+
+--------------------------------------------------------------------------------
+TABS                                                                 *myhelp-tabs*
+
+  <c-F5>		Move the tab page to the left
+  <c-F6>		Move the tab page to the right
+
+  <c-F7>		Go to the previous tab page.
+  <c-F8>		Go to the next tab page.
+
+
+  <c-s-f11>		Place each buffer in its own tab
+  <c-s-f10>		Place each tab in its own window
+
+
+--------------------------------------------------------------------------------
+BLACK HOLE                                                     *myhelp-black-hole*
+
+  <leader>d,x,s,
+  dd,D,C,S		Deletes without save into register
+
+  <del>			Enters the prefix `"_`
+  <leader>b		Enters the prefix `"_`
+  
+  <leader>p		Replace selected without save into register
+
+
+--------------------------------------------------------------------------------
+GOOD TO REMEMBER                                         *myhelp-good-to-remember*
+
+  =			Format selected text
+  ==			Format current Line
+  gi			Insert text in the previous position
+
+  zz			Redraw and put current line at center of window
+  zt			Redraw and put current line at top of window
+  zb			Redraw and put current line at bottom of window
+
+  gU			Make uppercase after move
+  CTRL-F		Make the word before the cursor upercase in insert mode
+  gUU, gUgU		Make current line uppercase
+
+  g?			Rot13 encode
+
+  <leader>dl		Open Netrw Directory Listing
+
+  gf			Open the file whose name is under the cursor
+  gx			Open the URL whose is under the cursor
+  gv			Reselect visual area
+
+  @@			Repeat last macro
+
+  zy			yank without trailing spaces
+  +			Go to the line above in the first no-blank character
+  -			Go to the line below in the first no-blank character
+
+  af			Select a function
+
+
+
+  <Leader>w		Toggle text wrap
+
+  <leader>p		Replace selected without yank
+
+
+--------------------------------------------------------------------------------
+ENCRIPT                                                           *myhelp-encript*
+
+  Works only in `Vim`. It was been removed from `Neovim` :(
+
+
+  :X			Prompt for an encryption key.
+			The file will remain unchanged until you write it.  
+
+
+  -x			Use encryption to read/write files.  Will prompt for a 
+			key, where all writes will then use to encrypt the text.  
+			It is not needed when reading a file, because there is 
+			a check if the file has been encrypted, and Vim asks
+			for a key automatically. |encryption|
+
+
+
+To disable the encryption: ~
+
+    Reset the 'key' option to an empty value: >
+	:set key=
+. 
+    Or type `:X` and Enter for an empty 'key':
+
+
+
+--------------------------------------------------------------------------------
+ZIP                                                                   *myhelp-zip*
+
+
+
+
+--------------------------------------------------------------------------------
+vim:tw=78:ts=8:ft=help:norl:
