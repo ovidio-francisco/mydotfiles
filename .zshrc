@@ -2,7 +2,7 @@
 CASE_SENSITIVE="true"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
-export EDITOR="vim"
+export EDITOR="nvim"
 export MANPAGER='less -s -M +Gg'
 
 export COMMANDS="~/Storage/.scripts/i3"
@@ -18,7 +18,7 @@ export PATH="/snap/bin:$PATH"
 alias term='echo -e "Term = $TERM"'
 alias so='source ~/.zshrc'
 
-alias rm='echo "don'"'"'t use this shit! - try trash"'
+alias rm='echo "Don''t use this shit! Try trash instead."'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias ll='ls -gohX --group-directories-first'
