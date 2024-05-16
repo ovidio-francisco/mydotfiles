@@ -73,6 +73,7 @@ call vundle#begin()
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
 	Plugin 'fxn/vim-monochrome'
+	Plugin 'ntk148v/komau.vim'
 call vundle#end()
 
 endif
@@ -141,6 +142,15 @@ let g:netrw_list_hide='^\.[^\.\/].*$' " Makes netrw start hidding the dotfiles
 
 
 let g:monochrome_italic_comments = 1
+" For light version
+" set background=light
+" For dark version
+" set background=dark
+" Disable italic, enable by default
+let g:komau_italic=1
+" Disable bold, enable by default
+let g:komau_bold=1
+
 
 
 " ------------------------------------------------------------
@@ -337,10 +347,20 @@ nnoremap <F5> :call ToggleTransparentBG()<CR>
 " Set colorscheme 
 nnoremap <silent><C-F1>  :colorscheme default		\| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
 nnoremap <silent><C-F2>  :colorscheme one			\| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><C-F3>  :colorscheme gruvbox		\| hi normal ctermbg=none     \| colorscheme <cr>
+" nnoremap <silent><C-F3>  :colorscheme gruvbox		\| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F3>  :colorscheme komau		\| hi normal ctermbg=none     \| colorscheme <cr>
 nnoremap <silent><C-F4>  :colorscheme monochrome	\| hi normal ctermbg=none     \| colorscheme <cr>
 
 " lunaperche habamax   gruvbox   jellybeans ron       slate     
+
+" https://github.com/ntk148v/komau.vim
+" https://raw.githubusercontent.com/jaredgorski/Mies.vim/main/.media/full-screenshot_mies.png
+" https://github.com/robertmeta/nofrils
+" https://github.com/ryanpcmcquen/true-monochrome_vim
+" https://github.com/zaki/zazen
+" https://github.com/mcchrish/zenbones.nvim
+" https://vimcolorschemes.com/i/top/e.vim
+
 
 
 " Next/Previous colorsheme
