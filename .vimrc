@@ -335,14 +335,13 @@ nnoremap <c-c><c-c> ^D
 nnoremap <F5> :call ToggleTransparentBG()<CR>
 
 " Set colorscheme 
-nnoremap <silent><C-F1>  :colorscheme default    \| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
-nnoremap <silent><C-F2>  :colorscheme lunaperche \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><C-F3>  :colorscheme habamax    \| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><C-F4>  :colorscheme one        \| hi normal ctermbg=none     \| colorscheme <cr>
-" nnoremap <silent><S-F5>  :colorscheme gruvbox    \| hi normal ctermbg=none     \| colorscheme <cr>
-" nnoremap <silent><S-F6>  :colorscheme jellybeans \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
-" nnoremap <silent><S-F7>  :colorscheme ron        \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
-" nnoremap <silent><S-F8>  :colorscheme slate      \| hi normal ctermbg=none     \| hi LineNr ctermbg=none \| colorscheme <cr>
+nnoremap <silent><C-F1>  :colorscheme default		\| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
+nnoremap <silent><C-F2>  :colorscheme one			\| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F3>  :colorscheme gruvbox		\| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F4>  :colorscheme monochrome	\| hi normal ctermbg=none     \| colorscheme <cr>
+
+" lunaperche habamax   gruvbox   jellybeans ron       slate     
+
 
 " Next/Previous colorsheme
 " TODO
