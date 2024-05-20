@@ -279,6 +279,14 @@ nnoremap <silent><F4>      :Goyo<CR>
 " =========================
 
 
+
+nnoremap <c-cr> :call EvalCurrentLine()<CR>
+
+" echo $(( 1 + 2 + 3 + 4 + 5 + 6 + 7 ))
+" 1 + 2 + 3 + 4 + 5 + 6 + 7
+
+
+
 " Move tabs
 nnoremap <c-F5> :tabmove-<cr>
 nnoremap <c-F6> :tabmove+<cr>
@@ -506,8 +514,29 @@ nnoremap <Leader><Leader>. yypVr.k
 " ------------------------ FUNCTIONS -------------------------
 " ------------------------------------------------------------
 
-" function AdjustVerticalMovementToRelativeNumbers()
-"
+
+function! EvalCurrentLine()
+  
+  let lnum = line('.')
+ 
+  let line = getline(lnum)
+
+  if line =~ '^echo \$((.*))'
+
+    let cmd = line
+  else
+
+    let cmd = 'echo $((' . line . '))'
+  endif
+
+  let result = system(cmd)
+
+  let result = substitute(result, '\n$', '', '')
+
+  call setline(lnum, result)
+endfunction
+
+
 
 function! CopyFullPath()
 	let @+ = expand('%:p')

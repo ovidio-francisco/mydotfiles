@@ -275,6 +275,10 @@ BLACK HOLE                                                     *myhelp-black-hol
 --------------------------------------------------------------------------------
 GOOD TO REMEMBER                                         *myhelp-good-to-remember*
 
+  %			Find the next item `([{}])` in this line after or under the
+			cursor and jump to its match.
+ 
+
   =			Format selected text
   ==			Format current Line
   gi			Insert text in the previous position
@@ -308,6 +312,9 @@ GOOD TO REMEMBER                                         *myhelp-good-to-remembe
   <Leader>w		Toggle text wrap
 
   <leader>p		Replace selected without yank
+
+  ctrl-n		move downward *linewise*
+  ctrl-p		move upward *linewise*
 
 
 --------------------------------------------------------------------------------
