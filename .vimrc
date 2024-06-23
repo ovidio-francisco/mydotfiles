@@ -49,9 +49,9 @@ set rtp+=~/.vim/myhelps
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 
-let isVim       = !has('nvim')                                " [~] v
-let isNeoVim    =  has('nvim')                                " [~] vim
-let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " [~] nvim
+let isVim       = !has('nvim')                                " Just vim
+let isNeoVim    =  has('nvim')                                " Neovim with .vimrc
+let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " Neovim with Lua
 
 
 if !isNeoVimLua
@@ -72,8 +72,8 @@ call vundle#begin()
 	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
-	Plugin 'fxn/vim-monochrome'
-	Plugin 'ntk148v/komau.vim'
+	" Plugin 'fxn/vim-monochrome'
+	" Plugin 'ntk148v/komau.vim'
 call vundle#end()
 
 endif
@@ -97,6 +97,9 @@ autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md         call SetMarkdownConfig()
 autocmd BufRead,BufNewFile     *.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  .vimrc       set  relativenumber 
+autocmd BufReadPre,BufNewFile  *            set background=dark
+" autocmd BufReadPre,BufNewFile  .vimrc       colorscheme default
+
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
@@ -147,9 +150,9 @@ let g:monochrome_italic_comments = 1
 " For dark version
 " set background=dark
 " Disable italic, enable by default
-let g:komau_italic=1
+" let g:komau_italic=1
 " Disable bold, enable by default
-let g:komau_bold=1
+" let g:komau_bold=1
 
 
 
@@ -244,6 +247,13 @@ vnoremap <F1> <ESC>:q<CR>
 vnoremap <F2> <ESC>:w<cr>
 inoremap <F1> <ESC>
 inoremap <F2> <ESC>:w<cr>
+
+
+" Autosave
+nnoremap <silent>g3 :call AutoSaveToggle()<cr>
+nnoremap <silent>g# :call ShowAutoSave()<cr>
+
+command Autosave :call AutoSaveToggle()
 
 
 " Comments
@@ -515,6 +525,31 @@ nnoremap <Leader><Leader>. yypVr.k
 " ------------------------------------------------------------
 
 
+function! AutoSaveToggle()
+	if(!exists('g:autosave'))
+		let g:autosave = 1
+	endif
+
+	let g:autosave = !g:autosave
+
+	if(g:autosave) 
+		autocmd! InsertLeave,TextChanged * write 
+		echo 'autosave on'
+	else
+		autocmd! InsertLeave,TextChanged * 
+		echo 'autosave off'
+	endif
+endfunction
+
+function! ShowAutoSave()
+	if(!exists('g:autosave') || g:autosave == 0)
+		echo 'autosave is off'
+	else 
+		echo 'autosave is on'
+	endif
+endfunction
+
+
 function! EvalCurrentLine()
   
   let lnum = line('.')
@@ -668,7 +703,8 @@ endfunction
 
 function! ToggleShowWinBar()
 	if empty(&winbar)
-		set winbar=File\ \-\ %f\ %R%M
+		" set winbar=File\ \-\ %f\ %R%M
+		set winbar=[%f]\ %R%M
 	else
 		set winbar=
 	endif
