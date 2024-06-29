@@ -15,6 +15,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:$PATH"
 export PATH="/snap/bin:$PATH"
 
+alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
+
 alias term='echo -e "Term = $TERM"'
 alias so='source ~/.zshrc'
 
@@ -36,13 +38,12 @@ alias vim='XDG_CONFIG_HOME="$HOME/.config/alter_nvin" \
 		   XDG_DATA_HOME="$HOME/.config/alter_nvin" \
 		   nvim -u ~/.vimrc -O'
 
-alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 
 alias nvim='nvim -O'
 alias v='/usr/bin/vim -O'
-alias tvim='vim /tmp/tmp.txt'
-alias .vimrc='vim ~/.vimrc'
-alias .zshrc='vim ~/.zshrc'
+alias .vimrc='nvim ~/.vimrc'
+alias .zshrc='nvim ~/.zshrc'
+
 
 alias fzf='fzf --preview="cat {}"'
 alias fzfvim='vim $(fzf --preview="cat {}")'
@@ -119,6 +120,16 @@ export LS_COLORS
 
 # Colors the files and directories on tab completion
 zstyle ':completion:*' list-colors $LS_COLORS
+
+
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
+
+
+
+# 7 Amazing CLI Tools You Need To Try
+# https://www.youtube.com/watch?v=mmqDYw9C30I
 
 
 
