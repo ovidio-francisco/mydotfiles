@@ -526,14 +526,14 @@ nnoremap <Leader><Leader>. yypVr.k
 
 
 function! AutoSaveToggle()
-	if(!exists('g:autosave'))
-		let g:autosave = 1
+	if(!exists('b:autosave'))
+		let b:autosave = 0
 	endif
 
-	let g:autosave = !g:autosave
+	let b:autosave = !b:autosave
 
-	if(g:autosave) 
-		autocmd! InsertLeave,TextChanged * write 
+	if(b:autosave) 
+		autocmd! InsertLeave,TextChanged * if &ft !~ 'NvimTree' | write | endif
 		echo 'autosave on'
 	else
 		autocmd! InsertLeave,TextChanged * 
@@ -542,7 +542,7 @@ function! AutoSaveToggle()
 endfunction
 
 function! ShowAutoSave()
-	if(!exists('g:autosave') || g:autosave == 0)
+	if(!exists('b:autosave') || b:autosave == 0)
 		echo 'autosave is off'
 	else 
 		echo 'autosave is on'
