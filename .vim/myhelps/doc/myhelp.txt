@@ -348,7 +348,10 @@ To disable the encryption: ~
 ZIP                                                                   *myhelp-zip*
 
 
+--------------------------------------------------------------------------------
+Nvim-tree                                                              *nvim-tree*
 
+  a 			Create File Or Directory
 
 --------------------------------------------------------------------------------
 vim:tw=78:ts=8:ft=help:norl:
