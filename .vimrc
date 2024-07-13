@@ -44,7 +44,7 @@ set showmode                        " Show mode in status line
 set laststatus=0                    " Determines how to display a status line
 set guicursor=i:block,r:hor20       " Cursor shapes
 set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
-set rtp+=~/.vim/myhelps
+set rtp+=~/.vim/myhelps             " Add my helps to the run time path
 
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
@@ -72,6 +72,7 @@ call vundle#begin()
 	Plugin 'gruvbox-community/gruvbox'
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
+	Plugin 'crusoexia/vim-monokai'
 	" Plugin 'fxn/vim-monochrome'
 	" Plugin 'ntk148v/komau.vim'
 call vundle#end()
@@ -97,7 +98,7 @@ autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md         call SetMarkdownConfig()
 autocmd BufRead,BufNewFile     *.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  .vimrc       set  relativenumber 
-autocmd BufReadPre,BufNewFile  *            set background=dark
+autocmd BufReadPre,BufNewFile  *            set  background=dark
 " autocmd BufReadPre,BufNewFile  .vimrc       colorscheme default
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -214,7 +215,7 @@ nnoremap Y y$
 " Do nothing 
 nnoremap <c-z>    :echo 'do nothing :)'<cr>
 nnoremap g!       :echo 'wasted map'<cr>
-nnoremap g2       :echo 'wasted map'<cr>
+nnoremap g9       :echo 'wasted map'<cr>
 nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
@@ -277,7 +278,7 @@ nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <S-F3> :TagbarToggle<cr>
 
 " Open Netrw Directory Listing
-nnoremap <leader>dl :Explore<cr>
+nnoremap <leader>e :Explore<cr>
 
 
 " Goyo -- Distraction Free Writing
@@ -285,10 +286,27 @@ nnoremap <silent><F4>      :Goyo<CR>
 
 
 " =========================
+" Make some abbreviations
+" =========================
+
+iabbrev linkcss <link rel="stylesheet" href="styles.css"><esc>bbbb
+
+
+" =========================
 " Make some functionalities
 " =========================
 
 
+
+function! Box()
+
+endfunction
+
+
+" Puts the text into a box
+nnoremap gb :.!toilet -f term -F border <cr>
+vnoremap gb :.!toilet -f term -F border <cr>
+" vnoremap gb :join<CR>:<C-U>'<,'>!toilet -f term -F border<CR>
 
 nnoremap <c-cr> :call EvalCurrentLine()<CR>
 
