@@ -34,15 +34,11 @@ alias 'gitdotfiles add .'="echo don't use add . in a bare repository"
 
 
 
-alias vim='XDG_CONFIG_HOME="$HOME/.config/alter_nvin" \
-		   XDG_DATA_HOME="$HOME/.config/alter_nvin" \
-		   nvim -u ~/.vimrc -O'
-
 
 alias nvim='nvim -O'
-alias v='/usr/bin/vim -O'
-alias .vimrc='nvim ~/.vimrc'
-alias .zshrc='nvim ~/.zshrc'
+alias vim='vim -O'
+alias .vimrc='vim ~/.vimrc'
+alias .zshrc='vim ~/.zshrc'
 
 
 alias fzf='fzf --preview="cat {}"'
