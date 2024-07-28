@@ -45,6 +45,7 @@ set laststatus=0                    " Determines how to display a status line
 set guicursor=i:block,r:hor20       " Cursor shapes
 set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
 set rtp+=~/.vim/myhelps             " Add my helps to the run time path
+set rtp+=~/.vim/devhelps            " Add dev helps to the run time path
 
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
@@ -73,6 +74,7 @@ call vundle#begin()
 	Plugin 'rakr/vim-one'
 	Plugin 'nanotech/jellybeans.vim'
 	Plugin 'crusoexia/vim-monokai'
+	Plugin 'caglartoklu/borlandp.vim'
 	" Plugin 'fxn/vim-monochrome'
 	" Plugin 'ntk148v/komau.vim'
 call vundle#end()
@@ -178,18 +180,18 @@ if (isNeoVim)
 
 else
 
-	map [1;2P  <S-F1>|  map [1;5P  <c-F1>|  map [1;6P  <c-s-f1>   
-	map [1;2Q  <S-F2>|  map [1;5Q  <c-F2>|  map [1;6Q  <c-s-f2>   
-	map [1;2R  <S-F3>|  map [1;5R  <c-F3>|  map [1;6R  <c-s-f3>   
-	map [1;2S  <S-F4>|  map [1;5S  <c-F4>|  map [1;6S  <c-s-f4>   
-	map [15;2~ <S-F5>|  map [15;5~ <c-F5>|  map [15;6~ <c-s-f5>   
-	map [17;2~ <S-F6>|  map [17;5~ <c-F6>|  map [17;6~ <c-s-f6>   
-	map [18;2~ <S-F7>|  map [18;5~ <c-F7>|  map [18;6~ <c-s-f7>   
-	map [19;2~ <S-F8>|  map [19;5~ <c-F8>|  map [19;6~ <c-s-f8>   
-	map [20;2~ <S-F9>|  map [20;5~ <c-F9>|  map [20;6~ <c-s-f9>   
-	map [21;2~ <S-F10>| map [21;5~ <c-F10>| map [21;6~ <c-s-f10>  
-	map [23;2~ <S-F11>| map [23;5~ <c-F11>| map [20;6~ <c-s-f11>  
-	map [24;2~ <S-F12>| map [24;5~ <c-F12>| map [24;6~ <c-s-f12>  
+	nmap [1;2P  <S-F1>|  nmap [1;5P  <c-F1>|  nmap [1;6P  <c-s-f1>    
+	nmap [1;2Q  <S-F2>|  nmap [1;5Q  <c-F2>|  nmap [1;6Q  <c-s-f2>    
+	nmap [1;2R  <S-F3>|  nmap [1;5R  <c-F3>|  nmap [1;6R  <c-s-f3>    
+	nmap [1;2S  <S-F4>|  nmap [1;5S  <c-F4>|  nmap [1;6S  <c-s-f4>    
+	nmap [15;2~ <S-F5>|  nmap [15;5~ <c-F5>|  nmap [15;6~ <c-s-f5>    
+	nmap [17;2~ <S-F6>|  nmap [17;5~ <c-F6>|  nmap [17;6~ <c-s-f6>    
+	nmap [18;2~ <S-F7>|  nmap [18;5~ <c-F7>|  nmap [18;6~ <c-s-f7>    
+	nmap [19;2~ <S-F8>|  nmap [19;5~ <c-F8>|  nmap [19;6~ <c-s-f8>    
+	nmap [20;2~ <S-F9>|  nmap [20;5~ <c-F9>|  nmap [20;6~ <c-s-f9>    
+	nmap [21;2~ <S-F10>| nmap [21;5~ <c-F10>| nmap [21;6~ <c-s-f10>   
+	nmap [23;2~ <S-F11>| nmap [23;5~ <c-F11>| nmap [20;6~ <c-s-f11>   
+	nmap [24;2~ <S-F12>| nmap [24;5~ <c-F12>| nmap [24;6~ <c-s-f12>   
 
 endif
 
@@ -219,7 +221,6 @@ nnoremap g9       :echo 'wasted map'<cr>
 nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
-nnoremap gy       :echo 'wasted map'<cr>
 
 
 
@@ -229,9 +230,11 @@ nnoremap gy       :echo 'wasted map'<cr>
 
 " Selects the previous changed or yanked
 nnoremap gp `[v`]
+nnoremap gl `[v`]
 
 " Yank all
 nnoremap yA :%y+<cr>
+nnoremap gy :%y+<cr>
 
 " Go to older position in change list
 nnoremap <backspace> g;
@@ -292,10 +295,10 @@ nnoremap <silent><F4>      :Goyo<CR>
 iabbrev linkcss <link rel="stylesheet" href="styles.css"><esc>bbbb
 
 
+
 " =========================
 " Make some functionalities
 " =========================
-
 
 
 function! Box()
@@ -441,7 +444,12 @@ nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
 nnoremap <silent><F11> :call ToggleShowTabBar()<cr>
 
 " Show/Hide Winbar
-nnoremap <silent><F10> :call ToggleShowWinBar()<cr>
+if (isNeoVim)
+	nnoremap <silent><F10> :call ToggleShowWinBar()<cr>
+else 
+	nnoremap <silent><F10> :file<cr>
+endif
+
 
 
 " Insert line in Normal Mode
