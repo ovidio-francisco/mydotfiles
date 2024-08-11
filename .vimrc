@@ -487,7 +487,7 @@ nnoremap <Leader>-     :split<cr>
 nnoremap <Leader>n :vnew<cr>
 
 " Create an empty Window at the Bottom
-nnoremap <Leader>_ :new<cr>
+nnoremap <Leader>N :new<cr>
  
 " Change to next window
 nnoremap <s-tab> <c-w>w
@@ -539,10 +539,10 @@ vnoremap > >gv
 nnoremap <leader>= 1z=
 
 " Add a header underline
-nnoremap <Leader><Leader>= yypVr=k
-nnoremap <Leader><Leader>~ yypVr~k
-nnoremap <Leader><Leader>- yypVr-k
-nnoremap <Leader><Leader>. yypVr.k
+nnoremap <Leader>g= yypVr=k
+nnoremap <Leader>g~ yypVr~k
+nnoremap <Leader>g- yypVr-k
+nnoremap <Leader>g. yypVr.k
 
 
 
