@@ -1,3 +1,10 @@
+#                      _
+#              _______| |__  _ __ ___
+#             |_  / __| '_ \| '__/ __|
+#            _ / /\__ \ | | | | | (__
+#           (_)___|___/_| |_|_|  \___|
+
+
 
 CASE_SENSITIVE="true"
 
@@ -35,14 +42,10 @@ alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 alias 'gitdotfiles add .'="echo don't use add . in a bare repository"
 
-
-
-
 alias nvim='nvim -O'
 alias vim='vim -O'
 alias .vimrc='vim ~/.vimrc'
 alias .zshrc='vim ~/.zshrc'
-
 
 alias fzf='fzf --preview="cat {}"'
 alias fzfvim='vim $(fzf --preview="cat {}")'
@@ -55,12 +58,13 @@ alias ping='ping 8.8.8.8 -c5'
 alias o='xdg-open' 
 
 alias ..='cd ..' 
-alias ~='cd ~' 
-alias -1='cd -1' 
-alias -2='cd -2' 
-alias -3='cd -3' 
-alias -4='cd -4' 
+alias ~'cd ~' 
+alias 1='cd -1' 
+alias 2='cd -2' 
+alias 3='cd -3' 
+alias 4='cd -4' 
 alias tmp='cd /tmp'
+alias dirs='dirs -v'
 
 alias cmatrix='cmatrix -b' 
 alias hl='highlight'
@@ -102,18 +106,17 @@ tkdir() {
 }
 
 
-set -o noclobber     # avoid override existing file
+set -o noclobber     # prevents ovewriting files by redirection
 unsetopt AUTO_CD     # no auto_cd
 bindkey -r "^[[Z"    # disable the shift tab
 stty -ixon           # disable the <ctrl-s>
-
+stty -echoctl        # prevents print ^C
 
 # avoid the annoying bold slash (/) after a directory name
 zle_highlight=(region:standout special:standout suffix:none isearch:underline)
 
 
-# Changes de ls output style for some directories like the ones created on Windows.
-# See dircolors tool.  
+# Changes de ls output style for some directories like the ones created on Windows. See dircolors tool.  
 LS_COLORS='ow=38;5;166:di=01;34:';  
 export LS_COLORS
 
