@@ -40,7 +40,7 @@ alias ld='ls -A | grep "^\."'
 
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
-alias 'gitdotfiles add .'="echo don't use add . in a bare repository"
+alias 'gitdot add .'="echo don't use add . in a bare repository"
 
 alias nvim='nvim -O'
 alias vim='vim -O'
