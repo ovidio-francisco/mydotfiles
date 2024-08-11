@@ -5,6 +5,8 @@
 " -----------------------------------                                          
 
 
+
+
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
 syntax on                           " Enable syntax highlighting
 set hlsearch                        " Highlight the search matches
@@ -407,6 +409,9 @@ nnoremap <silent><C-F4>  :colorscheme monochrome	\| hi normal ctermbg=none     \
 
 " My helps
 nnoremap <S-F1> :help myhelp.txt<cr>
+command Myvim :sview ~/.vimrc
+
+
 
 " Spot the cursor
 nnoremap <F7>        :set cursorline!<CR>
@@ -479,15 +484,15 @@ nnoremap <silent>K kJ==
 nnoremap <Leader>w  :set wrap!<cr>
 
 
-" Window splits
+" Split current window Vertical/Horizontal
 nnoremap <Leader><bar> :vsplit<cr>
 nnoremap <Leader>-     :split<cr>
 
-" Create an empty Window at the Left
+" Create a new window at the Left/Botton
 nnoremap <Leader>n :vnew<cr>
+nnoremap <Leader>N :new<cr>
 
 " Create an empty Window at the Bottom
-nnoremap <Leader>N :new<cr>
  
 " Change to next window
 nnoremap <s-tab> <c-w>w
