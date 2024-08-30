@@ -24,6 +24,7 @@ export PATH="/snap/bin:$PATH"
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+alias fill-dirs="source $HOME/bin/fill-dirs-stack && dirs -v"
 
 alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 
@@ -127,8 +128,6 @@ zstyle ':completion:*' list-colors $LS_COLORS
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
-
-
 
 # 7 Amazing CLI Tools You Need To Try
 # https://www.youtube.com/watch?v=mmqDYw9C30I
