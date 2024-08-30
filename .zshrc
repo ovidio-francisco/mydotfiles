@@ -59,7 +59,7 @@ alias ping='ping 8.8.8.8 -c5'
 alias o='xdg-open' 
 
 alias ..='cd ..' 
-alias ~'cd ~' 
+alias ~='cd ~' 
 alias 1='cd -1' 
 alias 2='cd -2' 
 alias 3='cd -3' 
