@@ -77,8 +77,6 @@ call vundle#begin()
 	Plugin 'nanotech/jellybeans.vim'
 	Plugin 'crusoexia/vim-monokai'
 	Plugin 'caglartoklu/borlandp.vim'
-	" Plugin 'fxn/vim-monochrome'
-	" Plugin 'ntk148v/komau.vim'
 call vundle#end()
 
 endif
@@ -101,12 +99,19 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md         call SetMarkdownConfig()
 autocmd BufRead,BufNewFile     *.kn,*.notes call SetNotesConfig()
-autocmd BufReadPre,BufNewFile  .vimrc       set  relativenumber 
 autocmd BufReadPre,BufNewFile  *            set  background=dark
+" autocmd BufReadPre,BufNewFile  .vimrc,js,c,java       set  relativenumber 
 " autocmd BufReadPre,BufNewFile  .vimrc       colorscheme default
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
+" TODO comentar o que isso faz ...
+let g:my_filetypes = ['vimrc', 'js', 'jsx', 'c', 'java', 'py', 'html', 'css']
+
+for ft in g:my_filetypes
+    execute 'autocmd BufReadPre,BufNewFile *.' . ft . ' set relativenumber'
+endfor
 
 
 " ------------------------------------------------------------
@@ -295,6 +300,8 @@ nnoremap <silent><F4>      :Goyo<CR>
 " =========================
 
 iabbrev linkcss <link rel="stylesheet" href="styles.css"><esc>bbbb
+iabbrev link.. <link rel="stylesheet" href="styles.css"><esc>bbbb
+iabbrev html5 <!DOCTYPE html><CR><html lang="en"><CR><head><CR><meta charset="UTF-8"><CR><title></title><CR></head><CR><body><CR><CR></body><CR></html><esc>kki<tab><tab><esc>
 
 
 
