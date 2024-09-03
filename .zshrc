@@ -74,6 +74,10 @@ alias confi3='vim ~/.config/i3/config'
 alias confblocks='vim ~/.config/i3blocks/config'
 
 
+if [ -f ~/.alias.zsh ]; then
+	source ~/.alias.zsh
+fi
+
 # export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
 export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
