@@ -48,6 +48,7 @@ set guicursor=i:block,r:hor20       " Cursor shapes
 set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
 set rtp+=~/.vim/myhelps             " Add my helps to the run time path
 set rtp+=~/.vim/devhelps            " Add dev helps to the run time path
+" set rtp+=~/.vim/spell          for neovim, but doesn't works  
 
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
@@ -172,18 +173,12 @@ let g:monochrome_italic_comments = 1
 
 if (isNeoVim)
 
-	map <F13> <S-F1>|  map <F25> <c-F1>|  map <F37> <c-s-f1>
-	map <F14> <S-F2>|  map <F26> <c-F2>|  map <F38> <c-s-f2>
-	map <F15> <S-F3>|  map <F27> <c-F3>|  map <F39> <c-s-f3>
-	map <F16> <S-F4>|  map <F28> <c-F4>|  map <F40> <c-s-f4>
-	map <F17> <S-F5>|  map <F29> <c-F5>|  map <F41> <c-s-f5>
-	map <F18> <S-F6>|  map <F30> <c-F6>|  map <F42> <c-s-f6>
-	map <F19> <S-F7>|  map <F31> <c-F7>|  map <F43> <c-s-f7>
-	map <F20> <S-F8>|  map <F32> <c-F8>|  map <F44> <c-s-f8>
-	map <F21> <S-F9>|  map <F33> <c-F9>|  map <F45> <c-s-f9>
-	map <F22> <S-F10>| map <F34> <c-F10>| map <F46> <c-s-f10>
-	map <F23> <S-F11>| map <F35> <c-F11>| map <F47> <c-s-f11>
-	map <F24> <S-F12>| map <F36> <c-F12>| map <F48> <c-s-f12>
+	map <F13> <S-F1>|   map <F14> <S-F2>|   map <F15> <S-F3>|   map <F16> <S-F4> |   map <F17> <S-F5>|    map <F18> <S-F6>|
+	map <F19> <S-F7>|   map <F20> <S-F8>|   map <F21> <S-F9>|   map <F22> <S-F10>|   map <F23> <S-F11>|   map <F24> <S-F12>|
+	map <F25> <c-F1>|   map <F26> <c-F2>|   map <F27> <c-F3>|   map <F28> <c-F4>|    map <F29> <c-F5>|    map <F30> <c-F6>|
+	map <F31> <c-F7>|   map <F32> <c-F8>|   map <F33> <c-F9>|   map <F34> <c-F10>|   map <F35> <c-F11>|   map <F36> <c-F12>|
+	map <F37> <c-s-f1>| map <F38> <c-s-f2>| map <F39> <c-s-f3>| map <F40> <c-s-f4>|  map <F41> <c-s-f5>|  map <F42> <c-s-f6>|
+	map <F43> <c-s-f7>| map <F44> <c-s-f8>| map <F45> <c-s-f9>| map <F46> <c-s-f10>| map <F47> <c-s-f11>| map <F48> <c-s-f12>|
 
 else
 
@@ -201,6 +196,24 @@ else
 	nmap [24;2~ <S-F12>| nmap [24;5~ <c-F12>| nmap [24;6~ <c-s-f12>   
 
 endif
+
+
+inoremap <F1> <esc>|  inoremap <F2> <esc>|  inoremap <F3> <esc>|  inoremap <F4> <esc>|
+inoremap <F5> <esc>|  inoremap <F6> <esc>|  inoremap <F7> <esc>|  inoremap <F8> <esc>|
+inoremap <F9> <esc>|  inoremap <F10> <esc>| inoremap <F11> <esc>| inoremap <F12> <esc>|
+inoremap <F13> <esc>| inoremap <F14> <esc>| inoremap <F15> <esc>| inoremap <F16> <esc>|
+inoremap <F17> <esc>| inoremap <F18> <esc>| inoremap <F19> <esc>| inoremap <F20> <esc>|
+inoremap <F21> <esc>| inoremap <F22> <esc>| inoremap <F23> <esc>| inoremap <F24> <esc>|
+
+vnoremap <F1> <esc>|  vnoremap <F2> <esc>|  vnoremap <F3> <esc>|  vnoremap <F4> <esc>|
+vnoremap <F5> <esc>|  vnoremap <F6> <esc>|  vnoremap <F7> <esc>|  vnoremap <F8> <esc>|
+vnoremap <F9> <esc>|  vnoremap <F10> <esc>| vnoremap <F11> <esc>| vnoremap <F12> <esc>|
+vnoremap <F13> <esc>| vnoremap <F14> <esc>| vnoremap <F15> <esc>| vnoremap <F16> <esc>|
+vnoremap <F17> <esc>| vnoremap <F18> <esc>| vnoremap <F19> <esc>| vnoremap <F20> <esc>|
+vnoremap <F21> <esc>| vnoremap <F22> <esc>| vnoremap <F23> <esc>| vnoremap <F24> <esc>|
+
+
+
 
 
 " =========================
@@ -256,7 +269,6 @@ nnoremap <F1> :q<CR>
 nnoremap <F2> :w<CR>:echo ''<cr>
 vnoremap <F1> <ESC>:q<CR>
 vnoremap <F2> <ESC>:w<cr>
-inoremap <F1> <ESC>
 inoremap <F2> <ESC>:w<cr>
 
 
