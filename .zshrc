@@ -105,6 +105,11 @@ READNULLCMD=cat
 
 
 mkcd() {
+	if [ -z "$1" ]; then
+		echo "Please provide the directory name or its path\n"
+		return 1
+	fi 
+
 	mkdir -p "$1" && cd "$1"
 
 	retVal=$?
