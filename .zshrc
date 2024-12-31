@@ -58,6 +58,9 @@ alias ping='ping 8.8.8.8 -c5'
 
 alias o='xdg-open' 
 
+
+alias mkjd=mkcd    # Make and jump into a directory
+
 alias ..='cd ..' 
 alias ~='cd ~' 
 alias 1='cd -1' 
@@ -101,8 +104,8 @@ NULLCMD=:
 READNULLCMD=cat
 
 
-tkdir() {
-	mkdir "$1" && cd "$1"
+mkcd() {
+	mkdir -p "$1" && cd "$1"
 
 	retVal=$?
 	if [ $retVal -ne 0 ]; then
