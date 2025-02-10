@@ -66,7 +66,8 @@ call vundle#begin()
 	Plugin 'junegunn/goyo.vim'
 	Plugin 'tpope/vim-surround'
 	Plugin 'preservim/tagbar'
-	Plugin 'scrooloose/nerdcommenter' 
+	" Plugin 'scrooloose/nerdcommenter' 
+	Plugin 'preservim/nerdcommenter' 
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'lervag/vimtex'
 	Plugin 'dkarter/bullets.vim'
@@ -280,11 +281,11 @@ command Autosave :call AutoSaveToggle()
 
 
 " Comments
-nnoremap <leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
-vnoremap <leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
-nnoremap <leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
-nnoremap <leader>A :call nerdcommenter#Comment(0,"append")<cr>
-nnoremap <leader>I :call nerdcommenter#Comment(0,"insert")<cr>i
+nnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
+vnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
+nnoremap <silent><leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
+nnoremap <silent><leader>A :call nerdcommenter#Comment(0,"append")<cr>
+nnoremap <silent><leader>I :call nerdcommenter#Comment(0,"insert")<cr>i
 
 " Window resizing
 nnoremap <s-F11> 5<c-w><
