@@ -1,0 +1,58 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "0x555555"
+blue = "0x5555FF"
+cyan = "0x55FFFF"
+green = "0x00AA00"
+magenta = "0xFF55FF"
+red = "0xFF5555"
+white = "0xFFFFFF"
+yellow = "0xFFFF55"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x0000AA"
+cyan = "0x00AAAA"
+green = "0x55FF55"
+magenta = "0xAA00AA"
+red = "0xAA0000"
+white = "0xAAAAAA"
+yellow = "0xAA5500"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xd8d8d8"
+
+[cursor]
+blink_interval = 410
+
+[cursor.style]
+shape = "Block"
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "Fantasquesansmono"
+style = "Bold"
+
+[font.italic]
+family = "Fantasquesansmono"
+style = "Italic"
+
+[font.normal]
+family = "Fantasquesansmono"
+style = "Light"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "none"
+opacity = 0.9
+
+[window.dimensions]
+columns = 110
+lines = 35
