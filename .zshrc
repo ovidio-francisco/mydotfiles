@@ -62,6 +62,8 @@ alias o='xdg-open'
 
 
 alias mkjd=mkcd    # Make and jump into a directory
+alias mj=mkcd
+alias mkdirj=mkcd
 
 alias ..='cd ..' 
 alias ~='cd ~' 
