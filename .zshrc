@@ -24,10 +24,8 @@ export PATH="/snap/bin:$PATH"
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
-up=$(which uptime)
-alias uptime='echo "$($up -p) since $($up -s)"'
 
-
+alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
 alias fill-dirs="source $HOME/bin/fill-dirs-stack && dirs -v"
 
 alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
