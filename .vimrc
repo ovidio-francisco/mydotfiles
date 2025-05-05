@@ -58,6 +58,9 @@ let isNeoVim    =  has('nvim')                                " Neovim with .vim
 let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " Neovim with Lua
 
 
+
+
+
 if !isNeoVimLua
 
 call vundle#begin() 
@@ -250,7 +253,7 @@ nnoremap <C-Up>   :echo 'wasted map'<cr>
 " =========================
 
 " Selects the previous changed or yanked
-nnoremap gp `[v`]
+" nnoremap gp `[v`]
 nnoremap gl `[v`]
 
 " Yank all
@@ -274,8 +277,8 @@ inoremap <F2> <ESC>:w<cr>
 
 
 " Autosave
-nnoremap <silent>g3 :call AutoSaveToggle()<cr>
-nnoremap <silent>g# :call ShowAutoSave()<cr>
+nnoremap <silent>g!3 :call AutoSaveToggle()<cr>
+nnoremap <silent>g!# :call ShowAutoSave()<cr>
 
 command Autosave :call AutoSaveToggle()
 
