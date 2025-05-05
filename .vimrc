@@ -240,7 +240,6 @@ nnoremap Y y$
 
 " Do nothing 
 nnoremap <c-z>    :echo 'do nothing :)'<cr>
-nnoremap g!       :echo 'wasted map'<cr>
 nnoremap g9       :echo 'wasted map'<cr>
 nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
@@ -259,6 +258,9 @@ nnoremap gl `[v`]
 " Yank all
 nnoremap yA :%y+<cr>
 nnoremap gy :%y+<cr>
+
+" Delete all to blackhole
+nnoremap g!! gg"_dG
 
 " Go to older position in change list
 nnoremap <backspace> g;
