@@ -61,9 +61,12 @@ alias ping='ping 8.8.8.8 -c5'
 alias o='xdg-open' 
 
 
-alias mkjd=mkcd    # Make and jump into a directory
+# Make and jump into a directory
+alias m=mkcd
 alias mj=mkcd
+alias mkjd=mkcd    
 alias mkdirj=mkcd
+
 
 alias ..='cd ..' 
 alias ~='cd ~' 
