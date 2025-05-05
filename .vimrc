@@ -328,6 +328,9 @@ iabbrev html5 <!DOCTYPE html><CR><html lang="en"><CR><head><CR><meta charset="UT
 " =========================
 
 
+command! RemoveCtrlMs %s/\r//g
+
+
 function! Box()
 
 endfunction
