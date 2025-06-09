@@ -37,6 +37,8 @@ export PATH="/snap/bin:$PATH"
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+
+alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
 alias fill-dirs="source $HOME/bin/fill-dirs-stack && dirs -v"
 
 alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
@@ -84,6 +86,8 @@ alias o='xdg-open'
 
 
 alias mkjd=mkcd    # Make and jump into a directory
+alias mj=mkcd
+alias mkdirj=mkcd
 
 alias ..='cd ..' 
 alias ~='cd ~' 
