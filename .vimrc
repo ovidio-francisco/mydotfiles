@@ -327,6 +327,8 @@ iabbrev html5 <!DOCTYPE html><CR><html lang="en"><CR><head><CR><meta charset="UT
 " Make some functionalities
 " =========================
 
+" Delete all text
+nnoremap dat ggdG
 
 command! RemoveCtrlMs %s/\r//g
 
