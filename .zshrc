@@ -6,6 +6,19 @@
 #
 
 
+
+OS="$(uname -s)"
+
+case "$OS" in 
+	Linux*) IS_LINUX=true; IS_MAC=false ;;
+	Darwin*) IS_LINUX=false; IS_MAC=true ;;
+	*) IS_LINUX=false/ IS_MAC=false ;;
+esac
+
+
+
+
+
 CASE_SENSITIVE="true"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -34,14 +47,25 @@ alias so='source ~/.zshrc'
 alias rm='echo "Don''t use this shit! Try trash instead."'
 alias mv='mv -iv'
 alias cp='cp -iv'
-alias ll='ls -gohX --group-directories-first'
-alias Ll='ls -gohXL'
-alias lh='ls -Ad .*' # list the hidden
-alias ld='ls -A | grep "^\."'
+
+if $IS_LINUX; then
+	alias ll='ls -gohX --group-directories-first'
+	alias Ll='ls -gohXL'
+	alias lh='ls -Ad .*' # list the hidden
+	alias ld='ls -A | grep "^\."'
+elif $IS_MAC; then
+	alias ll='ls -loh'
+	export PATH="/usr/local/opt/trash-cli/bin:$PATH"
+fi
+
+
 
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias gitdotadd="gitdot add -p"
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 alias 'gitdot add .'="echo don't use add . in a bare repository"
+
+
 
 alias nvim='nvim -O'
 alias vim='vim -O'
