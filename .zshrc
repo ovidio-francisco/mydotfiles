@@ -17,8 +17,6 @@ esac
 
 
 
-
-
 CASE_SENSITIVE="true"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
