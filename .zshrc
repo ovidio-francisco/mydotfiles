@@ -170,10 +170,9 @@ zstyle ':completion:*' list-colors $LS_COLORS
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
+
 # 7 Amazing CLI Tools You Need To Try
 # https://www.youtube.com/watch?v=mmqDYw9C30I
-
-
 
 #                      _
 #              _______| |__  _ __ ___
@@ -181,5 +180,4 @@ eval "$(fzf --zsh)"
 #            _ / /\__ \ | | | | | (__
 #           (_)___|___/_| |_|_|  \___|
 #
-
 

@@ -32,7 +32,7 @@ blink_interval = 410
 shape = "Block"
 
 [font]
-size = 13.0
+size = 10.0
 
 [font.bold]
 family = "Fantasquesansmono"
@@ -50,9 +50,18 @@ style = "Light"
 hide_when_typing = true
 
 [window]
+title = "Alacritty"
+dynamic_title = true
 decorations = "none"
-opacity = 0.9
+opacity = 0.85
 
 [window.dimensions]
 columns = 110
 lines = 35
+
+[window.padding]
+x = 5
+y = 5
+
+
+
