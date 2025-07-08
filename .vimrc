@@ -48,8 +48,7 @@ set guicursor=i:block,r:hor20       " Cursor shapes
 set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will search for runtime files
 set rtp+=~/.vim/myhelps             " Add my helps to the run time path
 set rtp+=~/.vim/devhelps            " Add dev helps to the run time path
-" set rtp+=~/.vim/spell          for neovim, but doesn't works  
-
+set title                           " Enables setting the terminal title
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
 
 
@@ -58,7 +57,12 @@ let isNeoVim    =  has('nvim')                                " Neovim with .vim
 let isNeoVimLua =  has('nvim') && !exists("$XDG_CONFIG_HOME") " Neovim with Lua
 
 
-
+" Sets the title
+if isVim 
+	set titlestring=%t\ \-\ VIM
+else
+	set titlestring=%t\ \-\ NVIM
+endif
 
 
 if !isNeoVimLua
