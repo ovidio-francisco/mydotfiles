@@ -32,8 +32,6 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/bin:$PATH"
 export PATH="/snap/bin:$PATH"
-# export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-# export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 # Detecta o JAVA_HOME automaticamente a partir do 'java' no PATH
 export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")"
 export PATH=$JAVA_HOME/bin:$PATH
