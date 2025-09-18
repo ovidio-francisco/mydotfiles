@@ -49,6 +49,8 @@ alias rm='echo "Don''t use this shit! Try trash instead."'
 alias mv='mv -iv'
 alias cp='cp -iv'
 
+alias t=true
+
 if $IS_LINUX; then
 	alias ll='ls -gohX --group-directories-first'
 	alias Ll='ls -gohXL'
