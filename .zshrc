@@ -51,6 +51,8 @@ alias cp='cp -iv'
 
 alias t=true
 
+alias g='. g'
+
 if $IS_LINUX; then
 	alias ll='ls -gohX --group-directories-first'
 	alias Ll='ls -gohXL'
@@ -88,9 +90,6 @@ alias o='xdg-open'
 
 # Make and jump into a directory
 alias m=mkcd
-alias mj=mkcd
-alias mkjd=mkcd    
-alias mkdirj=mkcd
 
 
 alias ..='cd ..' 
