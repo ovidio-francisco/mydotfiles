@@ -89,7 +89,7 @@ alias o='xdg-open'
 
 
 # Make and jump into a directory
-alias m=mkcd
+# alias m=mkcd
 
 
 alias ..='cd ..' 
@@ -135,7 +135,7 @@ NULLCMD=:
 READNULLCMD=cat
 
 
-mkcd() {
+m() {
 	if [ -z "$1" ]; then
 		echo "Please provide the directory name or its path\n"
 		return 1
