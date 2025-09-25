@@ -51,7 +51,6 @@ alias cp='cp -iv'
 
 alias t=true
 
-alias g='. g'
 
 if $IS_LINUX; then
 	alias ll='ls -gohX --group-directories-first'
@@ -88,18 +87,25 @@ alias ping='ping 8.8.8.8 -c5'
 alias o='xdg-open' 
 
 
-# Make and jump into a directory
-# alias m=mkcd
-
-
 alias ..='cd ..' 
 alias ~='cd ~' 
 alias 1='cd -1' 
 alias 2='cd -2' 
 alias 3='cd -3' 
 alias 4='cd -4' 
+
 alias tmp='cd /tmp'
+
+alias g='. g'
+alias g1='. g 1'
+alias g2='. g 2'
+alias g3='. g 3'
+alias g4='. g 4'
+alias g5='. g 5'
+alias g6='. g 6'
+
 alias dirs='dirs -v'
+
 
 alias cmatrix='cmatrix -b' 
 alias hl='highlight'
