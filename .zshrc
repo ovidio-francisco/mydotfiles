@@ -38,7 +38,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
-alias fill-dirs="source $HOME/bin/fill-dirs-stack && dirs -v"
 
 alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
 
