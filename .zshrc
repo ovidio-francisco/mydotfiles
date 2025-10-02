@@ -75,8 +75,6 @@ alias vim='vim -O'
 alias .vimrc='vim ~/.vimrc'
 alias .zshrc='vim ~/.zshrc'
 
-alias fzf='fzf --preview="cat {}"'
-alias fzfvim='vim $(fzf --preview="cat {}")'
 
 alias rg='urxvt -e ranger'
 
@@ -95,13 +93,24 @@ alias 4='cd -4'
 
 alias tmp='cd /tmp'
 
-alias g='. g'
-alias g1='. g 1'
-alias g2='. g 2'
-alias g3='. g 3'
-alias g4='. g 4'
-alias g5='. g 5'
-alias g6='. g 6'
+
+alias fzf='fzf --preview="cat {}"'
+alias fzfvim='vim $(fzf --preview="cat {}")'
+
+alias ff='fzf'
+alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' sh'
+alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
+alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
+
+alias g='cd $(~/bin/g)'
+alias g1='cd $(~/bin/g 1)'
+alias g2='cd $(~/bin/g 2)'
+alias g3='cd $(~/bin/g 3)'
+alias g4='cd $(~/bin/g 4)'
+alias g5='cd $(~/bin/g 5)'
+alias g6='cd $(~/bin/g 6)'
+alias g7='cd $(~/bin/g 7)'
+
 
 alias dirs='dirs -v'
 
