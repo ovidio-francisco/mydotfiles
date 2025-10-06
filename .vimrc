@@ -163,17 +163,6 @@ let g:user_emmet_leader_key='<c-c>'
 let g:netrw_list_hide='^\.[^\.\/].*$' " Makes netrw start hidding the dotfiles
 
 
-let g:monochrome_italic_comments = 1
-" For light version
-" set background=light
-" For dark version
-" set background=dark
-" Disable italic, enable by default
-" let g:komau_italic=1
-" Disable bold, enable by default
-" let g:komau_bold=1
-
-
 
 " ------------------------------------------------------------
 " ------------------------ My remaps -------------------------
@@ -347,11 +336,6 @@ nnoremap gb :.!toilet -f term -F border <cr>
 vnoremap gb :.!toilet -f term -F border <cr>
 " vnoremap gb :join<CR>:<C-U>'<,'>!toilet -f term -F border<CR>
 
-nnoremap <c-cr> :call EvalCurrentLine()<CR>
-
-" echo $(( 1 + 2 + 3 + 4 + 5 + 6 + 7 ))
-" 1 + 2 + 3 + 4 + 5 + 6 + 7
-
 
 
 " Move tabs
@@ -422,24 +406,10 @@ nnoremap <F5> :call ToggleTransparentBG()<CR>
 " Set colorscheme 
 nnoremap <silent><C-F1>  :colorscheme default		\| hi LineNr ctermfg=darkgrey \| colorscheme <cr>
 nnoremap <silent><C-F2>  :colorscheme one			\| hi normal ctermbg=none     \| colorscheme <cr>
+nnoremap <silent><C-F3>  :colorscheme komau			\| hi normal ctermbg=none     \| colorscheme <cr>
 " nnoremap <silent><C-F3>  :colorscheme gruvbox		\| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><C-F3>  :colorscheme komau		\| hi normal ctermbg=none     \| colorscheme <cr>
-nnoremap <silent><C-F4>  :colorscheme monochrome	\| hi normal ctermbg=none     \| colorscheme <cr>
-
 " lunaperche habamax   gruvbox   jellybeans ron       slate     
 
-" https://github.com/ntk148v/komau.vim
-" https://raw.githubusercontent.com/jaredgorski/Mies.vim/main/.media/full-screenshot_mies.png
-" https://github.com/robertmeta/nofrils
-" https://github.com/ryanpcmcquen/true-monochrome_vim
-" https://github.com/zaki/zazen
-" https://github.com/mcchrish/zenbones.nvim
-" https://vimcolorschemes.com/i/top/e.vim
-
-
-
-" Next/Previous colorsheme
-" TODO
 
 " My helps
 nnoremap <S-F1> :help myhelp.txt<cr>
@@ -471,10 +441,10 @@ noremap <S-F9>      :set spell!<cr>
 nnoremap <F9> :ALEToggle<cr>
 
 " Show File name and filetype
-nnoremap g1 :echo expand('%:r'). ' - ' . &filetype<cr>
+nnoremap g2 :echo expand('%:r'). ' - ' . &filetype<cr>
 
 " Copy full path to the clipboard
-nnoremap <silent>g2 :call CopyFullPath() \| echo "Full path has copied"<cr>
+nnoremap <silent>g1 :call CopyFullPath() \| echo "Full path has copied"<cr>
 
 " Show/Hide Statusbar
 nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
@@ -488,6 +458,11 @@ if (isNeoVim)
 else 
 	nnoremap <silent><F10> :file<cr>
 endif
+
+
+" Decore current line
+nnoremap g3 :call Decore()<CR>
+nnoremap g4 :call Decore(80)<CR>
 
 
 
@@ -590,6 +565,32 @@ nnoremap <Leader>g. yypVr.k
 " ------------------------------------------------------------
 
 
+function! Decore(...)
+  let l:text = getline(".")
+  let l:decorated = ' ' . l:text . ' '
+
+  " default length 40 if none passed
+  let l:total = (a:0 > 0 ? a:1 : 40)
+  let l:remaining = l:total - len(l:decorated)
+
+  if l:remaining < 0
+    " too long → truncate text to fit
+    let l:decorated = ' ' . strpart(l:text, 0, l:total - 2) . ' '
+    let l:remaining = 0
+  endif
+
+  " distribute dashes
+  let l:left = repeat('-', float2nr(l:remaining / 2))
+  let l:right = repeat('-', l:remaining - len(l:left))
+
+  call setline('.', l:left . l:decorated . l:right)
+endfunction
+
+
+
+
+
+
 function! AutoSaveToggle()
 	if(!exists('b:autosave'))
 		let b:autosave = 0
@@ -612,28 +613,6 @@ function! ShowAutoSave()
 	else 
 		echo 'autosave is on'
 	endif
-endfunction
-
-
-function! EvalCurrentLine()
-  
-  let lnum = line('.')
- 
-  let line = getline(lnum)
-
-  if line =~ '^echo \$((.*))'
-
-    let cmd = line
-  else
-
-    let cmd = 'echo $((' . line . '))'
-  endif
-
-  let result = system(cmd)
-
-  let result = substitute(result, '\n$', '', '')
-
-  call setline(lnum, result)
 endfunction
 
 
@@ -1004,17 +983,6 @@ function! SetNotesConfig()
 	syn match markdownCheckBoxX         "\[\zsx\ze\]"  
 	syn match markdownCheckBoxUndefined "\[\zs-\ze\]"  
 	syn match markdownCheckBox          "^\s*-\s*\[[\ x-]\]"        contains=markdownCheckBoxX,markdownCheckBoxUndefined
-
-
-
-
-
-
-
-
-
-
-
 
 
 	syn match dotMark       "^\zs\s*\.\ze\s*\s.*"
