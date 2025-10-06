@@ -86,10 +86,10 @@ alias o='xdg-open'
 
 alias ..='cd ..' 
 alias ~='cd ~' 
-alias 1='cd -1' 
-alias 2='cd -2' 
-alias 3='cd -3' 
-alias 4='cd -4' 
+alias -1='cd -1' 
+alias -2='cd -2' 
+alias -3='cd -3' 
+alias -4='cd -4' 
 
 alias tmp='cd /tmp'
 
@@ -102,7 +102,8 @@ alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' s
 alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
 alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
 
-alias g='cd $(~/bin/g)'
+
+g() { cd -- "$("$HOME/bin/g" "$@")" }
 alias g1='cd $(~/bin/g 1)'
 alias g2='cd $(~/bin/g 2)'
 alias g3='cd $(~/bin/g 3)'
