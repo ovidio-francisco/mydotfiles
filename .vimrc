@@ -460,31 +460,30 @@ else
 endif
 
 
-" Decore current line
-nnoremap g-1 :call Decore(20)<CR>
-nnoremap g-2 :call Decore(40)<CR>
-nnoremap g-3 :call Decore(80)<CR>
-
-nnoremap g-[1 :call Decore(20, '-', '[]')<CR>
-nnoremap g-[2 :call Decore(40, '-', '[]')<CR>
-nnoremap g-[3 :call Decore(80, '-', '[]')<CR>
-
-nnoremap g-{1 :call Decore(20, '-', '{}')<CR>
-nnoremap g-{2 :call Decore(40, '-', '{}')<CR>
-nnoremap g-{3 :call Decore(80, '-', '{}')<CR>
 
 
-nnoremap g=1 :call Decore(20, '=')<CR>
-nnoremap g=2 :call Decore(40, '=')<CR>
-nnoremap g=3 :call Decore(80, '=')<CR>
-          
-nnoremap g=[1 :call Decore(20, '=', '[]')<CR>
-nnoremap g=[2 :call Decore(40, '=', '[]')<CR>
-nnoremap g=[3 :call Decore(80, '=', '[]')<CR>
-          
-nnoremap g={1 :call Decore(20, '=', '{}')<CR>
-nnoremap g={2 :call Decore(40, '=', '{}')<CR>
-nnoremap g={3 :call Decore(80, '=', '{}')<CR>
+
+" ======= [ Decore current line ] ========
+
+" nnoremap g-1 :call Decore(20)<CR>
+" nnoremap g-[1 :call Decore(20, '-', '[]')<CR>
+
+
+" Count goes BEFORE the mapping: 40g-, 80g=, etc.
+nnoremap <silent> g- :<C-u>call DecoreSmart('-', v:count1)<CR>
+nnoremap <silent> g= :<C-u>call DecoreSmart('=', v:count1)<CR>
+
+
+" ====== Usage =======
+
+" 40g-[
+" 70g=(
+" g-<Enter, Esc>
+" 2g-<Enter, Esc>
+" 3g=(
+
+
+
 
 
 " Insert line in Normal Mode
@@ -634,6 +633,29 @@ function! Decore(...)
 
   call setline('.', l:left . l:decorated . l:right)
 endfunction
+
+
+
+function! DecoreSmart(filler, countlen) abort
+  let L = a:countlen >= 10 ? a:countlen
+        \ : a:countlen == 1 ? 20
+        \ : a:countlen == 2 ? 40
+        \ : a:countlen == 3 ? 80
+        \ : 40
+
+  let c = getchar()                " Get exactly one key
+
+  if c == 13 || c == 10 || c == 27 " CR  NL or Esc => no encloser
+	  let E = ''
+  else
+	  let ch = nr2char(c)
+	  let pairs = { '[':'[]', '{':'{}', '(':'()', '<':'<>', }
+	  let E = has_key(pairs, ch) ? pairs[ch] : (ch . ch)
+  endif
+
+  call Decore(L, a:filler, E)
+endfunction
+
 
 
 
