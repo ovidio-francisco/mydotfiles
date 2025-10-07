@@ -461,9 +461,30 @@ endif
 
 
 " Decore current line
-nnoremap g3 :call Decore()<CR>
-nnoremap g4 :call Decore(80)<CR>
+nnoremap g-1 :call Decore(20)<CR>
+nnoremap g-2 :call Decore(40)<CR>
+nnoremap g-3 :call Decore(80)<CR>
 
+nnoremap g-[1 :call Decore(20, '-', '[]')<CR>
+nnoremap g-[2 :call Decore(40, '-', '[]')<CR>
+nnoremap g-[3 :call Decore(80, '-', '[]')<CR>
+
+nnoremap g-{1 :call Decore(20, '-', '{}')<CR>
+nnoremap g-{2 :call Decore(40, '-', '{}')<CR>
+nnoremap g-{3 :call Decore(80, '-', '{}')<CR>
+
+
+nnoremap g=1 :call Decore(20, '=')<CR>
+nnoremap g=2 :call Decore(40, '=')<CR>
+nnoremap g=3 :call Decore(80, '=')<CR>
+          
+nnoremap g=[1 :call Decore(20, '=', '[]')<CR>
+nnoremap g=[2 :call Decore(40, '=', '[]')<CR>
+nnoremap g=[3 :call Decore(80, '=', '[]')<CR>
+          
+nnoremap g={1 :call Decore(20, '=', '{}')<CR>
+nnoremap g={2 :call Decore(40, '=', '{}')<CR>
+nnoremap g={3 :call Decore(80, '=', '{}')<CR>
 
 
 " Insert line in Normal Mode
@@ -566,22 +587,50 @@ nnoremap <Leader>g. yypVr.k
 
 
 function! Decore(...)
-  let l:text = getline(".")
-  let l:decorated = ' ' . l:text . ' '
+  let l:text  = getline('.')
+  let l:total = (a:0 >= 1 ? a:1 : 40)
 
-  " default length 40 if none passed
-  let l:total = (a:0 > 0 ? a:1 : 40)
-  let l:remaining = l:total - len(l:decorated)
+  let l:filler = (a:0 >= 2 ? a:2 : '-') " default '-'
 
-  if l:remaining < 0
-    " too long → truncate text to fit
-    let l:decorated = ' ' . strpart(l:text, 0, l:total - 2) . ' '
-    let l:remaining = 0
+  " Optional enclosers
+  let l:l_enclose = ''
+  let l:r_enclose = ''
+  if a:0 >= 3 && type(a:3) == v:t_string && a:3 !=# ''
+    let l:enc    = a:3
+    let l:nchars = strchars(l:enc)
+    if l:nchars >= 2
+      let l:l_enclose = strcharpart(l:enc, 0, 1)
+      let l:r_enclose = strcharpart(l:enc, l:nchars - 1, 1)
+    else
+      let l:l_enclose = l:enc
+      let l:r_enclose = l:enc
+    endif
   endif
 
-  " distribute dashes
-  let l:left = repeat('-', float2nr(l:remaining / 2))
-  let l:right = repeat('-', l:remaining - len(l:left))
+  " Case: empty line → just filler
+  if empty(l:text)
+    call setline('.', repeat(l:filler, l:total))
+    return
+  endif
+
+  " Build decorated text
+  let l:has_enclose = (l:l_enclose !=# '' || l:r_enclose !=# '')
+  if l:has_enclose
+    let l:decorated = ' ' . l:l_enclose . ' ' . l:text . ' ' . l:r_enclose . ' '
+  else
+    let l:decorated = ' ' . l:text . ' '
+  endif
+
+  let l:remaining = l:total - len(l:decorated)
+
+  if l:remaining < 2
+    echo "Line too long for " . l:total . " chars"
+    return
+  endif
+
+  " Distribute filler evenly
+  let l:left  = repeat(l:filler, float2nr(l:remaining / 2))
+  let l:right = repeat(l:filler, l:remaining - len(l:left))
 
   call setline('.', l:left . l:decorated . l:right)
 endfunction
