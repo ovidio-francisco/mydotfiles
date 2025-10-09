@@ -326,11 +326,6 @@ nnoremap dat ggdG
 command! RemoveCtrlMs %s/\r//g
 
 
-
-
-
-
-
 " ======= [ Decore current line ] ========
 
 " Count goes BEFORE the mapping: 40g-, 80g=, etc.
@@ -511,11 +506,6 @@ nnoremap <Leader>w  :set wrap!<cr>
 nnoremap <Leader><bar> :vsplit<cr>
 nnoremap <Leader>-     :split<cr>
 
-" Create a new window at the Left/Botton
-nnoremap <Leader>n :vnew<cr>
-nnoremap <Leader>N :new<cr>
-
-" Create an empty Window at the Bottom
  
 " Change to next window
 nnoremap <s-tab> <c-w>w
@@ -706,9 +696,6 @@ endfunction
 
 " :Box [style] [minwidth or width=NN] [inner align] [outer align] [screen=NN]
 command! -range -nargs=? Box <line1>,<line2>call <SID>BoxCmd(<line1>, <line2>, <q-args>)
-
-
-
 
 
 
@@ -1542,8 +1529,4 @@ endif        " End of Status Bar for Vim
 " | It is often used as the last activation function of a neural network to normalize the 
 " | output of a network to a probability distribution over predicted output classes. — 
 " | Wikipedia [link]
-
-
-" Get the file path
-
 
