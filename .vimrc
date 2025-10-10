@@ -310,10 +310,6 @@ nnoremap <silent><F4>      :Goyo<CR>
 " Make some abbreviations
 " =========================
 
-" iabbrev linkcss <link rel="stylesheet" href="styles.css"><esc>bbbb
-" iabbrev link.. <link rel="stylesheet" href="styles.css"><esc>bbbb
-" iabbrev html5 <!DOCTYPE html><CR><html lang="en"><CR><head><CR><meta charset="UTF-8"><CR><title></title><CR></head><CR><body><CR><CR></body><CR></html><esc>kki<tab><tab><esc>
-
 
 
 " =========================
