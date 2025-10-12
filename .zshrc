@@ -102,8 +102,6 @@ alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' s
 alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
 alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
 
-
-g() { cd -- "$("$HOME/bin/g" "$@")" }
 alias g1='cd $(~/bin/g 1)'
 alias g2='cd $(~/bin/g 2)'
 alias g3='cd $(~/bin/g 3)'
@@ -122,10 +120,6 @@ alias hl='highlight'
 alias confi3='vim ~/.config/i3/config'
 alias confblocks='vim ~/.config/i3blocks/config'
 
-
-if [ -f ~/.alias.zsh ]; then
-	source ~/.alias.zsh
-fi
 
 # export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
@@ -148,6 +142,18 @@ export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
 
 NULLCMD=:
 READNULLCMD=cat
+
+
+g() {
+  if [[ $1 == e ]]; then
+    command "$HOME/bin/g" "$@" </dev/tty >/dev/tty 2>&1
+    return
+  fi
+
+  local dest
+  dest="$("$HOME/bin/g" "$@")" || return
+  [[ -n $dest ]] && cd -- "$dest"
+}
 
 
 m() {
