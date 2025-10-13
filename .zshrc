@@ -48,8 +48,7 @@ alias rm='echo "Don''t use this shit! Try trash instead."'
 alias mv='mv -iv'
 alias cp='cp -iv'
 
-alias t=true
-
+alias t='true && clear -x'
 
 if $IS_LINUX; then
 	alias ll='ls -gohX --group-directories-first'
@@ -102,6 +101,26 @@ alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' s
 alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
 alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
 
+
+
+# g() {
+  # if [[ $1 == e ]]; then
+    # command "$HOME/bin/g" "$@" </dev/tty >/dev/tty 2>&1
+    # return
+  # fi
+
+  # local dest
+  # dest="$("$HOME/bin/g" "$@")" || return
+  # [[ -n $dest ]] && cd -- "$dest"
+# }
+
+
+
+
+# alias g='. $HOME/bin/g'
+
+g() { cd -- "$(. "$HOME/bin/g" "$@")" }
+
 alias g1='cd $(~/bin/g 1)'
 alias g2='cd $(~/bin/g 2)'
 alias g3='cd $(~/bin/g 3)'
@@ -143,17 +162,6 @@ export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
 NULLCMD=:
 READNULLCMD=cat
 
-
-g() {
-  if [[ $1 == e ]]; then
-    command "$HOME/bin/g" "$@" </dev/tty >/dev/tty 2>&1
-    return
-  fi
-
-  local dest
-  dest="$("$HOME/bin/g" "$@")" || return
-  [[ -n $dest ]] && cd -- "$dest"
-}
 
 
 m() {
