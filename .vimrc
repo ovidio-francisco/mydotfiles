@@ -219,6 +219,8 @@ vnoremap <F21> <esc>| vnoremap <F22> <esc>| vnoremap <F23> <esc>| vnoremap <F24>
 " Changing some defaults
 " =========================
 
+
+
 " My leader
 let mapleader = ' '
 nnoremap <space> <nop>
@@ -239,6 +241,7 @@ nnoremap g9       :echo 'wasted map'<cr>
 nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
+nnoremap <c-m>    :echo 'wasted map'<cr>
 
 
 
@@ -322,6 +325,34 @@ nnoremap <silent><F4>      :Goyo<CR>
 nnoremap dat ggdG
 
 command! RemoveCtrlMs %s/\r//g
+
+
+
+
+
+
+" function! LoremCmd(...) abort
+  " " Defaults: :Lorem -> 1 paragraph, 5 sentences
+  " let p = 1
+  " let s = 5
+
+  " " :Lorem 4 -> 1 paragraph, 4 sentences
+  " " :Lorem 3 7 -> 3 paragraphs, 7 sentences
+  " if a:0 == 1
+    " let s = max([1, str2nr(a:1)])
+  " elseif a:0 >= 2
+    " let p = max([1, str2nr(a:1)])
+    " let s = max([1, str2nr(a:2)])
+  " endif
+
+  " let cmd = 'my($p,$s)=@ARGV; my $l=Text::Lorem->new; my @paras; for(1..$p){ my $x=$l->sentences($s); $x =~ s/\s*\R+\s*/ /g; push @paras,$x } print join("\n\n",@paras),qq(\n);'
+  " execute 'r !perl -MText::Lorem -e ' . shellescape(cmd) . ' ' . p . ' ' . s
+" endfunction
+
+" command! -nargs=* Lorem call LoremCmd(<f-args>)
+
+
+
 
 
 " ======= [ Decore current line ] ========
