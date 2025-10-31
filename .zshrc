@@ -37,6 +37,10 @@ export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
+
+alias top=btop
+alias d=dysk
+
 alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
 
 alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE%'
