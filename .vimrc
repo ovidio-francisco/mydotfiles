@@ -321,37 +321,22 @@ nnoremap <silent><F4>      :Goyo<CR>
 " Make some functionalities
 " =========================
 
+
+
+" Group lines with no blanks
+command! -range=% RemoveBlankLines <line1>,<line2>keeppatterns g/^\s*$/d
+xnoremap <silent> <leader>J :<C-u>'<,'>RemoveBlankLines<CR>
+
+" Usage
+" Whole file - :RemoveBlankLines
+" Selection visually select, then :'<,'>RemoveBlankLines
+
+
+
 " Delete all text
 nnoremap dat ggdG
 
 command! RemoveCtrlMs %s/\r//g
-
-
-
-
-
-
-" function! LoremCmd(...) abort
-  " " Defaults: :Lorem -> 1 paragraph, 5 sentences
-  " let p = 1
-  " let s = 5
-
-  " " :Lorem 4 -> 1 paragraph, 4 sentences
-  " " :Lorem 3 7 -> 3 paragraphs, 7 sentences
-  " if a:0 == 1
-    " let s = max([1, str2nr(a:1)])
-  " elseif a:0 >= 2
-    " let p = max([1, str2nr(a:1)])
-    " let s = max([1, str2nr(a:2)])
-  " endif
-
-  " let cmd = 'my($p,$s)=@ARGV; my $l=Text::Lorem->new; my @paras; for(1..$p){ my $x=$l->sentences($s); $x =~ s/\s*\R+\s*/ /g; push @paras,$x } print join("\n\n",@paras),qq(\n);'
-  " execute 'r !perl -MText::Lorem -e ' . shellescape(cmd) . ' ' . p . ' ' . s
-" endfunction
-
-" command! -nargs=* Lorem call LoremCmd(<f-args>)
-
-
 
 
 
@@ -372,13 +357,6 @@ nnoremap <silent> g= :<C-u>call textdecor#decore#DecoreSmart('=', v:count1)<CR>
 
 " nnoremap g-1 :call Decore(20)<CR>
 " nnoremap g-[1 :call Decore(20, '-', '[]')<CR>
-
-
-
-" Banner / ASCII Art
-" nnoremap gb :.!toilet -f term -F<cr>
-" vnoremap gb :.!toilet -f term -F<cr>
-" vnoremap gb :join<CR>:<C-U>'<,'>!toilet -f term -F border<CR>
 
 
 
