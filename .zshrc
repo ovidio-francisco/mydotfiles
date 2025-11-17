@@ -54,6 +54,7 @@ alias cp='cp -iv'
 
 alias t='true && clear -x'
 
+
 if $IS_LINUX; then
 	alias ll='ls -gohX --group-directories-first'
 	alias Ll='ls -gohXL'
@@ -142,6 +143,24 @@ alias hl='highlight'
 
 alias confi3='vim ~/.config/i3/config'
 alias confblocks='vim ~/.config/i3blocks/config'
+
+
+
+
+# --------------- widgets ----------------
+
+clear_widget() {
+	BUFFER="true && clear -x"
+	CURSOR=$#BUFFER
+	zle accept-line
+}
+zle -N clear_widget
+
+bindkey -M emacs "^[n" clear_widget
+
+
+
+
 
 
 # export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
