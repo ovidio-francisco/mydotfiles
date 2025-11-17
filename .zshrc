@@ -153,12 +153,14 @@ clear_widget() {
 	BUFFER="true && clear -x"
 	CURSOR=$#BUFFER
 	zle accept-line
+	# zle clear-screen
 }
 zle -N clear_widget
 
 bindkey -M emacs "^[n" clear_widget
 
 
+# zle clear-screen   # like Ctrl+L
 
 
 
