@@ -160,10 +160,6 @@ zle -N clear_widget
 bindkey -M emacs "^[n" clear_widget
 
 
-# zle clear-screen   # like Ctrl+L
-
-
-
 
 # export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
