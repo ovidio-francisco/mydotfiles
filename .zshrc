@@ -74,6 +74,8 @@ alias 'gitdot add .'="echo don't use add . in a bare repository"
 
 
 
+alias n='nvim -O'
+alias v='vim -O'
 alias nvim='nvim -O'
 alias vim='vim -O'
 alias .vimrc='vim ~/.vimrc'
