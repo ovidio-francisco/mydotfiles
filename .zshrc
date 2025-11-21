@@ -7,6 +7,9 @@
 
 
 
+
+# ----------- [ Some configs ] -----------
+
 OS="$(uname -s)"
 
 case "$OS" in 
@@ -16,8 +19,23 @@ case "$OS" in
 esac
 
 
-
 CASE_SENSITIVE="true"
+NULLCMD=:
+READNULLCMD=cat
+
+set -o noclobber     # prevents ovewriting files by redirection
+unsetopt AUTO_CD     # no auto_cd
+bindkey -r "^[[Z"    # disable the shift tab
+stty -ixon           # disable the <ctrl-s>
+stty -echoctl        # prevents print ^C
+
+# avoid the annoying bold slash (/) after a directory name
+zle_highlight=(region:standout special:standout suffix:none isearch:underline)
+
+
+
+
+# ------------- [ Exports ] --------------
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export EDITOR="nvim"
@@ -37,6 +55,43 @@ export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)                 # green
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6)                 # cyan
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 7; tput setab 4)   # yellow on blue
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)      # white
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+export GROFF_NO_SGR=1                            # For Konsole and Gnome-terminal
+# export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+
+
+# Changes de ls output style for some directories 
+# like the ones created on Windows. See dircolors tool.  
+export LS_COLORS='ow=38;5;166:di=01;34:';  
+
+
+
+
+# ------------- [ Aliases ] --------------
+
+
+if $IS_LINUX; then
+	alias ll='ls -gohX --group-directories-first'
+	alias Ll='ls -gohXL'
+	alias lh='ls -Ad .*' # list the hidden
+	alias ld='ls -A | grep "^\."'
+elif $IS_MAC; then
+	alias ll='ls -loh'
+	export PATH="/usr/local/opt/trash-cli/bin:$PATH"
+fi
+
 
 alias top=btop
 alias d=dysk
@@ -55,23 +110,10 @@ alias cp='cp -iv'
 alias t='true && clear -x'
 
 
-if $IS_LINUX; then
-	alias ll='ls -gohX --group-directories-first'
-	alias Ll='ls -gohXL'
-	alias lh='ls -Ad .*' # list the hidden
-	alias ld='ls -A | grep "^\."'
-elif $IS_MAC; then
-	alias ll='ls -loh'
-	export PATH="/usr/local/opt/trash-cli/bin:$PATH"
-fi
-
-
-
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias gitdotadd="gitdot add -p"
 alias giti3='/usr/bin/git --git-dir=$HOME/.i3setup/ --work-tree=$HOME/.config'
 alias 'gitdot add .'="echo don't use add . in a bare repository"
-
 
 
 alias n='nvim -O'
@@ -81,14 +123,12 @@ alias vim='vim -O'
 alias .vimrc='vim ~/.vimrc'
 alias .zshrc='vim ~/.zshrc'
 
-
 alias rg='urxvt -e ranger'
 
 alias grep='grep --color=auto -i'
 alias ping='ping 8.8.8.8 -c5'
 
 alias o='xdg-open' 
-
 
 alias ..='cd ..' 
 alias ~='cd ~' 
@@ -99,7 +139,6 @@ alias -4='cd -4'
 
 alias tmp='cd /tmp'
 
-
 alias fzf='fzf --preview="cat {}"'
 alias fzfvim='vim $(fzf --preview="cat {}")'
 
@@ -108,25 +147,6 @@ alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' s
 alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
 alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
 
-
-
-# g() {
-  # if [[ $1 == e ]]; then
-    # command "$HOME/bin/g" "$@" </dev/tty >/dev/tty 2>&1
-    # return
-  # fi
-
-  # local dest
-  # dest="$("$HOME/bin/g" "$@")" || return
-  # [[ -n $dest ]] && cd -- "$dest"
-# }
-
-
-
-
-# alias g='. $HOME/bin/g'
-
-g() { cd -- "$(. "$HOME/bin/g" "$@")" }
 
 alias g1='cd $(~/bin/g 1)'
 alias g2='cd $(~/bin/g 2)'
@@ -147,45 +167,9 @@ alias confi3='vim ~/.config/i3/config'
 alias confblocks='vim ~/.config/i3blocks/config'
 
 
+# ------------ [ functions ] -------------
 
-
-# --------------- widgets ----------------
-
-clear_widget() {
-	BUFFER="true && clear -x"
-	CURSOR=$#BUFFER
-	zle accept-line
-	# zle clear-screen
-}
-zle -N clear_widget
-
-bindkey -M emacs "^[n" clear_widget
-
-
-
-# export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
-export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
-export LESS_TERMCAP_me=$(tput sgr0)
-export LESS_TERMCAP_so=$(tput bold; tput setaf 7; tput setab 4) # yellow on blue
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
-export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-export LESS_TERMCAP_mr=$(tput rev)
-export LESS_TERMCAP_mh=$(tput dim)
-export LESS_TERMCAP_ZN=$(tput ssubm)
-export LESS_TERMCAP_ZV=$(tput rsubm)
-export LESS_TERMCAP_ZO=$(tput ssupm)
-export LESS_TERMCAP_ZW=$(tput rsupm)
-export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
-
-
-
-
-NULLCMD=:
-READNULLCMD=cat
-
-
+g() { cd -- "$(. "$HOME/bin/g" "$@")" }
 
 m() {
 	if [ -z "$1" ]; then
@@ -202,19 +186,25 @@ m() {
 }
 
 
-set -o noclobber     # prevents ovewriting files by redirection
-unsetopt AUTO_CD     # no auto_cd
-bindkey -r "^[[Z"    # disable the shift tab
-stty -ixon           # disable the <ctrl-s>
-stty -echoctl        # prevents print ^C
 
-# avoid the annoying bold slash (/) after a directory name
-zle_highlight=(region:standout special:standout suffix:none isearch:underline)
+# --------------- widgets ----------------
+
+clear_widget() {
+	BUFFER="true && clear -x"
+	CURSOR=$#BUFFER
+	zle accept-line
+	# zle clear-screen
+}
+zle -N clear_widget
+
+bindkey -M emacs "^[n" clear_widget
 
 
-# Changes de ls output style for some directories like the ones created on Windows. See dircolors tool.  
-LS_COLORS='ow=38;5;166:di=01;34:';  
-export LS_COLORS
+
+
+# -------------- [ Inits ] ---------------
+
+
 
 # Colors the files and directories on tab completion
 zstyle ':completion:*' list-colors $LS_COLORS
