@@ -94,7 +94,7 @@ fi
 
 
 alias top=btop
-alias d=dysk
+alias d="dysk '-c label+type+size+used+free+use+free_percent+mount'"
 
 alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
 
