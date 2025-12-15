@@ -96,7 +96,7 @@ fi
 alias top=btop
 alias d="dysk '-c label+type+size+used+free+use+free_percent+mount'"
 alias uptime='echo "$(command uptime -p) since $(command uptime -s)"'
-alias lsblk='lsblk -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE% --filter "SIZE > 1G"'
+alias lsblk='lsblk -T -o NAME,MOUNTPOINT,LABEL,SIZE,fsused,FSUSE% --filter "SIZE > 1G"'
 alias term='echo -e "Term = $TERM"'
 alias so='source ~/.zshrc'
 alias rm='echo "Don''t use this shit! Try trash instead."'
