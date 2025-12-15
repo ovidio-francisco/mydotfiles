@@ -161,6 +161,10 @@ alias hl='highlight'
 alias confi3='vim ~/.config/i3/config'
 alias confblocks='vim ~/.config/i3blocks/config'
 
+alias last-commit='git --no-pager log -1 --oneline'
+alias gitlog-1='git --no-pager log -1 --oneline'
+
+
 
 # ------------ [ functions ] -------------
 
