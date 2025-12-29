@@ -129,6 +129,12 @@ endfor
 " ------------------ CONFIGURE SOME PLUGINS ------------------
 " ------------------------------------------------------------
 
+
+" Bullets
+let g:bullets_renumber_on_change = 0      " Do not restart the list when itens have a black line between
+let g:bullets_checkbox_markers = ' .oOx'
+
+
 " LaTeX
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_complete_close_braces = 1
