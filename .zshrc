@@ -189,7 +189,8 @@ m() {
 # --------------- widgets ----------------
 
 clear_widget() {
-	BUFFER="true && clear -x"
+	# BUFFER="true && clear -x"
+	BUFFER="clear -x"
 	CURSOR=$#BUFFER
 	zle accept-line
 	# zle clear-screen
