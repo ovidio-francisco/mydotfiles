@@ -238,6 +238,11 @@ nnoremap k gk
 
 nnoremap Y y$
 
+nnoremap <leader>q q
+nnoremap q :q<CR>
+nnoremap QQ ZQ
+
+
 
 " ----- WASTED MAPS -----
 
