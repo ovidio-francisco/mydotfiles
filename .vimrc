@@ -253,7 +253,7 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
-nnoremap <tab>    :echo 'wasted map'<cr>
+" nnoremap <tab>    :echo 'wasted map'<cr>
 
 
 
@@ -296,6 +296,8 @@ command Autosave :call AutoSaveToggle()
 
 
 " Comments
+nnoremap <silent><tab>     :call nerdcommenter#Comment(0,"toggle")<cr>
+vnoremap <silent><tab>     :call nerdcommenter#Comment(0,"toggle")<cr>
 nnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
 vnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
 nnoremap <silent><leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
