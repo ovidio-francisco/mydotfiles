@@ -253,6 +253,7 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
+nnoremap <tab>    :echo 'wasted map'<cr>
 
 
 
