@@ -1,0 +1,6 @@
+#!/bin/sh
+calcurseQ
+echo
+echo "Press any key to close…"
+read _
+

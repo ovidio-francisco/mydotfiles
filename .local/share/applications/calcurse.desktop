@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Calcurse
+Comment=Terminal calendar and scheduler
+Exec=launch-calcurse calcurse
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;
+Keywords=calendar;agenda;todo;
+StartupNotify=true
+
+

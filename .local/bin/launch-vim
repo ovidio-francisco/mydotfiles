@@ -1,0 +1,5 @@
+#!/bin/sh
+exec alacritty \
+	--config-file "$HOME/.config/alacritty/vim.toml" \
+	-e vim
+

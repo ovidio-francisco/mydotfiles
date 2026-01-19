@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Ranger
+Comment=Best File Manager
+Exec=launch-ranger
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;
+Keywords=ranger;file;mananger
+StartupNotify=true

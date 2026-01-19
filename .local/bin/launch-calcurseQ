@@ -1,0 +1,4 @@
+#!/bin/sh
+exec alacritty \
+  --config-file "$HOME/.config/alacritty/calcurse.toml" \
+  -e "$@"

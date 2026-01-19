@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Agenda
+Comment=Calcurse agenda (365 days)
+Exec=launch-calcurse agenda-view
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;
+Keywords=calendar;agenda;calcurse;
+StartupNotify=true

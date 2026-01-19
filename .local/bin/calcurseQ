@@ -1,0 +1,8 @@
+#!/bin/sh
+echo
+calcurse -Q \
+  --filter-type cal \
+  --format-event " • %m\n" \
+  --output-datefmt "%d/%m/%Y" \
+  --days=365
+echo

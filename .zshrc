@@ -165,7 +165,8 @@ alias last-commit='git --no-pager log -1 --oneline'
 alias gitlog-1='git --no-pager log -1 --oneline'
 
 
-alias calcurseQ='echo && calcurse -Q --filter-type cal  --format-event " • %m\n" --output-datefmt "%d/%m/%Y" --days=365 && echo'
+# alias calcurseQ='echo && calcurse -Q --filter-type cal  --format-event " • %m\n" --output-datefmt "%d/%m/%Y" --days=365 && echo'
+alias agenda='~/.local/bin/calcurseQ'
 
 
 

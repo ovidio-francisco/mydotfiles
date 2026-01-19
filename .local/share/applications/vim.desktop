@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Vim
+Comment=Best editor
+Exec=launch-vim
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;
+Keywords=vim;text;editor;code
+StartupNotify=true
