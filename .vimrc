@@ -287,6 +287,7 @@ nnoremap <F2> :w<CR>:echo ''<cr>
 vnoremap <F1> <ESC>:q<CR>
 vnoremap <F2> <ESC>:w<cr>
 inoremap <F2> <ESC>:w<cr>
+nnoremap gs   :w<CR>:echo ''<cr>
 
 
 " Autosave
