@@ -65,6 +65,7 @@ else
 endif
 
 
+
 if !isNeoVimLua
 
 call vundle#begin() 
@@ -97,6 +98,15 @@ call vundle#begin()
 call vundle#end()
 
 endif
+
+
+
+
+
+
+
+
+
 
 
 " ------------------------------------------------------------
@@ -145,6 +155,16 @@ let g:bullets_checkbox_markers = ' .oOx'
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_complete_close_braces = 1
 let g:tex_flavor = 'latex'
+
+let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_compiler_latexmk = {
+	  \ 'out_dir' : 'build',
+	  \}
+
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_quickfix_open_on_error = 0
+
+
 
 
 " NERDTree
