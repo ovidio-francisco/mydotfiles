@@ -123,7 +123,9 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 
 
 " Execute automatically on {event} for a file matching
-autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
+"
+" autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
+autocmd Syntax tex call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md         call SetMarkdownConfig()
 autocmd BufRead,BufNewFile     *.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  *            set  background=dark
@@ -151,18 +153,28 @@ let g:bullets_renumber_on_change = 0      " Do not restart the list when itens h
 let g:bullets_checkbox_markers = ' .oOx'
 
 
-" LaTeX
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:vimtex_complete_close_braces = 1
+
+
+
+" LaTeX (VimTeX)
 let g:tex_flavor = 'latex'
 
 let g:vimtex_compiler_method = 'latexmk'
+
 let g:vimtex_compiler_latexmk = {
-	  \ 'out_dir' : 'build',
-	  \}
+      \ 'out_dir'  : 'build',
+      \ 'callback' : 0,
+      \}
 
 let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_quickfix_open_on_error = 0
+let g:vimtex_quickfix_open_on_error   = 0
+
+let g:vimtex_quickfix_enabled = 0
+
+
+
+
+
 
 
 
@@ -791,16 +803,13 @@ endfunction
 
 
 function! SetTexConfig() 
-	set filetype=tex  
+	" set filetype=tex  
 
 	let w:myshowbreak='       '
 	let &showbreak=w:myshowbreak
 	set cpoptions+=n
 
 	let w:slb = 0
-	" call ToggleShowBreaks()
-
-	" let g:text_comment_nospell=1
 	set spell
 
 	let g:NERDTreeIgnore = ['\.aux$']
@@ -813,8 +822,23 @@ function! SetTexConfig()
 	hi VimtexTocSec1 ctermfg=gray cterm=none
 	hi VimtexTocSec2 ctermfg=darkgray cterm=none
 
-endfunction
 
+	syn match TexCmdSlash         /\\/                    contained
+	syn match TexSection          /\\section/             contained containedin=ALLBUT,texComment,texCommentLine contains=TexCmdSlash
+	syn match TexSubsection       /\\subsection/          contained containedin=ALLBUT,texComment,texCommentLine contains=TexCmdSlash
+	syn match TexSubsubsection    /\\subsubsection/       contained containedin=ALLBUT,texComment,texCommentLine contains=TexCmdSlash
+	syn match TexSubsubsubsection /\\subsubsubsection/    contained containedin=ALLBUT,texComment,texCommentLine contains=TexCmdSlash
+
+
+	hi TexCmdSlash         cterm=bold ctermfg=red
+	hi TexSection          cterm=bold ctermfg=lightblue
+	hi TexSubsection       cterm=bold ctermfg=67
+	hi TexSubsubsection    cterm=bold ctermfg=110
+	hi TexSubsubsubsection cterm=bold ctermfg=208
+	" hi TexSubsection       cterm=bold ctermfg=208
+
+
+endfunction
 
 
 function! CheckTheBox()
@@ -924,7 +948,7 @@ endfunction
 
 
 
-"      - ̗̀ AGORA SIM!  ̖́-
+"      - ̗̀ AGORA SIM! ̖́-
 
 function! SetNotesConfig()
 	set filetype=notes  
