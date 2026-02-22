@@ -123,14 +123,12 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 
 
 " Execute automatically on {event} for a file matching
-"
+
 " autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd Syntax tex call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md            call SetMarkdownConfig()
 autocmd BufRead,BufNewFile     *.n,.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  *               set  background=dark
-" autocmd BufReadPre,BufNewFile  .vimrc,js,c,java       set  relativenumber 
-" autocmd BufReadPre,BufNewFile  .vimrc       colorscheme default
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -293,6 +291,8 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
+nnoremap <c-p>    :echo 'wasted map'<cr>
+nnoremap <c-n>    :echo 'wasted map'<cr>
 
 
 
