@@ -138,6 +138,8 @@ alias fzf='fzf --preview="cat {}"'
 alias fzfvim='vim $(fzf --preview="cat {}")'
 
 alias ff='fzf'
+alias fcat='fzf -m --print0 | xargs -0 -r sh -c '\''for f; do printf "cat %s\n\n" "$f"; cat -- "$f"; done < /dev/tty'\'' sh'
+alias fbat='fzf -m --print0 | xargs -0 -r sh -c '\''for f; do printf "bat %s\n\n" "$f"; bat -- "$f"; done < /dev/tty'\'' sh'
 alias fvim='fzf -m --print0 | xargs -0 -r sh -c '\''vim -- "$@" < /dev/tty'\'' sh'
 alias fnvim='fzf -m --print0 | xargs -0 -r sh -c '\''nvim -- "$@" < /dev/tty'\'' sh'
 alias fcd='fzf -m --print0 --walker=dir | xargs -0 -r sh -c '\''cd -- "$@" < /dev/tty'\'' sh'
