@@ -24,7 +24,7 @@ set ttimeout ttimeoutlen=20         " Quickly time out on key codes
 set notimeout                       " Never time out on mappings
 set showmatch                       " Briefly jumps to the matching bracket when it is inserted
 set matchtime=2                     " How briefly is the matching jump
-set mouse=a                         " Enable the mouse for all modes
+set mouse=nv                        " Enable mouse for normal and visual modes
 set linebreak                       " Break at word boundary
 set display=truncate                " If last line can't fit, put an @ at line number and show as much as possible
 set formatoptions=qro               " How to autoformat texts. Run :verb set formatopitions 
