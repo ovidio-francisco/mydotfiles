@@ -115,8 +115,9 @@ endif
 
 
 " Execute automatically when the user doesn't press a key for the time
-autocmd CursorHold * checktime                " Check if the file was loaded outside vim
-autocmd CursorHold * echo ''
+autocmd CursorHold  * checktime         " Check if the file was loaded outside vim
+autocmd CursorHoldI * stopinsert        " If in insert mode, back to normal mode
+autocmd CursorHold  * echo ''           
 
 " F1 to exit on Netrw
 autocmd filetype netrw nmap <buffer> <f1> :q<CR>
