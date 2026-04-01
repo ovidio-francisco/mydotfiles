@@ -465,10 +465,10 @@ vnoremap af Va{V
 
 
 " Move lines
-nnoremap <C-j>      :m .+1 <CR>==
-nnoremap <C-k>      :m .-2 <CR>==
-vnoremap <C-j>      :m '>+1<CR>gv=gv
-vnoremap <C-k>      :m '<-2<CR>gv=gv
+nnoremap <silent><C-j> :m .+1 <CR>==:echo "1↓"<cr>
+nnoremap <silent><C-k> :m .-2 <CR>==:echo "1↑"<cr>
+vnoremap <silent><C-j> :m '>+1<CR>gv=gv
+vnoremap <silent><C-k> :m '<-2<CR>gv=gv
 
 " Duplicate current line
 nnoremap <c-l> :t.<CR>
