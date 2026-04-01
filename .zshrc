@@ -170,10 +170,11 @@ alias gitlog-1='git --no-pager log -1 --oneline'
 
 
 # alias calcurseQ='echo && calcurse -Q --filter-type cal  --format-event " • %m\n" --output-datefmt "%d/%m/%Y" --days=365 && echo'
-alias agenda='~/.local/bin/calcurseQ'
+alias agenda='~/.local/bin/calcurseQ | hi'
 
 alias path='realpath'
 
+alias cal='ncal -C'
 
 
 # ------------ [ functions ] -------------
@@ -194,7 +195,9 @@ m() {
 	fi
 }
 
-
+hi() {
+  sed -E "s/($1)/\x1b[1;31m\1\x1b[0m/gI"
+}
 
 # --------------- widgets ----------------
 
@@ -234,4 +237,5 @@ eval "$(fzf --zsh)"
 #            _ / /\__ \ | | | | | (__
 #           (_)___|___/_| |_|_|  \___|
 #
+
 
