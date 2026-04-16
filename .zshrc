@@ -124,7 +124,7 @@ alias rg='urxvt -e ranger'
 alias grep='grep --color=auto -i'
 alias ping='ping 8.8.8.8 -c5'
 
-alias o='xdg-open' 
+# alias o='xdg-open' 
 
 alias ..='cd ..' 
 alias ~='cd ~' 
@@ -178,6 +178,13 @@ alias cal='ncal -C'
 
 
 # ------------ [ functions ] -------------
+
+o() {
+  for f in "$@"; do
+    setsid -f xdg-open "$f" >/dev/null 2>&1
+  done
+}
+
 
 g() { cd -- "$(. "$HOME/bin/g" "$@")" }
 
