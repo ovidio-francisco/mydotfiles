@@ -183,7 +183,7 @@ alias cal='ncal -C'
 
 o() {
   for f in "$@"; do
-    setsid -f xdg-open "$f" >/dev/null 2>&1
+    setsid -f xdg-open "$f" >/dev/null # 2>&1
   done
 }
 
