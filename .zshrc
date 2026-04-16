@@ -153,6 +153,8 @@ alias g4='cd $(~/bin/g 4)'
 alias g5='cd $(~/bin/g 5)'
 alias g6='cd $(~/bin/g 6)'
 alias g7='cd $(~/bin/g 7)'
+alias g8='cd $(~/bin/g 8)'
+alias g9='cd $(~/bin/g 9)'
 
 
 alias dirs='dirs -v'
