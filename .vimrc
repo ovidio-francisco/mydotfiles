@@ -1,10 +1,8 @@
-"------------------------------------             __   _ _ _ __ ___  _ __ ___  
+"------------------------------------             __   _ _ _ __ ___  _ __ ___ 
 " Author:      Ovídio José Francisco              \ \ / / | '_ ` _ \| '__/ __| 
 " Description: My vim dotfile                     _\ V /| | | | | | | | | (__  
 " Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| 
 " -----------------------------------                                          
-
-
 
 
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
@@ -49,7 +47,9 @@ set rtp+=~/.vim/bundle/Vundle.vim   " Sets the run time path, where vim will sea
 set rtp+=~/.vim/myhelps             " Add my helps to the run time path
 set rtp+=~/.vim/devhelps            " Add dev helps to the run time path
 set title                           " Enables setting the terminal title
+set updatetime=1000                 " How many miliseconds to wait in some events
 set rulerformat=%30(%R%M%=%-13.(%l,%v%)\ %P%)
+
 
 
 let isVim       = !has('nvim')                                " Just vim
@@ -63,6 +63,8 @@ if isVim
 else
 	set titlestring=%t\ \-\ NVIM
 endif
+
+
 
 
 
@@ -105,6 +107,15 @@ endif
 
 
 
+" ------------------------------------------------------------
+" ----------------------- MY VARIABLES -----------------------
+" ------------------------------------------------------------
+
+let g:save_updatetime = &updatetime
+let g:insert_idle_timeout=12000
+
+
+
 
 
 
@@ -115,9 +126,12 @@ endif
 
 
 " Execute automatically when the user doesn't press a key for the time
-autocmd CursorHold  * checktime         " Check if the file was loaded outside vim
-" autocmd CursorHoldI * stopinsert        " If in insert mode, back to normal mode
+autocmd CursorHold  * checktime               " Check if the file was loaded outside vim
+autocmd CursorHoldI * stopinsert              " If in insert mode, back to normal mode
+autocmd InsertEnter * call EnterInsert()
+autocmd InsertLeave * call EnterNormal()
 autocmd CursorHold  * echo ''           
+
 
 " F1 to exit on Netrw
 autocmd filetype netrw nmap <buffer> <f1> :q<CR>
@@ -135,11 +149,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 " TODO comentar o que isso faz ...
-let g:my_filetypes = ['vimrc', 'js', 'jsx', 'c', 'java', 'py', 'html', 'css']
-
-for ft in g:my_filetypes
-    execute 'autocmd BufReadPre,BufNewFile *.' . ft . ' set relativenumber'
+for ft in ['vimrc', 'js', 'jsx', 'c', 'java', 'py', 'html', 'css']
+	execute 'autocmd BufReadPre,BufNewFile *.' . ft . ' set relativenumber'
 endfor
+
+
+
 
 
 " ------------------------------------------------------------
@@ -632,6 +647,20 @@ nnoremap <Leader>g. yypVr.k
 " ------------------------------------------------------------
 " ------------------------ FUNCTIONS -------------------------
 " ------------------------------------------------------------
+
+
+function! EnterInsert()
+
+	let &updatetime=g:insert_idle_timeout
+
+endfunction
+
+function! EnterNormal()
+
+	
+	let &updatetime=g:save_updatetime
+
+endfunction
 
 
 function! AutoSaveToggle()
