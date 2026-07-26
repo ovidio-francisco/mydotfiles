@@ -28,6 +28,10 @@ foreground = "0xd8d8d8"
 [cursor]
 blink_interval = 410
 
+
+
+
+
 [cursor.style]
 shape = "Block"
 
@@ -62,6 +66,18 @@ lines = 52
 [window.padding]
 x = 5
 y = 5
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

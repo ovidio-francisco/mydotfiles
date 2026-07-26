@@ -178,8 +178,15 @@ alias path='realpath'
 
 alias cal='ncal -C'
 
+alias clip='wl-copy'
+
+
 
 # ------------ [ functions ] -------------
+
+js() {
+	javac 
+}
 
 o() {
   for f in "$@"; do
