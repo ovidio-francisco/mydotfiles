@@ -72,7 +72,7 @@ if !isNeoVimLua
 
 call vundle#begin() 
 	Plugin 'ovidio-francisco/vim-textdecor'
-	Plugin 'vim-statusbar-config'
+	Plugin 'ovidio-francisco/vim-statusbar-config'
 
 	Plugin 'VundleVim/Vundle.vim'
 	Plugin 'itchyny/lightline.vim'
@@ -93,15 +93,9 @@ call vundle#begin()
 	Plugin 'crusoexia/vim-monokai'
 	Plugin 'caglartoklu/borlandp.vim'
 
-
-	set rtp+=/home/gwon/Storage/Projetos/vim-statusbar-config
-
-
 call vundle#end()
 
 endif
-
-
 
 
 
@@ -113,9 +107,6 @@ endif
 
 let g:save_updatetime = &updatetime
 let g:insert_idle_timeout=12000
-
-
-
 
 
 
