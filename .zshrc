@@ -178,8 +178,6 @@ alias path='realpath'
 
 alias cal='ncal -C'
 
-alias copy='wl-copy'
-
 alias sizeof='du -sh'
 
 
