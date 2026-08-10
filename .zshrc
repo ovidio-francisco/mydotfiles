@@ -178,8 +178,9 @@ alias path='realpath'
 
 alias cal='ncal -C'
 
-alias clip='wl-copy'
+alias copy='wl-copy'
 
+alias sizeof='du -sh'
 
 
 # ------------ [ functions ] -------------
