@@ -25,7 +25,6 @@ READNULLCMD=cat
 
 set -o noclobber     # prevents ovewriting files by redirection
 unsetopt AUTO_CD     # no auto_cd
-bindkey -r "^[[Z"    # disable the shift tab
 stty -ixon           # disable the <ctrl-s>
 stty -echoctl        # prevents print ^C
 
@@ -218,6 +217,7 @@ m() {
 	fi
 }
 
+
 # hi() {
   # sed -E "s/($1)/\x1b[1;31m\1\x1b[0m/gI"
 # }
@@ -235,6 +235,31 @@ zle -N clear_widget
 
 bindkey -M emacs "^[n" clear_widget
 
+
+
+# --------------- Fixies ----------------
+
+# Removes Shift+tab when there is no command before,
+# but keep is as reverse menu complete
+
+shift_tab_complete() {
+    # Do nothing on an empty line
+    if [[ -z "${BUFFER//[[:space:]]/}" ]]; then
+        return
+    fi
+
+    zle reverse-menu-complete
+}
+
+zle -N shift_tab_complete
+
+# Normal command-line mode
+bindkey '^[[Z' shift_tab_complete
+
+# While the completion menu is visible,
+# use the REAL zsh widget directly.
+zmodload -i zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 
 
@@ -262,3 +287,4 @@ eval "$(fzf --zsh)"
 #
 
 
+# bindkey -r "^[[Z"    # disable the shift tab
