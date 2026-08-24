@@ -95,6 +95,8 @@ call vundle#begin()
 
 call vundle#end()
 
+
+
 endif
 
 
@@ -143,8 +145,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 for ft in ['vimrc', 'js', 'jsx', 'c', 'java', 'py', 'html', 'css']
 	execute 'autocmd BufReadPre,BufNewFile *.' . ft . ' set relativenumber'
 endfor
-
-
 
 
 
@@ -767,7 +767,8 @@ endfunction
 
 function! ToggleShowStatusBar()
 
-	if &laststatus > 0 
+	" TODO: criar um flag para isso so executar 1 vez
+	if &laststatus == 0 
 		call vim_statusbar_config#config()
 	endif
 
@@ -1256,4 +1257,6 @@ hi def link htmlTag	htmlEndTag
 " | It is often used as the last activation function of a neural network to normalize the 
 " | output of a network to a probability distribution over predicted output classes. — 
 " | Wikipedia [link]
+
+
 
