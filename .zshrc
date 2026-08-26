@@ -288,3 +288,18 @@ eval "$(fzf --zsh)"
 
 
 # bindkey -r "^[[Z"    # disable the shift tab
+
+
+
+
+
+vx() {
+    command vim "$@"
+    local st=$?
+
+    if (( st == 99 )); then
+        exit
+    fi
+
+    return $st
+}

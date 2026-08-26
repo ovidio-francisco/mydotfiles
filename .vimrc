@@ -335,7 +335,7 @@ vnoremap <F2> <ESC>:w<cr>
 inoremap <F2> <ESC>:w<cr>
 nnoremap gs   :w<CR>:echo ''<cr>
 
-nnoremap <leader>QX cquit 99<cr>
+nnoremap <leader>QX :cquit 99<cr>
 
 
 " Autosave
