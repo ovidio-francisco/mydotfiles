@@ -7,6 +7,7 @@
 
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
 syntax on                           " Enable syntax highlighting
+" syntax spell notoplevel
 set hlsearch                        " Highlight the search matches
 set incsearch                       " Show search matches while typing
 set ignorecase                      " Ignore case in a pattern
@@ -334,6 +335,8 @@ vnoremap <F2> <ESC>:w<cr>
 inoremap <F2> <ESC>:w<cr>
 nnoremap gs   :w<CR>:echo ''<cr>
 
+nnoremap <leader>QX cquit 99<cr>
+
 
 " Autosave
 nnoremap <silent>g!3 :call AutoSaveToggle()<cr>
@@ -608,6 +611,7 @@ nnoremap <del> "_
 nnoremap <leader>b "_
 vnoremap <leader>d "_d
 nnoremap <leader>x "_x
+nnoremap <leader>X "_X
 nnoremap <leader>s "_s
 nnoremap <leader>dd "_dd
 nnoremap <leader>D "_D
@@ -1258,5 +1262,21 @@ hi def link htmlTag	htmlEndTag
 " | output of a network to a probability distribution over predicted output classes. — 
 " | Wikipedia [link]
 
+
+" syntax region MyString start=+"+ skip=+\\"+ end=+"+ contains=@Spell
+" highlight link MyString String
+
+syntax spell notoplevel
+
+augroup spell_strings
+    autocmd!
+    autocmd Syntax * syntax spell notoplevel
+    autocmd Syntax * syntax match StringSpell
+                \ /\<[[:alpha:]][[:alpha:]'-]*\>/
+                \ contained
+                \ containedin=.*String.*
+                \ contains=@Spell
+                \ transparent
+augroup END
 
 
