@@ -7,7 +7,7 @@
 
 filetype indent plugin on           " Detect filetype, indent and load plugins for specific file types
 syntax on                           " Enable syntax highlighting
-" syntax spell notoplevel
+syntax spell notoplevel
 set hlsearch                        " Highlight the search matches
 set incsearch                       " Show search matches while typing
 set ignorecase                      " Ignore case in a pattern
@@ -1263,10 +1263,6 @@ hi def link htmlTag	htmlEndTag
 " | Wikipedia [link]
 
 
-" syntax region MyString start=+"+ skip=+\\"+ end=+"+ contains=@Spell
-" highlight link MyString String
-
-syntax spell notoplevel
 
 augroup spell_strings
     autocmd!
