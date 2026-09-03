@@ -137,7 +137,7 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 " autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd Syntax tex call SetTexConfig()
 autocmd BufRead,BufNewFile     *.md            call SetMarkdownConfig()
-autocmd BufRead,BufNewFile     *.n,.kn,*.notes call SetNotesConfig()
+" autocmd BufRead,BufNewFile     *.n,.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  *               set  background=dark
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
