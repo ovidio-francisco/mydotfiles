@@ -117,6 +117,10 @@ alias nvim='nvim -O'
 alias vim='vim -O'
 alias .vimrc='vim ~/.vimrc'
 alias .zshrc='vim ~/.zshrc'
+alias .i3='vim ~/.config/i3/config'
+alias .sway='vim ~/.config/sway/config'
+alias .blocks='vim ~/.config/i3blocks/config'
+
 
 alias rg='urxvt -e ranger'
 
@@ -161,9 +165,6 @@ alias dirs='dirs -v'
 
 alias cmatrix='cmatrix -b' 
 alias hl='highlight'
-
-alias confi3='vim ~/.config/i3/config'
-alias confblocks='vim ~/.config/i3blocks/config'
 
 alias gs='git status'
 alias last-commit='git --no-pager log -1 --oneline'
@@ -292,14 +293,3 @@ eval "$(fzf --zsh)"
 
 
 
-
-vx() {
-    command vim "$@"
-    local st=$?
-
-    if (( st == 99 )); then
-        exit
-    fi
-
-    return $st
-}

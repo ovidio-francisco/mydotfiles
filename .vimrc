@@ -1038,12 +1038,46 @@ function! SetNotesConfig()
 	syn match bolditalicDelimiter  "\/\*" contained
 	syn match strikDelimiter       "\~"   contained
 
+	" syn region notesBoldContent matchgroup=boldDelimiter start="\*\*" end="\*\*" keepend
 
-	syn region notesBoldContent        start="\*\w" end="\w\*" 			keepend contains=boldDelimiter
-	syn region notesItalicContent      start="\^\w" end="\w\^" 			keepend contains=italicDelimiter 
-	syn region underlineItalicContent  start="__\w"  end="\w__" 		keepend contains=underlineDelimiter 
-	syn region notesItalicBoldContent  start="\*\/\w" end="\w\/\*" 		keepend contains=bolditalicDelimiter 
-	syn region notesStrikeContent      start="\~\w" end="\w\~" 			keepend contains=strikDelimiter
+	" syn region notesBoldContent        start="\*\w" end="\w\*" 			keepend contains=boldDelimiter
+	" syn region notesItalicContent      start="\^\w" end="\w\^" 			keepend contains=italicDelimiter 
+	" syn region underlineItalicContent  start="__\w"  end="\w__" 		keepend contains=underlineDelimiter 
+	" syn region notesItalicBoldContent  start="\*\/\w" end="\w\/\*" 		keepend contains=bolditalicDelimiter 
+	" syn region notesStrikeContent      start="\~\w" end="\w\~" 			keepend contains=strikDelimiter
+
+
+	syn region notesBoldContent
+				\ matchgroup=boldDelimiter
+				\ start="\*\*"
+				\ end="\*\*"
+				\ keepend
+				\ contains=notesQuoted
+
+	syn region notesItalicContent
+				\ start="\^\w"
+				\ end="\w\^"
+				\ keepend
+				\ contains=italicDelimiter 
+
+	syn region underlineItalicContent
+				\ start="__\w"
+				\ end="\w__"
+				\ keepend
+				\ contains=underlineDelimiter 
+
+	syn region notesItalicBoldContent
+				\ start="\*\/\w"
+				\ end="\w\/\*"
+				\ keepend
+				\ contains=bolditalicDelimiter 
+
+	syn region notesStrikeContent
+				\ start="\~\w"
+				\ end="\w\~"
+				\ keepend
+				\ contains=strikDelimiter
+
 
 
 	syn match markdownRightArrow "-\{2,}>\|=\{2,}>"
