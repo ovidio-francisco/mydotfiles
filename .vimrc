@@ -154,6 +154,14 @@ endfor
 " ------------------ CONFIGURE SOME PLUGINS ------------------
 " ------------------------------------------------------------
 
+let g:lightline = {
+			\ 'enable': {
+			\   'statusline': 0,
+			\   'tabline': 0,
+			\ },
+			\ }
+
+
 
 " Bullets
 let g:bullets_renumber_on_change = 0      " Do not restart the list when itens have a black line between
@@ -300,8 +308,6 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
-nnoremap <c-p>    :echo 'wasted map'<cr>
-nnoremap <c-n>    :echo 'wasted map'<cr>
 
 
 
@@ -434,11 +440,12 @@ nnoremap <c-F6> :tabmove+<cr>
 " Circle tabs
 nnoremap <c-F7> gT
 nnoremap <c-F8> gt
+nnoremap <c-p>  gT
+nnoremap <c-n>  gt
+nnoremap [<tab> gT
+nnoremap ]<tab> gt
 
 
-" Place each buffer in its own tab
-nnoremap <c-s-f11> :tab      sball \| tabfirst<cr>
-nnoremap <c-s-f10> :vertical sball <cr>
 
 
 " Source selected lines
@@ -538,8 +545,21 @@ nnoremap g2 :echo expand('%:r'). ' - ' . &filetype<cr>
 " Show/Hide Statusbar
 nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
 
+
+
+
 " Show/Hide Tabsbar
 nnoremap <silent><F11> :call ToggleShowTabBar()<cr>
+
+
+" Place each buffer in its own tab
+nnoremap <c-s-f10> :vertical sball <cr>
+
+if isVim
+	" The plugin has a guard to avoid multiples loads
+	nnoremap <c-s-f11> :call vim_statusbar_config#config() \| tab sball \| tabfirst<cr>  
+endif
+
 
 " Show/Hide Winbar
 if (isNeoVim)
@@ -772,10 +792,7 @@ endfunction
 
 function! ToggleShowStatusBar()
 
-	" TODO: criar um flag para isso so executar 1 vez
-	if &laststatus == 0 
-		call vim_statusbar_config#config()
-	endif
+	call vim_statusbar_config#config() " The plugin has a guard to avoid multiples loads
 
 
 	if &laststatus == 0
@@ -801,6 +818,8 @@ endfunction
 
 function! ToggleShowTabBar()
 
+	call vim_statusbar_config#config() " The plugin has a guard to avoid multiples loads
+	
 	if &showtabline == 0
 		set showtabline=1
 		echo "tabline=1 → if more than 1 tab pages"
