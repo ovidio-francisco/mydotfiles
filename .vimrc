@@ -1,4 +1,4 @@
-"------------------------------------             __   _ _ _ __ ___  _ __ ___ 
+" ------------------------------------            __   _ _ _ __ ___  _ __ ___ 
 " Author:      Ovídio José Francisco              \ \ / / | '_ ` _ \| '__/ __| 
 " Description: My vim dotfile                     _\ V /| | | | | | | | | (__  
 " Created:     July, 2017                        (_)\_/ |_|_| |_| |_|_|  \___| 
@@ -143,11 +143,15 @@ autocmd BufReadPre,BufNewFile  *               set  background=dark
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" TODO comentar o que isso faz ...
+" Sets relative numbers to some filetypes used in programming 
 for ft in ['vimrc', 'js', 'jsx', 'c', 'java', 'py', 'html', 'css']
 	execute 'autocmd BufReadPre,BufNewFile *.' . ft . ' set relativenumber'
 endfor
 
+
+
+autocmd FileType nerdtree nmap <silent> <buffer> l <CR>
+autocmd FileType nerdtree nmap <expr> <buffer> h get(g:NERDTreeFileNode.GetSelected(), 'isOpen', 0) ? "\<CR>" : "x"
 
 
 " ------------------------------------------------------------
@@ -185,12 +189,6 @@ let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_quickfix_open_on_error   = 0
 
 let g:vimtex_quickfix_enabled = 0
-
-
-
-
-
-
 
 
 
@@ -279,7 +277,6 @@ vnoremap <F21> <esc>| vnoremap <F22> <esc>| vnoremap <F23> <esc>| vnoremap <F24>
 " =========================
 
 
-
 " My leader
 let mapleader = ' '
 nnoremap <space> <nop>
@@ -308,6 +305,9 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
+nnoremap -        :echo 'wasted map'<cr>
+nnoremap +        :echo 'wasted map'<cr>
+nnoremap <c-S-Q>        :echo 'wasted map'<cr>
 
 
 
@@ -353,15 +353,17 @@ command Autosave :call AutoSaveToggle()
 
 
 " Comments
-" nnoremap <silent><tab>     :call nerdcommenter#Comment(0,"toggle")<cr>
-" vnoremap <silent><tab>     :call nerdcommenter#Comment(0,"toggle")<cr>
-" nnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
-" vnoremap <silent><leader>; :call nerdcommenter#Comment(0,"toggle")<cr>
+
 nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
 vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
 nnoremap <silent><leader>s :call nerdcommenter#Comment(0,"sexy")<cr>
 nnoremap <silent><leader>A :call nerdcommenter#Comment(0,"append")<cr>
 nnoremap <silent><leader>I :call nerdcommenter#Comment(0,"insert")<cr>i
+
+
+" Map Unmap ; to toggle comment
+nnoremap <leader>; :call ToggleSemicolon()<CR>
+
 
 " Window resizing
 nnoremap <s-F11> 5<c-w><
@@ -431,6 +433,9 @@ nnoremap <silent> g= :<C-u>call textdecor#decore#DecoreSmart('=', v:count1)<CR>
 " nnoremap g-1 :call Decore(20)<CR>
 " nnoremap g-[1 :call Decore(20, '-', '[]')<CR>
 
+" TODO: Poder selecionar uma parte da linha e não apenas a linha toda. Ou seja funcionar em modo visual
+" bla bla bla bla bla bla  ----------[ Algo legal ] -----------   mais bla bla bla
+" TODO: Um highlight para isso no .n
 
 
 " Move tabs
@@ -444,6 +449,7 @@ nnoremap <c-p>  gT
 nnoremap <c-n>  gt
 nnoremap [<tab> gT
 nnoremap ]<tab> gt
+nnoremap <c-]>  gt
 
 
 
@@ -663,6 +669,19 @@ nnoremap <Leader>g. yypVr.k
 " ------------------------------------------------------------
 " ------------------------ FUNCTIONS -------------------------
 " ------------------------------------------------------------
+
+function! ToggleSemicolon()
+
+    if empty(maparg(';', 'n'))
+		nnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+		vnoremap ; :call nerdcommenter#Comment(0,"toggle")<cr>
+		echo "; → Comment"
+    else
+		nunmap ;
+        vunmap ;
+		echo "; → Repeat latest f, t, F or T "
+    endif
+endfunction
 
 
 function! EnterInsert()
@@ -1045,6 +1064,13 @@ highlight htmlTitle ctermfg=white
 hi def link htmlTag	htmlEndTag
 
 
+" Make selection nice with code highlight
+highlight clear Visual
+highlight Visual ctermbg=18
+" highlight Visual ctermbg=238
+" highlight Visual ctermbg=24
+
+
 
 
 " -------------------------------------------------------------------------------
@@ -1076,5 +1102,13 @@ augroup spell_strings
                 \ contains=@Spell
                 \ transparent
 augroup END
+
+
+"TODO: Selecionar a palavra atual (se nada selecionado) ou a próxima palavra (facila a leitura) 
+
+
+
+
+
 
 
