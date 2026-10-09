@@ -119,6 +119,8 @@ alias .vimrc='vim ~/.vimrc'
 alias .zshrc='vim ~/.zshrc'
 alias .i3='vim ~/.config/i3/config'
 alias .sway='vim ~/.config/sway/config'
+alias .hypr='nvim ~/.config/hypr/hyprland.lua'
+alias .waybar='cd ~/.config/waybar/ && nvim config.jsonc'
 alias .blocks='vim ~/.config/i3blocks/config'
 
 
