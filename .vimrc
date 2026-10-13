@@ -154,6 +154,20 @@ autocmd FileType nerdtree nmap <silent> <buffer> l <CR>
 autocmd FileType nerdtree nmap <expr> <buffer> h get(g:NERDTreeFileNode.GetSelected(), 'isOpen', 0) ? "\<CR>" : "x"
 
 
+
+augroup spell_strings
+    autocmd!
+    autocmd Syntax * syntax spell notoplevel
+    autocmd Syntax * syntax match StringSpell
+                \ /\<[[:alpha:]][[:alpha:]'-]*\>/
+                \ contained
+                \ containedin=.*String.*
+                \ contains=@Spell
+                \ transparent
+augroup END
+
+
+
 " ------------------------------------------------------------
 " ------------------ CONFIGURE SOME PLUGINS ------------------
 " ------------------------------------------------------------
@@ -305,9 +319,10 @@ nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
 nnoremap <c-m>    :echo 'wasted map'<cr>
-nnoremap -        :echo 'wasted map'<cr>
 nnoremap +        :echo 'wasted map'<cr>
 nnoremap <c-S-Q>        :echo 'wasted map'<cr>
+
+
 
 
 
@@ -395,6 +410,13 @@ nnoremap <silent><F4>      :Goyo<CR>
 " =========================
 " Make some functionalities
 " =========================
+
+
+
+"Select the word under cursor (if don't) or the next word (to make reading easier)
+nnoremap - viw
+vnoremap - <esc>wviwo
+
 
 
 
@@ -1066,8 +1088,8 @@ hi def link htmlTag	htmlEndTag
 
 " Make selection nice with code highlight
 highlight clear Visual
-highlight Visual ctermbg=18
-" highlight Visual ctermbg=238
+" highlight Visual ctermbg=18
+highlight Visual ctermbg=238
 " highlight Visual ctermbg=24
 
 
@@ -1090,22 +1112,6 @@ highlight Visual ctermbg=18
 
 
 "      - ̗̀ AGORA SIM! ̖́-
-
-
-augroup spell_strings
-    autocmd!
-    autocmd Syntax * syntax spell notoplevel
-    autocmd Syntax * syntax match StringSpell
-                \ /\<[[:alpha:]][[:alpha:]'-]*\>/
-                \ contained
-                \ containedin=.*String.*
-                \ contains=@Spell
-                \ transparent
-augroup END
-
-
-"TODO: Selecionar a palavra atual (se nada selecionado) ou a próxima palavra (facila a leitura) 
-
 
 
 
