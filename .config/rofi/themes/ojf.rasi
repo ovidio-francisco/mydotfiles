@@ -56,8 +56,15 @@ inputbar {
     border-radius:  5px 5px 0px 0px;
     border-color: @border-color;
     font: "Source Code Pro 18";
-    children:   [ prompt,textbox-prompt-colon,entry ];
+    // children:   [ prompt,textbox-prompt-colon,entry, num-filtered-rows, textbox-num-sep, num-rows];
+    children:   [ prompt,textbox-prompt-colon,entry];
 }
+
+textbox-num-sep {
+    str: "/";
+    expand: false;
+}
+
 
 entry,prompt,case-indicator {
     text-font: inherit;
