@@ -306,8 +306,18 @@ nnoremap <leader>q q
 nnoremap q :q<CR>
 nnoremap QQ ZQ
 
-nnoremap <tab> ;
-vnoremap <tab> ;
+
+
+" Next/Previous f, t, F or T
+
+nnoremap , ;
+vnoremap , ;
+
+nnoremap <c-m> ,
+vnoremap <c-m> ,
+
+nnoremap <tab>   ;l
+
 
 
 " ----- WASTED MAPS -----
@@ -318,10 +328,8 @@ nnoremap g9       :echo 'wasted map'<cr>
 nnoremap 1g1      :echo 'wasted map'<cr>
 nnoremap <S-Up>   :echo 'wasted map'<cr>
 nnoremap <C-Up>   :echo 'wasted map'<cr>
-nnoremap <c-m>    :echo 'wasted map'<cr>
 nnoremap +        :echo 'wasted map'<cr>
-nnoremap <c-S-Q>        :echo 'wasted map'<cr>
-
+nnoremap <c-S-Q>  :echo 'wasted map'<cr>
 
 
 
@@ -335,7 +343,6 @@ nnoremap <c-S-Q>        :echo 'wasted map'<cr>
 nnoremap gl `[v`]
 
 " Yank all
-nnoremap yA :%y+<cr>
 nnoremap gy :%y+<cr>
 
 " Delete all to blackhole
@@ -568,7 +575,7 @@ nnoremap <F9> :ALEToggle<cr>
 nnoremap <silent>g1 :call CopyFullPath() \| echo "Full path has copied"<cr>
 
 " Show File name and filetype
-nnoremap g2 :echo expand('%:r'). ' - ' . &filetype<cr>
+nnoremap g2 :echo expand('%:t'). ' - ' . &filetype<cr>
 
 " Show/Hide Statusbar
 nnoremap <silent><F12> :call ToggleShowStatusBar()<cr>
