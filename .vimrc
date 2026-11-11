@@ -291,6 +291,9 @@ vnoremap <F21> <esc>| vnoremap <F22> <esc>| vnoremap <F23> <esc>| vnoremap <F24>
 " =========================
 
 
+" Join the lines and try keep cursor position
+nnoremap J mzJ`z
+
 " My leader
 let mapleader = ' '
 nnoremap <space> <nop>
@@ -626,7 +629,7 @@ nnoremap <c-s>   <c-e>gj
 nnoremap <silent><f8> : set hlsearch!<cr>
 
 " Join with the line above
-nnoremap <silent>K kJ==
+nnoremap <silent>K mzkJ==`z
 
 " Toggle line wrap
 nnoremap <Leader>w  :set wrap!<cr>
