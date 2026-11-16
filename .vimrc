@@ -136,7 +136,7 @@ autocmd filetype netrw nmap <buffer> <f1> :q<CR>
 
 " autocmd BufRead,BufNewFile     *.tex        call SetTexConfig()
 autocmd Syntax tex call SetTexConfig()
-autocmd BufRead,BufNewFile     *.md            call SetMarkdownConfig()
+" autocmd BufRead,BufNewFile     *.md            call SetMarkdownConfig()
 " autocmd BufRead,BufNewFile     *.n,.kn,*.notes call SetNotesConfig()
 autocmd BufReadPre,BufNewFile  *               set  background=dark
 
@@ -425,7 +425,8 @@ nnoremap <silent><F4>      :Goyo<CR>
 
 "Select the word under cursor (if don't) or the next word (to make reading easier)
 nnoremap - viw
-vnoremap - <esc>wviwo
+vnoremap - <esc>WviWo
+vnoremap <space> <esc>WviWo
 
 
 
@@ -970,76 +971,76 @@ endfunction
 
 
 
-function! SetMarkdownConfig()
+" function! SetMarkdownConfig()
 
-	syn match markdownTimeSep     "\d\{1,2\}\zs[:hm]\ze\d\{1,2\}" contained
-	syn match markdownTime              "\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
-	syn match markdownTime    "\d\{1,2\}h\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
+	" syn match markdownTimeSep     "\d\{1,2\}\zs[:hm]\ze\d\{1,2\}" contained
+	" syn match markdownTime              "\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
+	" syn match markdownTime    "\d\{1,2\}h\d\{1,2\}[:hm]\d\{1,2\}" contains=markdownTimeSep
 
-	syn match markdownTagSep   "[;,.]"  contained
-	syn match markdownBrackts  "[\[\]]" contained
-	syn match markdownTags     "\[.*\]" contains=markdownBrackts,markdownTagSep
+	" syn match markdownTagSep   "[;,.]"  contained
+	" syn match markdownBrackts  "[\[\]]" contained
+	" syn match markdownTags     "\[.*\]" contains=markdownBrackts,markdownTagSep
 
-	syn match markdownDashedTextDashes "--" contained
-	syn match markdownDashedText "--.*--" contains=markdownDashedTextDashes
+	" syn match markdownDashedTextDashes "--" contained
+	" syn match markdownDashedText "--.*--" contains=markdownDashedTextDashes
 
-	syn match markdownTagSep2   "[;,.]"  contained
-	syn match markdownBrackts2  "[<>]" contained
-	syn match markdownTags2     "<.*>" contains=markdownBrackts2,markdownTagSep2
-
-
-	syn match markdownCheckBoxX "\[\zsx\ze\]"  
-	syn match markdownCheckBox  "^\s*-\s*\[[\ x]\]"        contains=markdownCheckBoxX
+	" syn match markdownTagSep2   "[;,.]"  contained
+	" syn match markdownBrackts2  "[<>]" contained
+	" syn match markdownTags2     "<.*>" contains=markdownBrackts2,markdownTagSep2
 
 
-
-	" --------------------------------------------------------------------------------	
-	" --------------------------------------------------------------------------------	
-
-
-	hi markdownBox              ctermfg=green
-
-	hi markdownArrow            ctermfg=red
-
-	hi markdownTime             ctermfg=cyan
-	hi markdownTimeSep          ctermfg=darkcyan
-	hi markdownString           cterm=italic
-	hi markdownQuote            ctermfg=darkmagenta
-	hi markdownString2          cterm=italic ctermfg=darkgreen
-	hi markdownQuote2           ctermfg=green
-	hi markdownTags             cterm=italic ctermfg=darkyellow
-	hi markdownBrackts          ctermfg=yellow
-	hi markdownTagSep           ctermfg=yellow
-	hi markdownTags2            cterm=italic ctermfg=darkred
-	hi markdownBrackts2         ctermfg=red
-	hi markdownTagSep2          ctermfg=red
-	" hi markdownSectionMarker    ctermfg=blue
-	hi markdownDashedText       cterm=italic
-	hi markdownDashedTextDashes ctermfg=white
-
-	hi def link markdownBox                   markdownBox
-
-	hi def link markdownCheckBox			  markdownArrow
-	hi def link markdownCheckBoxX			  markdownBox
+	" syn match markdownCheckBoxX "\[\zsx\ze\]"  
+	" syn match markdownCheckBox  "^\s*-\s*\[[\ x]\]"        contains=markdownCheckBoxX
 
 
-	hi markdownH2                cterm=none ctermfg=cyan
-	hi markdownH3                cterm=none ctermfg=darkcyan
-	hi markdownH4                cterm=none ctermfg=magenta
-	hi markdownH5                cterm=none ctermfg=darkmagenta
-	hi markdownH6                cterm=none ctermfg=red
-	hi markdownListMarker        cterm=bold ctermfg=red
-	hi markdownOrderedListMarker cterm=none ctermfg=red
-	hi markdownRule                         ctermfg=darkcyan
 
-	hi Error ctermfg=red ctermbg=none
+	" " --------------------------------------------------------------------------------	
+	" " --------------------------------------------------------------------------------	
 
-	let g:markDownCheckBoxCheckedChar='x'
-	let g:markDownCheckBoxUnCheckedChar=' '
-	let g:markDownCheckBoxUnDefinedChar='-'
-	" Check/Uncheck the CheckBox
-	nnoremap <buffer><silent> <leader><space> :call CheckTheBox()<cr>
-endfunction
+
+	" hi markdownBox              ctermfg=green
+
+	" hi markdownArrow            ctermfg=red
+
+	" hi markdownTime             ctermfg=cyan
+	" hi markdownTimeSep          ctermfg=darkcyan
+	" hi markdownString           cterm=italic
+	" hi markdownQuote            ctermfg=darkmagenta
+	" hi markdownString2          cterm=italic ctermfg=darkgreen
+	" hi markdownQuote2           ctermfg=green
+	" hi markdownTags             cterm=italic ctermfg=darkyellow
+	" hi markdownBrackts          ctermfg=yellow
+	" hi markdownTagSep           ctermfg=yellow
+	" hi markdownTags2            cterm=italic ctermfg=darkred
+	" hi markdownBrackts2         ctermfg=red
+	" hi markdownTagSep2          ctermfg=red
+	" " hi markdownSectionMarker    ctermfg=blue
+	" hi markdownDashedText       cterm=italic
+	" hi markdownDashedTextDashes ctermfg=white
+
+	" hi def link markdownBox                   markdownBox
+
+	" hi def link markdownCheckBox			  markdownArrow
+	" hi def link markdownCheckBoxX			  markdownBox
+
+
+	" hi markdownH2                cterm=none ctermfg=cyan
+	" hi markdownH3                cterm=none ctermfg=darkcyan
+	" hi markdownH4                cterm=none ctermfg=magenta
+	" hi markdownH5                cterm=none ctermfg=darkmagenta
+	" hi markdownH6                cterm=none ctermfg=red
+	" hi markdownListMarker        cterm=bold ctermfg=red
+	" hi markdownOrderedListMarker cterm=none ctermfg=red
+	" hi markdownRule                         ctermfg=darkcyan
+
+	" hi Error ctermfg=red ctermbg=none
+
+	" let g:markDownCheckBoxCheckedChar='x'
+	" let g:markDownCheckBoxUnCheckedChar=' '
+	" let g:markDownCheckBoxUnDefinedChar='-'
+	" " Check/Uncheck the CheckBox
+	" nnoremap <buffer><silent> <leader><space> :call CheckTheBox()<cr>
+" endfunction
 
 
 
