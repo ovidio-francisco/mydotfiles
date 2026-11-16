@@ -178,7 +178,7 @@ alias agenda='~/.local/bin/calcurseQ | hi'
 alias path='realpath'
 alias p='realpath'
 
-alias cal='ncal -C'
+alias cal='ncal -C3'
 
 alias sizeof='du -sh'
 
